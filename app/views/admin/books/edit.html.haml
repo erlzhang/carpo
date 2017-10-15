@@ -1,0 +1,5 @@
+.container
+  .page-header
+    %h1 修改书籍
+  = form_for @book, :url => admin_book_path(@book) do |f|
+    = render :partial => "form", :locals => { :f => f } 

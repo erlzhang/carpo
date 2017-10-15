@@ -1,0 +1,16 @@
+.container
+  .page-header
+    %h1 全部书籍
+    = link_to "新增", new_admin_book_path, :class => 'btn btn-primary'
+  .row
+    - @books.each do |book|
+      .col-md-4
+        .panel.panel-default
+          .panel-heading= book.title
+          .panel-body
+            %p= book.description
+            = link_to "管理", admin_book_path(book), :class => "btn btn-primary"
+            = link_to "修改", edit_admin_book_path(book), :class => "btn btn-warning"
+            = link_to "删除", admin_book_path(book),:method => :delete, :class => "btn btn-danger"
+
+

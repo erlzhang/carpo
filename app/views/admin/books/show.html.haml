@@ -1,0 +1,9 @@
+.container
+  .page-header
+    %h1 书籍管理
+  .jumbotron
+    %h2= @book.title
+    %p= @book.description
+    %p
+      = link_to "新增卷", nil, :class => "btn btn-primary"
+      = link_to "新增章节", nil, :class => "btn btn-primary"

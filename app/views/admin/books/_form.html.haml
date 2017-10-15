@@ -1,0 +1,13 @@
+.form-group
+  = f.label :title, "书名"
+  = f.text_field :title, :class => 'form-control'
+.form-group
+  = f.label :description, "摘要"
+  = f.text_area :description, :class => 'form-control'
+.form-group
+  = f.label :status, "状态"
+  = f.select :status, [["未完成", "0"], ["已完成", "1"]], { :class => "form-control"}
+.form-group
+  = f.label :openess, "开放性"
+  = f.select :openess, [["开放", "0"], ["已完成", "1"]], { :class => "form-control"}
+= f.submit "提交", :class => 'btn btn-primary'
