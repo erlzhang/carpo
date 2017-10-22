@@ -3,6 +3,6 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: 300 }
   
 
-  has_many :posts
-  has_many :volumes
+  has_many :posts, dependent: :destroy
+  has_many :volumes, dependent: :destroy
 end

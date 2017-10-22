@@ -3,9 +3,9 @@ class CreatePosts < ActiveRecord::Migration[5.1]
     create_table :posts do |t|
       t.string :title, null: false, default: ""
       t.text :content
-      t.integer :number, null: false, default: 0
-      t.integer :volume_id
-      t.integer :book_id
+      t.integer :index, null: false, default: 0
+      t.references :book
+      t.references :volume
 
       t.timestamps
     end

@@ -1,0 +1,11 @@
+.form-group
+  = f.label :title
+  = f.text_field :title, :class => "form-control"
+.form-group
+  = f.label :content
+  = f.text_area :content, :class => "form-control", :row => "20"
+.form-group
+  = f.label :volume_id
+  = f.select :volume_id, get_volumes, {}, :class => "form-control" 
+= f.submit "保存", :class => "btn btn-primary"
+= link_to "取消", admin_book_path(@book), :class => "btn btn-default"

@@ -1,0 +1,4 @@
+.page-header
+  %h1 修改文章
+= form_for @post, :url => admin_book_post_path(@book, @post) do |f|
+  = render :partial => "form", :locals => {:f => f}

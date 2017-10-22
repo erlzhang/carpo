@@ -1,5 +1,5 @@
-.container
-  .page-header
-    %h1 修改书籍
-  = form_for @book, :url => admin_book_path(@book) do |f|
-    = render :partial => "form", :locals => { :f => f } 
+.page-header
+  %h1 修改书籍
+= form_for @book, :url => admin_book_path(@book) do |f|
+  = render :partial => "form", :locals => { :f => f } 
+  = link_to "取消", admin_book_path(@book), :class => "btn btn-default"

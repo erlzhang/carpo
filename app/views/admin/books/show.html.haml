@@ -1,9 +1,41 @@
-.container
-  .page-header
-    %h1 书籍管理
-  .jumbotron
-    %h2= @book.title
-    %p= @book.description
-    %p
-      = link_to "新增卷", nil, :class => "btn btn-primary"
-      = link_to "新增章节", nil, :class => "btn btn-primary"
+%ol.breadcrumb
+  %li= link_to "我的书籍", admin_books_path
+  %li.active= @book.title
+.page-header
+  %h1= @book.title
+.row
+  .col-md-4
+    .jumbotron
+      %p= @book.description
+      %p
+        = link_to "修改信息", edit_admin_book_path(@book), :class => "btn btn-warning"
+        = link_to "新增卷", new_admin_book_volume_path(@book), :class => "btn btn-primary"
+        = link_to "新增文章", new_admin_book_post_path(@book), :class => "btn btn-primary"
+  .col-md-8
+    - @book.volumes.each do |volume|
+      .panel.panel-default
+        - if volume.index > 0
+          .panel-heading
+            = volume.title
+            .pull-right
+              = link_to "编辑", edit_admin_book_volume_path(@book, volume), :class => "btn btn-primary btn-xs"
+              = link_to "删除", admin_book_volume_path(@book, volume), :method => :delete, :class => "btn btn-danger btn-xs"
+              = link_to "添加文章", new_admin_book_post_path(@book, :volume_id => volume), :class => "btn btn-info btn-xs"
+        .panel-body
+          - if volume.posts.size > 0
+            %table.table
+              %thead
+                %tr
+                  %td 序号
+                  %td 标题
+                  %td 操作
+              %tbody
+                - volume.posts.each do |post|
+                  %tr
+                    %td= post.index
+                    %td= post.title
+                    %td
+                      = link_to "编辑", edit_admin_book_post_path(@book, post), :class => "btn btn-primary btn-xs"
+                      - if post.status == 0
+                        = link_to "发布", release_admin_book_post_path(@book, post), :class => "btn btn-success btn-xs"
+                      = link_to "删除", admin_book_post_path(@book, post), :method => :delete, :class => "btn btn-danger btn-xs"
