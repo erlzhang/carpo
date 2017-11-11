@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021104712) do
+ActiveRecord::Schema.define(version: 20171022104517) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "email", default: "", null: false
+    t.text "description"
+    t.integer "role", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "remember_digest"
+    t.index ["email"], name: "index_authors_on_email", unique: true
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title", default: "", null: false
@@ -22,12 +34,13 @@ ActiveRecord::Schema.define(version: 20171021104712) do
     t.integer "default_volume", default: 0, null: false
     t.integer "current_post_index", default: 0, null: false
     t.integer "current_volume_index", default: 0, null: false
+    t.integer "author_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.string "title", default: "", null: false
     t.text "content"
-    t.integer "index", default: 0, null: false
+    t.integer "post_index", default: 0, null: false
     t.integer "book_id"
     t.integer "volume_id"
     t.datetime "created_at", null: false
@@ -40,7 +53,7 @@ ActiveRecord::Schema.define(version: 20171021104712) do
   create_table "volumes", force: :cascade do |t|
     t.string "title", default: "", null: false
     t.text "description"
-    t.integer "index", default: 0, null: false
+    t.integer "volume_index", default: 0, null: false
     t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

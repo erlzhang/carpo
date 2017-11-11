@@ -1,6 +1,8 @@
-.page-header
-  %h1
-    编辑卷-
-    = @book.title
-= form_for @volume, :url => admin_book_volume_path(@book, @volume) do |f|
-  = render :partial => "form", :locals => {:f => f}
+.row
+  .col-md-8.col-md-offset-2
+    .page-header
+      %h1
+        编辑卷-
+        = @book.title
+    = form_for @volume, :url => admin_book_volume_path(@book, @volume) do |f|
+      = render :partial => "form", :locals => {:f => f}

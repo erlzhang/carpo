@@ -1,3 +1,147 @@
 // Place all the styles related to the admin::books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$book-card-height: 230px;
+a > .book-card, .book-card {
+  width: 100%;
+  height: $book-card-height;
+  padding: 20px;
+  border: 1px solid $line-color;
+  color: $text-color;
+  margin: 1.5rem 0;
+  .book-card-title {
+    margin-bottom: 1.5rem;
+  }
+  &.book-card-new {
+    text-align: center;
+    position: relative;
+    span.plus {
+      background-color: $line-color;
+      position: absolute;
+    }
+    .plus-row {
+      width: 60%;
+      top: $book-card-height/2 - 1px; 
+      height: 4px;
+      left: 20%;
+    }
+    .plus-col {
+      width: 4px;
+      top: 20%;
+      height: 60%;
+    }
+  }
+}
+.book-dashboard {
+  .book-info {
+    margin-bottom: 30px;
+    color: $text-color;
+    h1 {
+      font-size: 23px;
+    }
+  }
+  .book-content {
+    .book-volumes {
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          display: inline-block;
+          line-height: 34px;
+          list-style: none;
+          padding: 0 25px;
+          border: 1px solid $line-color;
+          border-bottom: 1px solid transparent;
+          margin-bottom: -1px;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          position: relative;
+          white-space: nowrap;
+          .delete_volume {
+            position: absolute;
+            right: 5px;
+            line-height: inherit;
+            color: $link-color;
+            display: none;
+          }
+          &.active {
+            border-bottom: 2px solid #fff;
+          }
+          &.plus {
+            color: $link-color;
+            padding: 0 12px;
+            border: 0;
+            font-size: 1.8rem;
+            cursor: pointer;
+          }
+          &:hover{
+            .delete_volume {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+    .book-chapter-container{
+      border: 1px solid $line-color;
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 30px;
+      &:after {
+        content: " ";
+        clear: both;
+        display: block;
+      }
+      .book-volume-info {
+        padding: 10px;
+        color: $text-color;
+        .hint {
+          color: $link-color;
+        }
+      }
+      .add-chapter{
+        padding-right: 20px;
+        .btn {
+          color: $link-color;
+        }
+      }
+      .chapter-list {
+        padding: 0;
+        margin: 10px 0;
+        width: 100%;
+        &:after {
+          content: "";
+          clear: both;
+          display: block;
+        }
+        .chapter {
+          width: 98%;
+          line-height: 40px;
+          margin: 0 1%;
+          padding: 0 10px;
+          border: 1px solid $line-color;
+          list-style: none;
+          color: $text-color;
+          .chapter-btns {
+            a {
+              margin-left: 5px;
+              color: $link-color;
+            }
+          }
+        }
+        .post-drag {
+          width: 98%;
+          margin: 0 1%;
+          padding: 0 10px;
+          list-style: none;
+          height: 20px;
+          &.on {
+            height: 45px;
+            background-color: $line-color;
+          }
+        }
+      }
+    }
+  }
+}
+

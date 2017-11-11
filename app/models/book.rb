@@ -5,4 +5,5 @@ class Book < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :volumes, dependent: :destroy
+  belongs_to :author
 end

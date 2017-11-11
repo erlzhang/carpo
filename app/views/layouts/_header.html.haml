@@ -1,4 +1,48 @@
-%nav.navbar.navbar-default
-  .container-fluid
-    .navbar-header
-      = link_to "Book APP", nil, :class => "navbar-brand"
+.header
+  .container
+    .pull-right.header-buttons
+      %ul
+        %li
+          = link_to nil do
+            %i.fa.fa-bell
+          .notice-list
+            %ul
+              %li
+                = link_to nil do
+                  Notice 1
+              %li
+                = link_to nil do
+                  Notice 2
+              %li
+                = link_to nil do
+                  Notice 3
+        - if logged_in?
+          %li
+            = link_to logout_path, :method => :delete do
+              %i.fa.fa-sign-out
+.sidebar
+  .author-info
+    .avatar
+    - if logged_in?
+      %h3= @current_author.name
+  %ul.sidebar-menu
+    %li.active
+      = link_to admin_books_path do
+        %span.glyphicon.glyphicon-book
+        书籍管理
+    %li
+      = link_to nil do
+        %span.glyphicon.glyphicon-user
+        个人中心
+    %li
+      = link_to nil do
+        %span.glyphicon.glyphicon-comment
+        评论管理
+  .sidebar-footer
+    %ul.sidebar-footer-menu
+      %li
+        = link_to nil do
+          %i.fa.fa-question-circle-o
+      %li
+        = link_to nil do
+          %i.fa.fa-info-circle

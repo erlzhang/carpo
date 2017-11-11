@@ -1,0 +1,21 @@
+.book-volume-info
+  - if @volume.description.blank?  
+    %p.volume-description.hint{"data-volume" => @volume.id} 双击可添加描述
+  - else
+    %p.volume-description{"data-volume" => @volume.id}= @volume.description
+.row
+  .add-chapter.pull-right
+    = link_to new_admin_book_post_path(@book, :volume_id => @volume), :class => "btn btn-default btn-bg" do
+      %i.fa.fa-plus
+      添加文章
+.book-chapters
+  %ul.chapter-list
+    - @volume.posts.each do |post|
+      .post-drag{:id => "drag-post-#{post.id}"}
+      %li.chapter{:id => "post-#{post.id}", :draggable => "true"}
+        = post.title
+        .chapter-btns.pull-right
+          = link_to edit_admin_book_post_path(post) do
+            %i.fa.fa-pencil
+          = link_to admin_book_post_path(post), :method => :delete do
+            %i.fa.fa-trash

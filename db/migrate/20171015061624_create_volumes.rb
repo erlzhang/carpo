@@ -3,7 +3,7 @@ class CreateVolumes < ActiveRecord::Migration[5.1]
     create_table :volumes do |t|
       t.string :title, null: false, default: ""
       t.text :description
-      t.integer :index, null: false, default: 0
+      t.integer :volume_index, null: false, default: 0
       t.references :book
 
       t.timestamps

@@ -1,0 +1,139 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  line-height: $header-height;
+  border-bottom: 1px solid $line-color;
+  background: #fff;
+  z-index: 5;
+  .header-buttons {
+    ul {
+      padding: 0;
+      border-left: 1px solid $line-color;
+      li {
+        width: $header-height;
+        text-align: center;
+        list-style: none;
+        display: inline-block;
+        border-right: 1px solid $line-color;
+        position: relative;
+        a {
+          color: $link-color;
+        }
+      }
+    } 
+  }
+  .notice-list {
+    position: absolute; 
+    top: $header-height + 10px;
+    width: $notice-width;
+    background-color: #fff;
+    border-radius: 5px;
+    left: - ($notice-width - $header-height)/2;
+    border: 1px solid $line-color;
+    z-index: 10;
+    display: none;
+    ul {
+      border: 0;
+      li {
+        display: block;
+        width: 100%;
+        padding: 0 8px;
+        border: 0;
+        text-align: left;
+        border-bottom: 1px dashed $line-color;
+        &:last-child {
+         border: 0; 
+        }
+      }
+    }
+    &:after {
+      content: "";
+      border-color: transparent transparent $line-color transparent;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      position: absolute;
+      top: -10px;
+      left: $notice-width/2 - 10px;
+    }
+  }
+}
+.current-book {
+  margin-bottom: 1.5rem;
+  line-height: 50px;
+  i {
+    color: $link-color;
+    margin-right: 5px;
+  }
+  a {
+    color: $link-color;
+    &:after {
+      content: "/";
+      margin: 0 8px;
+    }
+  }
+  span {
+    color: $link-color;
+  }
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: $sidebar-width;
+  border-right: 1px solid $line-color;
+  background-color: #fff;
+  .author-info {
+    margin-top: $header-height * 1.75;
+    text-align: center;
+    margin-bottom: $header-height;
+    .avatar {
+      width: $avatar-width;
+      height: $avatar-width;
+      border-radius: 50%;
+      border: 1px solid $line-color;
+      margin: 0 auto;
+    }
+    h3 {
+      color: $text-color;
+    }
+  }
+  .sidebar-menu {
+    padding: 0;
+    li {
+      list-style: none;  
+      padding: 0 20px;
+      width: 100%;
+      border-top: 1px solid $line-color;
+      a {
+        display: block;
+        line-height: 50px;
+        color: $link-color;
+      }
+      &:last-child {
+        border-bottom: 1px solid $line-color;
+      }
+      &.active {
+        border-left: 5px solid $link-color;
+      }
+    }
+  }
+  .sidebar-footer {
+    position: absolute;
+    bottom: 10px;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        padding-left: 20px;
+        a {
+          color: $link-color;
+        }
+      }
+    }
+  }
+}

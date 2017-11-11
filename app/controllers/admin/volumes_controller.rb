@@ -1,9 +1,12 @@
 class Admin::VolumesController < ApplicationController
+  before_action :logged_in_author
   before_action :set_book
-  before_action :set_volume, :only => [:edit, :update, :destroy]
-
-  def new
-    @volume = Volume.new
+  before_action :set_volume, :only => [:show, :update, :destroy, :update_name, :update_description]
+  def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -12,26 +15,30 @@ class Admin::VolumesController < ApplicationController
 
     #设置排序
     current_index = @book.current_volume_index + 1
-    @volume.index = current_index
+    @volume.volume_index = current_index
+
 
     if @volume.save
       @book.update_attribute(:current_volume_index, current_index)
+
+      #如果是用户创建的第一个卷，将默认卷下面的文章放到该卷下面
+      if current_index == 1
+        posts = @book.posts
+        @volume.posts << posts
+      end 
+
       redirect_to admin_book_path(@book)
     else
       render :new
     end
   end
 
-  def edit
+  def update_name
+    @volume.update_attribute(:title, params[:title])
   end
 
-  def update
-    if @volume.update(volume_params)
-      flash[:success] = "分卷信息修改成功！"
-      redirect_to admin_book_path(@book)
-    else
-      render :edit
-    end
+  def update_description
+    @volume.update_attribute(:description, params[:description])
   end
 
   def destroy
@@ -52,6 +59,9 @@ class Admin::VolumesController < ApplicationController
 
     def set_volume
       @volume = Volume.find(params[:id])
+      if @volume.book != @book
+        redirect_to admin_book_path(@book)
+      end
     end
     
     def volume_params

@@ -1,10 +1,15 @@
 class Admin::BooksController < ApplicationController
+  before_action :logged_in_author
   before_action :set_book, :only => [:show, :edit, :update, :destroy]
+  
   def index
-    @books = Book.all
+    @books = @current_author.books
   end
 
   def show
+    @volumes = []
+    @volumes = @book.volumes.where("volume_index > ?", 0) 
+    @volume = Volume.new
   end
 
   def new
@@ -13,13 +18,15 @@ class Admin::BooksController < ApplicationController
   
   def create
     @book = Book.new(book_params)
-
-    #设置默认卷
-    volume = Volume.create(:title => "无", :book_id => @book)
-
+    @book.author = @current_author
+    volume = Volume.new(:title => "无")
+    volume.book = @book
+    aaa
     if @book.save
+      volume.save
+      #设置默认卷
       flash[:success] = "书籍创建成功"
-      redirect_to admin_books_path
+      redirect_to admin_book_path(@book)
     else
       render :new
     end
@@ -50,6 +57,9 @@ class Admin::BooksController < ApplicationController
 
     def set_book
       @book = Book.find(params[:id])
+      if @book.author != current_author
+        redirect_to admin_books_path
+      end
     end
 
     def book_params

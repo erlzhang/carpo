@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+  before_action :logged_in_author
   before_action :set_book
   before_action :set_post, :only => [:edit, :destroy, :update, :release]
 
@@ -15,7 +16,7 @@ class Admin::PostsController < ApplicationController
 
     #设置排序
     current_index = @book.current_post_index + 1
-    @post.index = current_index
+    @post.post_index = current_index
 
     if @post.save
       @book.update_attribute(:current_post_index, current_index)
@@ -54,6 +55,9 @@ class Admin::PostsController < ApplicationController
 
     def set_post
       @post = Post.find(params[:id])
+      if @post.book != @book
+        redirect_to admin_book_path(@book)
+      end
     end
 
     def post_params
