@@ -80,6 +80,16 @@ a > .book-card, .book-card {
             }
           }
         }
+        .volume-drag {
+          display: inline-block;
+          height: 34px;
+          width: 10px; 
+          vertical-align: bottom;
+          &.on {
+            width: 30px;
+            background-color: #ccc;
+          }
+        }
       }
     }
     .book-chapter-container{

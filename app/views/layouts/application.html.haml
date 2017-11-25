@@ -6,7 +6,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
   %body
     = render "layouts/header"
-    .container-fluid
+    .page-container
       - flash.each do |message_type, message|
         .alert{:class => "alert-#{message_type}"}=message
       = yield

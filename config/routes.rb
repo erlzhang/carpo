@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :books do
+      get :sort_posts, :on => :member
+      get :sort_volumes, :on => :member
       resources :volumes do
         get :update_name, :on => :member
         get :update_description, :on => :member

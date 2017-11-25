@@ -8,7 +8,8 @@
         .book-volumes
           %ul
             - @volumes.each do |volume|
-              %li.volume{:id => "volume-#{volume.id}"}
+              .volume-drag{:id => "drag-volume-#{volume.id}"}
+              %li.volume{:id => "volume-#{volume.id}", :draggable => "true"}
                 = link_to admin_book_volume_path(@book, volume), :remote => true do
                   = volume.title
                 - unless volume.posts.count > 0
@@ -18,41 +19,24 @@
               %i.fa.fa-plus
             = form_for @volume, :url => admin_book_volumes_path(@book) do |f|
               = f.hidden_field :title
-        - if @volumes.empty?
-          .book-chapter-container
-            .row
-              .add-chapter.pull-right
-                = link_to new_admin_book_post_path(@book, :volume_id => 0), :class => "btn btn-default btn-bg" do
-                  %i.fa.fa-plus
-                  添加文章
-            .book-chapters
-              %ul.chapter-list
-                - @book.posts.each do |post|
-                  .post-drag{:id => "drag-post-#{post.id}"}
-                  %li.chapter{:id => "post-#{post.id}", :draggable => "true"}
-                    = post.title
-                    .chapter-btns.pull-right
-                      = link_to edit_admin_book_post_path(post) do
-                        %i.fa.fa-pencil
-                      = link_to admin_book_post_path(post), :method => :delete do
-                        %i.fa.fa-trash
-        - else
-          .book-chapter-container
+        .book-chapter-container
+          - unless @volumes.empty?
             .book-volume-info
               %p.volume-description{"data-volume" => @volumes.first.id}= @volumes.first.description
-            .row
-              .add-chapter.pull-right
-                = link_to new_admin_book_post_path(@book, :volume_id => @volumes.first), :class => "btn btn-default btn-bg" do
-                  %i.fa.fa-plus
-                  添加文章
-            .book-chapters
-              %ul.chapter-list
-                - @volumes.first.posts.each do |post|
-                  .post-drag{:id => "drag-post-#{post.id}"}
-                  %li.chapter{:id => "post-#{post.id}", :draggable => "true"}
-                    = post.title
-                    .chapter-btns.pull-right
-                      = link_to edit_admin_book_post_path(post) do
-                        %i.fa.fa-pencil
-                      = link_to admin_book_post_path(post), :method => :delete do
-                        %i.fa.fa-trash
+          .row
+            .add-chapter.pull-right
+              = link_to new_admin_book_post_path(@book, :volume_id => @volumes.first), :class => "btn btn-default btn-bg" do
+                %i.fa.fa-plus
+                添加文章
+          .book-chapters
+            %ul.chapter-list
+              - @posts.each do |post|
+                .post-drag{:id => "drag-post-#{post.id}"}
+                %li.chapter{:id => "post-#{post.id}", :draggable => "true"}
+                  = post.title
+                  .chapter-btns.pull-right
+                    = link_to edit_admin_book_post_path(post) do
+                      %i.fa.fa-pencil
+                    = link_to admin_book_post_path(post), :method => :delete do
+                      %i.fa.fa-trash
+
