@@ -1,0 +1,52 @@
+zh:
+  activerecord:
+    models:
+      user: "账号"
+      author: "用户"
+      book: "书籍"
+      volume: "分卷"
+      post: "文章"
+    attributes:
+      author:
+        name: "姓名"
+        birthday: "出生日期"
+        url: "个人网站"
+        introduction: "个人简介"
+        avatar: "头像"
+      user:
+        email: "电子邮箱"
+        password: "密码"
+        password_confirmation: ""
+        current_password: "当前密码"
+      book:
+        title: "书名"
+        description: "描述"
+      post:
+        title: "文章标题"
+        content: "文章内容"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "已被注册！"
+              blank: "不能为空！"
+            password:
+              too_short: "至少六位！"
+              blank: "不能为空！"
+            password_confirmation:
+              blank: "不能为空！"
+              confirmation: "两次输入密码不一致！"
+            current_password:
+              blank: "不能为空！"
+              invalid: "不正确！"
+        book:
+          attributes:
+            title:
+              blank: "不能为空！"
+        post:
+          attributes:
+            title:
+              blank: "不能为空！"
+            content:
+              blank: "不能为空！"

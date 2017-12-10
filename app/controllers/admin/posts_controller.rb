@@ -1,7 +1,12 @@
 class Admin::PostsController < ApplicationController
-  before_action :logged_in_author
+  layout 'application_admin'
+  before_action :authenticate_user!
+  before_action :current_author
   before_action :set_book
-  before_action :set_post, :only => [:edit, :destroy, :update, :release]
+  before_action :set_post, :only => [:show, :edit, :destroy, :update, :release, :withdraw]
+
+  def show
+  end
 
   def new
     @post = Post.new
@@ -20,7 +25,7 @@ class Admin::PostsController < ApplicationController
 
     if @post.save
       @book.update_attribute(:current_post_index, current_index)
-      redirect_to admin_book_path(@book)
+      redirect_to admin_book_path(@book, :volume => @post.volume)
     else
       render :new
     end
@@ -31,7 +36,7 @@ class Admin::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to admin_book_path(@book)
+      redirect_to admin_book_path(@book, :volume => @post.volume)
     else
       render :edit
     end
@@ -44,7 +49,12 @@ class Admin::PostsController < ApplicationController
 
   def release
     @post.update_attribute(:status, 1)
-    redirect_to admin_book_path(@book)
+    redirect_to admin_book_path(@book, :volume => @post.volume)
+  end
+
+  def withdraw
+    @post.update_attribute(:status, 0)
+    redirect_to admin_book_path(@book, :volume => @post.volume)
   end
 
   private
@@ -61,6 +71,6 @@ class Admin::PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, :volume_id)
+      params.require(:post).permit(:title, :content, :volume_id, :status)
     end
 end

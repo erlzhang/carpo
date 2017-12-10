@@ -1,0 +1,106 @@
+
+* {
+  transition: all .1s ease-in;
+}
+body, html {
+  height: 100%;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-height;
+  line-height: $header-height;
+  border-bottom: 1px solid $line-color;
+  background: #fff;
+  .header-buttons {
+    ul {
+      padding: 0;
+      border-left: 1px solid $line-color;
+      li {
+        width: $header-height;
+        text-align: center;
+        list-style: none;
+        display: inline-block;
+        border-right: 1px solid $line-color;
+        position: relative;
+        a {
+          color: #999;
+        }
+      }
+    } 
+  }
+  .notice-list {
+    position: absolute; 
+    top: $header-height + 10px;
+    width: $notice-width;
+    background-color: #fff;
+    border-radius: 5px;
+    left: - ($notice-width - $header-height)/2;
+    border: 1px solid $line-color;
+    display: none;
+    ul {
+      border: 0;
+      li {
+        display: block;
+        width: 100%;
+        padding: 0 8px;
+        border: 0;
+        text-align: left;
+        border-bottom: 1px dashed $line-color;
+        &:last-child {
+         border: 0; 
+        }
+      }
+    }
+    &:after {
+      content: "";
+      border-color: transparent transparent $line-color transparent;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      position: absolute;
+      top: -10px;
+      left: $notice-width/2 - 10px;
+    }
+  }
+}
+.current-book {
+  margin-bottom: 1.5rem;
+  line-height: 50px;
+  i {
+    color: #ccc;
+    margin-right: 5px;
+  }
+  a {
+    color: #ccc;
+    &:after {
+      content: "/";
+      margin: 0 8px;
+    }
+  }
+  span {
+    color: #ccc;
+  }
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: $sidebar-width;
+  border-right: 1px solid $line-color;
+  background-color: #fff;
+  .author-info {
+    margin-top: $header-height * 3;
+    text-align: center;
+    .avatar {
+      width: $avatar-width;
+      height: $avatar-width;
+      border-radius: 50%;
+      border: 1px solid $line-color;
+      margin: 0 auto;
+    }
+  }
+}
+

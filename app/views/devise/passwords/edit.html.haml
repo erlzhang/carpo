@@ -1,0 +1,16 @@
+.container-fluid
+  .container
+    .col-md-4.offset-md-4
+      .card.mt-5
+        .card-body
+          %h2 更改密码
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| 
+            = devise_error_messages! 
+            = f.hidden_field :reset_password_token 
+            .form-group
+              = f.password_field :password, autofocus: true, autocomplete: "off", :class => "form-control", :placeholder => "请输入您的新密码" 
+            .form-group
+              = f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :placeholder => "再次输入密码"
+            .form-group
+              = f.submit "提交更改", :class => "btn btn-primary"
+            = render "devise/shared/links"

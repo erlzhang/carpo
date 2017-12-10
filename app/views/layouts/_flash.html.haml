@@ -1,0 +1,13 @@
+.container
+  - if notice
+    .alert.alert-info
+      = notice
+      %button.close{"data-dismiss" => "alert", "aria-label" => "Close"}
+        %span{"aria-hidden" => "true"}
+          %i.fa.fa-times
+  - if alert
+    .alert.alert-warning
+      = alert
+      %button.close{"data-dismiss" => "alert", "aria-label" => "Close"}
+        %span{"aria-hidden" => "true"}
+          %i.fa.fa-times

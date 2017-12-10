@@ -1,19 +1,28 @@
 class Admin::BooksController < ApplicationController
-  before_action :logged_in_author
+  layout 'application_admin'
+  before_action :authenticate_user!
+  before_action :current_author
   before_action :set_book, :only => [:show, :edit, :update, :destroy, :sort_posts, :sort_volumes]
   
   def index
-    @books = @current_author.books
+    @books = current_author.books.order("created_at desc")
   end
 
   def show
     @volumes = []
     @volumes = @book.volumes.where("volume_index > ?", 0).order("volume_index") 
-    @volume = Volume.new
+    @new_volume = Volume.new
+
+    #初始应该显示哪个卷
+    if params[:volume]
+      @volume = Volume.find(params[:volume])
+    end
+    @volume = @volume || @volumes.first
+
     if @volumes.empty?
       @posts = @book.posts.order("post_index")
     else
-      @posts = @volumes.first.posts.order("post_index")
+      @posts = @volume.posts.order("post_index")
     end
   end
 
@@ -23,7 +32,7 @@ class Admin::BooksController < ApplicationController
   
   def create
     @book = Book.new(book_params)
-    @book.author = @current_author
+    @book.author = current_author
     volume = Volume.new(:title => "无")
     volume.book = @book
     if @book.save

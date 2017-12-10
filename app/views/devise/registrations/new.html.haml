@@ -1,0 +1,31 @@
+.container-fluid
+  .container.mt-5
+    .col-md-4.offset-md-4
+      .card
+        .card-body
+          %h2.mb-3 注册
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            .form-group
+              = f.email_field :email, autofocus: true, :class => input_class(@user, :email), :placeholder => "Email"
+              - if is_invalid?(@user, :email)
+                = invalid_message(@user, :email)
+              - else
+                %small.form-text.text-muted 邮箱地址将作为登陆账号使用，请认真填写
+            .form-group
+              = f.password_field :password, :class => input_class(@user, :password), autocomplete: "off", :placeholder => "Password"
+              - if is_invalid?(@user, :password)
+                = invalid_message(@user,:password)
+              - else
+                %small.form-text.text-muted
+                  密码至少
+                  = @minimum_password_length
+                  位
+            .form-group
+              = f.password_field :password_confirmation, autocomplete: "off", :class => input_class(@user, :password_confirmation), :placeholder => "Password again"
+              - if is_invalid?(@user, :password_confirmation)
+                = invalid_message(@user,:password_confirmation)
+            .form-group
+              = f.submit "提交", :class => "btn btn-primary btn-block"
+            = render "devise/shared/links"
+
+

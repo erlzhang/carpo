@@ -1,2 +1,8 @@
-%h1 Admin::Authors#edit
-%p Find me in app/views/admin/authors/edit.html.haml
+.container.mt-4
+  .row
+    .col-md-8.offset-md-2
+      %h3.mb-3 修改个人信息
+      %hr
+      = form_for @author, :url => admin_author_path do |f|
+        = render :partial => "form", :locals => {:f => f}
+        = link_to "返回", :back, :class => "btn btn-secondary"

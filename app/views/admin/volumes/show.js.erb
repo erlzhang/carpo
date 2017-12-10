@@ -1,4 +1,12 @@
 $(".book-chapter-container").html("<%= escape_javascript(render :partial => 'information')%>")
-var postList = document.getElementsByClassName("chapter")
 update_description();
-drag_sort("post", postList);
+sortable('.sortable-list',{
+  handle: ".post-handle",
+  items: ":not(.sort-disabled)"
+});
+sortable('.sortable-list')[0].addEventListener('sortupdate', function(e){
+  ajaxSort(e) 
+})
+$(function(){
+  $('[data-toggle = "tooltip"]').tooltip();
+});

@@ -1,0 +1,36 @@
+.container-fluid
+  .container
+    .row
+      .col-md-4.offset-md-4
+        .card.mt-5
+          .card-body
+            %h2.mb-3 修改账号信息 
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| 
+              .form-group
+                = f.email_field :email, autofocus: true, :disabled => "disabled", :class => "form-control" 
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation? 
+                Currently waiting confirmation for:
+                = resource.unconfirmed_email
+              .form-group
+                = f.password_field :password, autocomplete: "off", :class => input_class(@user, :password), :placeholder => "输入您的新密码" 
+                - if is_invalid?(@user, :password)
+                  = invalid_message(@user, :password)
+                - elsif @minimum_password_length 
+                  %small.form-text.text-muted 密码至少 #{@minimum_password_length} 位
+              .form-group
+                = f.password_field :password_confirmation, autocomplete: "off", :class => input_class(@user, :password_confirmation), :placeholder => "再次输入新密码"
+                - if is_invalid?(@user, :password_confirmation)
+                  = invalid_message(@user, :password_confirmation)
+              .form-group
+                = f.password_field :current_password, autocomplete: "off", :class => input_class(@user, :current_password), :placeholder => "请输入当前密码" 
+                - if is_invalid?(@user, :current_password)
+                  = invalid_message(@user, :current_password)
+                - else
+                  %small.form-text.text-muted 请输入当前密码
+              .form-group
+                = f.submit "确认更改", :class => "btn btn-primary"
+                = link_to "返回", admin_dashboard_path, :class => "btn btn-secondary"
+              -#
+                暂时不能注销用户
+                = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete </p>
+

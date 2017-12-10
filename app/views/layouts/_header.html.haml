@@ -1,48 +1,20 @@
-.header
-  .container
-    .pull-right.header-buttons
-      %ul
-        %li
-          = link_to nil do
-            %i.fa.fa-bell
-          .notice-list
-            %ul
-              %li
-                = link_to nil do
-                  Notice 1
-              %li
-                = link_to nil do
-                  Notice 2
-              %li
-                = link_to nil do
-                  Notice 3
-        - if logged_in?
-          %li
-            = link_to logout_path, :method => :delete do
-              %i.fa.fa-sign-out
-.sidebar
-  .author-info
-    .avatar
-    - if logged_in?
-      %h3= @current_author.name
-  %ul.sidebar-menu
-    %li.active
-      = link_to admin_books_path do
-        %span.glyphicon.glyphicon-book
-        书籍管理
-    %li
-      = link_to nil do
-        %span.glyphicon.glyphicon-user
-        个人中心
-    %li
-      = link_to nil do
-        %span.glyphicon.glyphicon-comment
-        评论管理
-  .sidebar-footer
-    %ul.sidebar-footer-menu
-      %li
-        = link_to nil do
-          %i.fa.fa-question-circle-o
-      %li
-        = link_to nil do
-          %i.fa.fa-info-circle
+%nav.navbar.navbar-light.bg-light.navbar-expand-lg.fixed-top
+  = link_to "Book Manage System", admin_dashboard_path, :class => "navbar-brand"
+  %ul.navbar-nav
+    %li.nav-item
+      = link_to "Home", root_path, :class => "nav-link"
+    %li.nav-item
+      = link_to "Dashboard", admin_dashboard_path, :class => "nav-link active"
+  %ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
+    - if current_user.author
+      - @author = current_user.author
+      %li.nav-item.dropdown
+        = link_to "#", :class => "nav-link  dropdown-toggle",:id => "navbarDropdownMenuLink", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false" do
+          %i.fa.fa-user
+        .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
+          = link_to "个人信息", edit_admin_author_path(@author), :class => "dropdown-item"
+          = link_to "修改密码", edit_user_registration_path, :class => "dropdown-item"
+    %li.nav-item
+      = link_to destroy_user_session_path, :method => :delete, :class => "nav-link", :title => "注销", "data-toggle" => "tooltip" do
+        %i.fa.fa-sign-out
+

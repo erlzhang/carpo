@@ -1,0 +1,27 @@
+.mt-4.position-fixed
+  .card.border-light.text-center.mb-3
+    .card-body
+      - if @author = @author || current_user.author
+        - if @author.file_avatar.blank?
+          = image_tag "avatar.jpg", :class => "img-fluid rounded-circle mb-2"
+        - else
+          = image_tag @author.file_avatar.thumb.url, :class => "img-fluid rounded-circle mb-2" 
+        %h4.card-title= @author.name
+        %p.text-muted.card-text= @author.introduction
+  -#
+    %nav.nav.nav-pills.flex-column
+      %li.nav-item
+        = link_to admin_dashboard_path, :class => params[:action] == "dashboard" ? "nav-link active" : "nav-link" do
+          Dashboard
+      %li.nav-item
+        = link_to admin_books_path, :class => params[:controller] == "admin/books" ? "nav-link active" : "nav-link" do
+          书籍管理
+      %li.nav-item
+        = link_to "#", :class => "nav-link disabled" do
+          专栏管理
+      %li.nav-item
+        = link_to "#", :class => "nav-link disabled" do
+          评论管理
+      %li.nav-item
+        = link_to "#", :class => "nav-link disabled" do
+          资料集

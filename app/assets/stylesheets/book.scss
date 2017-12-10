@@ -1,0 +1,23 @@
+.sortable-placeholder {
+  list-style: none;
+}
+.delete-volume {  
+  position: absolute;
+  right: -5px;
+  top: -10px;
+  display: none;
+}
+.volume-list .nav-item:hover {
+  .delete-volume {
+    display: inline-block;
+  }
+}
+.book-card {
+  height: 15rem;
+}
+.book-card:hover{
+  text-decoration: none;
+}
+.post-handle {
+  cursor: move;
+}

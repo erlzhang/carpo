@@ -1,0 +1,8 @@
+.container.mt-4
+  .col-md-10.offset-md-1
+    .form-group
+      = text_field_tag :title, nil, :class => "form-control", :placeholder => "Simple Title"
+    .form-group
+      = text_area_tag :content, nil, :class => "form-control", :placeholder => "Something to write down here...", :rows => "15"
+    = submit_tag "Save", :class => "btn btn-primary"
+    = submit_tag "Publish", :class => "btn btn-warning"

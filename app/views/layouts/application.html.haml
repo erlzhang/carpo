@@ -4,10 +4,7 @@
     %title BookApp
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-  %body
-    = render "layouts/header"
-    .page-container
-      - flash.each do |message_type, message|
-        .alert{:class => "alert-#{message_type}"}=message
-      = yield
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = render 'layouts/flash'
+    = yield

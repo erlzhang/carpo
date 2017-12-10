@@ -1,5 +1,7 @@
 class Admin::VolumesController < ApplicationController
-  before_action :logged_in_author
+  layout 'application_admin'
+  before_action :authenticate_user!
+  before_action :current_author
   before_action :set_book
   before_action :set_volume, :only => [:show, :update, :destroy, :update_name, :update_description]
   def show
@@ -56,7 +58,6 @@ class Admin::VolumesController < ApplicationController
       @volume.delete
       flash[:warning] = "成功删除卷！"  
     end
-    redirect_to admin_book_path(@book)
   end
 
   private

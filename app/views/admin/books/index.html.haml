@@ -1,14 +1,13 @@
-.row
-  .col-md-8.col-md-offset-2
-    .row
-      .col-md-4
-        = link_to new_admin_book_path do
-          .book-card.book-card-new
-            %span.plus.plus-row
-            %span.plus.plus-col
-      - @books.each do |book|
-        .col-md-4
-          = link_to admin_book_path(book) do
-            .book-card
-              %h3.book-card-title= book.title
-              %p.book-card-description= book.description
+.container.mt-4
+  .row.mt-3
+    - @books.each do |book|
+      .col-md-3
+        = link_to admin_book_path(book), :class => "card book-card" do
+          .card-body
+            %h4.card-title= book.title
+            %p.card-text.text-secondary= truncate(book.description, length: 50, omission: "...")
+    .col-md-3
+      = link_to new_admin_book_path do
+        .card.book-card.d-table.w-100
+          .card-body.text-center.d-table-cell.h-100.align-middle
+            %i.fa.fa-plus.fa-4x
