@@ -11,20 +11,21 @@
 %ul.list-group.sortable-list.mt-4
   - @posts.each do |post|
     %li.list-group-item{:id => "post-#{post.id}"}
-      %h5.mb-3
-        %i.fa.fa-arrows-alt.post-handle.mr-2.text-muted{:title => "拽住可拖动排序", "data-toggle" => "tooltip"}
-        = post.title
-        .float-right
-          - if post.status == 0
-            = link_to release_admin_book_post_path(@book, post), :class => "btn btn-success btn-sm rounded-circle mr-2", :title => "发布", "data-toggle" => "tooltip" do
-              %i.fa.fa-send
-          - else
-            = link_to withdraw_admin_book_post_path(@book, post), :class => "btn btn-secondary btn-sm rounded-circle mr-2", :title => "撤回", "data-toggle" => "tooltip" do
-              %i.fa.fa-low-vision
-          = link_to admin_book_post_path(@book, post), :class => "btn btn-info btn-sm rounded-circle mr-2", :title => "预览", "data-toggle" => "tooltip" do
-            %i.fa.fa-eye
-          = link_to edit_admin_book_post_path(@book, post), :class => "btn btn-primary btn-sm rounded-circle mr-2", :title => "修改", "data-toggle" => "tooltip" do
-            %i.fa.fa-pencil
-          = link_to admin_book_post_path(@book, post), :class => "btn btn-danger btn-sm rounded-circle ", :method => :delete, :title => "删除", "data-toggle" => "tooltip" do
-            %i.fa.fa-trash
-      %p.text-muted= truncate(strip_tags(post.content), length: 100, omission: "...")
+      .post-handle.float-left.mr-2{:title => "试试看，拽住拖动可以排序哦！", "data-toggle" => "tooltip"}
+        -#
+          %i.fa.fa-arrows-alt.post-handle.mr-2.text-muted
+      = post.title
+      .float-right
+        - if post.status == 0
+          = link_to release_admin_book_post_path(@book, post), :class => "btn btn-success btn-sm rounded-circle mr-2", :title => "发布", "data-toggle" => "tooltip" do
+            %i.fa.fa-send
+        - else
+          = link_to withdraw_admin_book_post_path(@book, post), :class => "btn btn-warning btn-sm rounded-circle mr-2", :title => "撤回", "data-toggle" => "tooltip" do
+            %i.fa.fa-low-vision
+        = link_to admin_book_post_path(@book, post), :class => "btn btn-info btn-sm rounded-circle mr-2", :title => "预览", "data-toggle" => "tooltip" do
+          %i.fa.fa-eye
+        = link_to edit_admin_book_post_path(@book, post), :class => "btn btn-primary btn-sm rounded-circle mr-2", :title => "修改", "data-toggle" => "tooltip" do
+          %i.fa.fa-pencil
+        = link_to admin_book_post_path(@book, post), :class => "btn btn-danger btn-sm rounded-circle ", :method => :delete, :title => "删除", "data-toggle" => "tooltip" do
+          %i.fa.fa-trash
+      //%p.text-muted= truncate(strip_tags(post.content), length: 100, omission: "...")

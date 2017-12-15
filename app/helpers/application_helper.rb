@@ -23,4 +23,12 @@ module ApplicationHelper
   def is_invalid?(model, attr)
     model.errors.include?(attr)
   end
+
+  def author_post_count(author)
+    count = 0
+    author.books.each do |book|
+      count += book.posts.count
+    end
+    return count
+  end
 end

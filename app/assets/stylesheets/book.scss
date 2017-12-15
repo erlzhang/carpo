@@ -1,3 +1,38 @@
+//books index
+.book-card {
+  height: 15rem;
+  transition: box-shadow 0.25s linear;
+  box-shadow: 0 1px 2px $gray-200;
+}
+.book-card:hover{
+  text-decoration: none;
+  box-shadow: 0 1px 12px 2px rgba($gray-400, .2);
+}
+.card-book-plus {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: inline-block;
+  .plus-col, .plus-row {
+    display: inline-block;
+    position: absolute;
+    background-color: $gray-200;
+  }
+  .plus-col {
+    width: 5px;
+    height: 100px;
+    left: 47.5px;
+    top: 0;
+  }
+  .plus-row {
+    height: 5px;
+    width: 100px;
+    left: 0;
+    top: 47.5px;
+  }
+}
+
+//books show
 .sortable-placeholder {
   list-style: none;
 }
@@ -12,12 +47,46 @@
     display: inline-block;
   }
 }
-.book-card {
-  height: 15rem;
-}
-.book-card:hover{
-  text-decoration: none;
-}
 .post-handle {
   cursor: move;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  &:after, &:before {
+    content: "";
+    display: inline-block;
+    background-color: $gray-200;
+    width: 5px;
+    height: 100%;
+    top: 0;
+    position: absolute;
+  }
+  &:after {
+    left: 5px; 
+  }
+  &:before {
+    left: 15px;
+  }
+}
+.list-group-item {
+  border-left: 0;
+  border-right: 0;
+}
+.book-side-form {
+  position: fixed;
+  background-color: #fff;
+  right: 0;
+  height: 100%;
+  top: 0;
+  box-shadow: -3px 10px 8px $gray-200;
+  z-index: 111;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.3s linear;
+}
+.book-side-form.on {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.3s linear;
 }

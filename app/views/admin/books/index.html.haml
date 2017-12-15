@@ -2,12 +2,17 @@
   .row.mt-3
     - @books.each do |book|
       .col-md-3
-        = link_to admin_book_path(book), :class => "card book-card" do
-          .card-body
+        = link_to admin_book_path(book), :class => "card book-card border-light" do
+          .card-body.d-flex.flex-column
             %h4.card-title= book.title
-            %p.card-text.text-secondary= truncate(book.description, length: 50, omission: "...")
+            %p.card-text.text-secondary.flex-1= truncate(book.description, length: 50, omission: "...")
+            %small.text-muted
+              更新于
+              = last_updated(book)
     .col-md-3
       = link_to new_admin_book_path do
-        .card.book-card.d-table.w-100
+        .card.book-card.d-table.w-100.border-light
           .card-body.text-center.d-table-cell.h-100.align-middle
-            %i.fa.fa-plus.fa-4x
+            .card-book-plus
+              %span.plus-col
+              %span.plus-row

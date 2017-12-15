@@ -1,18 +1,15 @@
 .mt-4.container
-  %nav.mb-3{"aria-label" => "breadcrumb", :role => "navigation"}
-    %ol.breadcrumb
-      %li.breadcrumb-item
-        = link_to "书籍管理", admin_books_path
-      %li.breadcrumb-item.active{"aria-current" => "page"}= @book.title
-  .mb-4.card.border-light
-    .card-body
-      %h2.card-title= @book.title
-      .text-secondary.card-text
-        = simple_format @book.description
-      %p
-        = link_to edit_admin_book_path(@book), :class => "btn btn-secondary" do
-          编辑基本信息
-  .card
+  .card-body
+    .row
+      .col-md-10
+        %h2.card-title.book-title= @book.title
+        .text-secondary.card-text.book-discription
+          = simple_format @book.description
+      .col-md-2
+        %p
+          = link_to "#", :class => "btn btn-secondary toggle-side-form" do
+            编辑基本信息
+  .card.border-light.shadow
     .card-header
       %ul.nav.nav-tabs.card-header-tabs.sortable-head.volume-list
         - @volumes.each do |volume|
@@ -35,3 +32,8 @@
           = f.hidden_field :title
     .card-body.book-chapter-container
       = render "admin/volumes/information"
+.book-side-form.col-md-3.pt-5
+  .card-body.mt-5
+    = form_for @book, :url => admin_book_path(@book), :remote => true, "data-type" => "json" do |f|
+      = render :partial => "form", :locals => { :f => f } 
+      = link_to "取消", "#", :class => "btn btn-secondary collapse-side-form"

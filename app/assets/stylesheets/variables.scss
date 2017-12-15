@@ -1,0 +1,78 @@
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+//主色
+$mojo:    #c34d34 !default;
+$patina:    #64a28d !default;
+$husk: #bb9f61;
+$sandal: #b17f69!default;
+$higususotake: #8d742a!default;
+
+//danger
+$pomegranate: #f44336 !default;
+
+//warning
+$hokeypokey: #d19b2a !default;
+$godenbell: #ed8210 !default;
+
+//success
+$fruitsalad: #53ab62 !default;
+
+//blue
+$cornflower: #60abe8 !default;
+$steelblue: #5288c4!default;
+
+
+
+//$primary:       $blue !default;
+//$secondary:     $gray-600 !default;
+//$success:       $green !default;
+//$info:          $cyan !default;
+//$warning:       $orange !default;
+//$danger:        $red !default;
+//$light:         $gray-100 !default;
+//$dark:          $gray-800 !default;
+
+$primary: $patina !default;
+$danger: $pomegranate !default;
+$warning: $godenbell !default;
+$success: $fruitsalad !default;
+$info: $steelblue !default;
+
+$body-bg: $gray-100 !default;
+$body-color: $gray-700 !default;
+
+$breadcrumb-bg: transparent !default;
+
+$nav-tabs-border-color: $gray-200 !default;
+$nav-tabs-link-active-bg: $white !default;
+$nav-tabs-border-color: $gray-200 !default;
+$nav-tabs-link-active-border-color: $gray-200 !default;
+
+$card-cap-bg: $body-bg;
+
+$list-group-border-color: $gray-200 !default;
+
+$dropdown-border-width: 0!default;
+$dropdown-box-shadow: 0 1px 2px $gray-200;
+

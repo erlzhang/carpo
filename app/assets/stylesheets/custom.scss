@@ -1,20 +1,108 @@
-$line-color: #ddd;
-$header-height: 40px;
-$notice-width: 200px;
-$sidebar-width: 150px;
-$avatar-width: 50px;
-$text-color: #666;
-$link-color: #999;
-$book-card-height: 230px;
-body, html {
+html, body {
   height: 100%;
 }
-a {
-  color: $link-color;
+body.admin {
+  display: flex;
+  flex-direction: column;
 }
-a:hover, a:visited {
-  text-decoration: none;
+.flex-1 {
+  flex: 1;
 }
-.page-container {
-  padding: $header-height + 20px 20px 20px $sidebar-width + 20px;
+.nav-item {
+  margin: 0 0.5rem;
+}
+.shadow {
+  box-shadow: 0 1px 2px $gray-200;
+}
+
+//toggle-input
+.custom-toggle-indicator{
+  width: 64px;
+  height: 30px;
+  border-radius: 15px!important;
+  position: relative;
+}
+.custom-toggle-indicator:after {
+  content: "";
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-color: #ccc;
+  transition: all .25s linear;
+}
+.custom-control-description {
+  line-height: 40px;
+  margin-left: 5px;
+  vertical-align: bottom;
+}
+.custom-control-input:checked ~.custom-toggle-indicator {
+  background-image: none!important;
+}
+.custom-control-input:checked ~.custom-toggle-indicator:after {
+  margin-left: 34px;
+  background-color: #fff;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 40px;
+}
+.input-label {
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  z-index: 3333;
+  transition: all .25s linear;
+  color: #ccc;
+}
+.form-control {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  position: relative;
+}
+.form-group-focus {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  background-color: $primary;
+  transition: width .25s linear;
+  display: inline-block;
+  z-index: 22222;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+.form-control:focus ~ .form-group-focus {
+  width: 100%;
+}
+.form-control:focus ~ .input-label, .form-control:valid ~ .input-label {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: -30px;
+}
+.form-control:focus ~ .input-label {
+  color: $primary;
+}
+
+//card tab
+.card-header {
+  border-bottom: 1px solid $gray-200;
+}
+.card-header-tabs {
+  .nav-link.active {
+    border-top: 2px solid $primary;
+    margin-top: -1px;
+  }
+}
+
+//menu-bar
+.dropdown-menu {
+  box-shadow: 0 1px 15px 1px rgba($gray-300, 0.5);
 }

@@ -1,9 +1,21 @@
-.form-group
-  = f.label :title, "书名"
+.form-group.input-group
   = f.text_field :title, :class => input_class(@book, :title)
+  = f.label :title, "书名", :class => "input-label"
+  %span.form-group-focus
   - if is_invalid?(@book, :title)
     = invalid_message(@book, :title)
-.form-group
-  = f.label :description, "摘要"
+.form-group.input-group
   = f.text_area :description, :class => 'form-control', :rows => "5"
+  = f.label :description, "摘要", :class => "input-label"
+  %span.form-group-focus
+.form-group
+  %label.custom-control.custom-checkbox.ml-0
+    = f.check_box :openess, :class => "custom-control-input"
+    %span.custom-control-indicator.custom-toggle-indicator
+    %span.custom-control-description 开放
+.form-group
+  %label.custom-control.custom-checkbox.ml-0
+    = f.check_box :status, :class => "custom-control-input"
+    %span.custom-control-indicator.custom-toggle-indicator
+    %span.custom-control-description 已完成
 = f.submit "提交", :class => 'btn btn-primary'

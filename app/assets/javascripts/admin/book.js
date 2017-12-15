@@ -65,7 +65,6 @@ init_volume_action()
 update_description();
 
 //ajax删除卷
-console.log($(".delete-volume"))
 $(".delete-volume").each(function(){
   $(this).on("ajax:success", function(event){
     $(this).parents("li.nav-item").remove();
@@ -76,8 +75,36 @@ $(".delete-volume").each(function(){
     //提示错误信息
   });
 });
-/*
-*/
+
+//ajax 修改书籍信息
+$(".toggle-side-form").click(function() {
+  $(".book-side-form").toggleClass("on");
+});
+$(".collapse-side-form").click(function() {
+  $(".book-side-form").removeClass("on")
+});
+
+console.log($('.edit_book[data-remote="true"]'))
+$('.edit_book[data-remote="true"]').on("ajax:success", function(e, data, status, xhr) {
+  if( status == "success" ){
+    $(".book-title").text(data.title);
+    $(".book-description").text(data.description);
+    $(".book-side-form").removeClass("on");
+  }
+});
+$('.edit_book[data-remote="true"]').on("ajax:error", function(e, xhr, status, error) {
+  console.log(xhr)
+  var errors = xhr.responseJSON
+  for( var key in errors ){
+    console.log(key)
+    console.log(errors[key])
+    var input = $("#book_" + key)
+    input.addClass("is-invalid");
+    
+  }
+});
+
+
 
 function init_volume_action() {
   var volumeList = $(".volume")

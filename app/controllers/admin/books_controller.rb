@@ -50,9 +50,11 @@ class Admin::BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to admin_books_path
+      render json: @book
     else
-      render :edit
+      #render :edit
+      #format.js
+      render json: @book.errors, status: :unprocessable_entity
     end
   end
 

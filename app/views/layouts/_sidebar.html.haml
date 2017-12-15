@@ -1,5 +1,5 @@
 .mt-4.position-fixed
-  .card.border-light.text-center.mb-3
+  .card.border-light.text-center.mb-3.shadow
     .card-body
       - if @author = @author || current_user.author
         - if @author.file_avatar.blank?
@@ -8,6 +8,17 @@
           = image_tag @author.file_avatar.thumb.url, :class => "img-fluid rounded-circle mb-2" 
         %h4.card-title= @author.name
         %p.text-muted.card-text= @author.introduction
+        .row
+          .col
+            .lead.text-primary
+              %strong= @author.books.count
+            %p.mb-0
+              %small.text-muted Books
+          .col
+            .lead.text-primary
+              %strong= author_post_count(@author)
+            %p.mb-0
+              %small.text-muted Posts
   -#
     %nav.nav.nav-pills.flex-column
       %li.nav-item
