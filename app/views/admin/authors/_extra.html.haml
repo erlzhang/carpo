@@ -1,0 +1,17 @@
+.modal-body
+  = form_for @author, :url => admin_author_path do |f|
+    .form-group.row
+      = f.label :birthday, :class => "col-sm-2 col-form-label"
+      .col-sm-10
+        = f.date_field :birthday, :class => "form-control", :placeholder => "YY-mm-dd"
+    .form-group.row
+      = f.label :url, :class => "col-sm-2 col-form-label"
+      .col-sm-10
+        = f.url_field :url, :class => "form-control", :placeholder => "http://"
+    .form-group.row
+      = f.label :introduction, :class => "col-sm-2 col-form-label"
+      .col-sm-10
+        = f.text_area :introduction, :class => "form-control", :placeholder => "简要介绍一下自己吧", :rows => "5"
+    .modal-footer
+      = link_to "搞定！", nil, :class => "btn btn-primary"
+      = link_to "太麻烦，以后再说！", nil, :class => "btn btn-secondary"

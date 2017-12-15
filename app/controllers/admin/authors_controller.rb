@@ -4,10 +4,16 @@ class Admin::AuthorsController < ApplicationController
   before_action :set_author, only: [:edit, :update]
 
   def new
+    if current_user.author
+      return redirect_to admin_dashboard_path
+    end
     @author = Author.new
   end
 
   def create
+    if current_user.author
+      return redirect_to admin_dashboard_path
+    end
     @author = Author.new(author_params)  
     @author.user = current_user
     #先不要审核功能
@@ -29,6 +35,9 @@ class Admin::AuthorsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def update_avatar
   end
 
   private

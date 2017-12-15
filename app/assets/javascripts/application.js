@@ -14,9 +14,6 @@
 //= require jquery_ujs
 //= require popper
 //= require bootstrap-sprockets
-//= require editor
-//= require sort
-//= require admin/book
 
 $(function(){
   $('[data-toggle = "tooltip"]').tooltip();
