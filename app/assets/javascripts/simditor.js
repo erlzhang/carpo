@@ -3930,7 +3930,7 @@ CodePopover = (function(superClass) {
 
   CodePopover.prototype.render = function() {
     var $option, k, lang, len, ref;
-    this._tpl = "<div class=\"code-settings\">\n  <div class=\"settings-field\">\n    <select class=\"select-lang\">\n      <option value=\"-1\">" + (this._t('selectLanguage')) + "</option>\n    </select>\n  </div>\n</div>";
+    this._tpl = "<div class=\"code-settings\">\n  <div class=\"settings-field form-group\">\n    <select class=\"select-lang form-control form-control-sm\">\n      <option value=\"-1\">" + (this._t('selectLanguage')) + "</option>\n    </select>\n  </div>\n</div>";
     this.langs = this.editor.opts.codeLanguages || [
       {
         name: 'Bash',
@@ -4130,7 +4130,7 @@ LinkPopover = (function(superClass) {
 
   LinkPopover.prototype.render = function() {
     var tpl;
-    tpl = "<div class=\"link-settings\">\n  <div class=\"settings-field\">\n    <label>" + (this._t('linkText')) + "</label>\n    <input class=\"link-text\" type=\"text\"/>\n    <a class=\"btn-unlink\" href=\"javascript:;\" title=\"" + (this._t('removeLink')) + "\"\n      tabindex=\"-1\">\n      <span class=\"simditor-icon simditor-icon-unlink\"></span>\n    </a>\n  </div>\n  <div class=\"settings-field\">\n    <label>" + (this._t('linkUrl')) + "</label>\n    <input class=\"link-url\" type=\"text\"/>\n  </div>\n  <div class=\"settings-field\">\n    <label>" + (this._t('linkTarget')) + "</label>\n    <select class=\"link-target\">\n      <option value=\"_blank\">" + (this._t('openLinkInNewWindow')) + " (_blank)</option>\n      <option value=\"_self\">" + (this._t('openLinkInCurrentWindow')) + " (_self)</option>\n    </select>\n  </div>\n</div>";
+    tpl = "<div class=\"link-settings\">\n  <div class=\"settings-field form-group\">\n    <label>" + (this._t('linkText')) + "</label>\n    <input class=\"link-text form-control form-control-sm\" type=\"text\"/>\n    <a class=\"btn-unlink\" href=\"javascript:;\" title=\"" + (this._t('removeLink')) + "\"\n      tabindex=\"-1\">\n      <span class=\"simditor-icon simditor-icon-unlink\"></span>\n    </a>\n  </div>\n  <div class=\"settings-field form-group\">\n    <label>" + (this._t('linkUrl')) + "</label>\n    <input class=\"link-url form-control form-control-sm\" type=\"text\"/>\n  </div>\n  <div class=\"settings-field form-group\">\n    <label>" + (this._t('linkTarget')) + "</label>\n    <select class=\"link-target form-control form-control-sm\">\n      <option value=\"_blank\">" + (this._t('openLinkInNewWindow')) + " (_blank)</option>\n      <option value=\"_self\">" + (this._t('openLinkInCurrentWindow')) + " (_self)</option>\n    </select>\n  </div>\n</div>";
     this.el.addClass('link-popover').append(tpl);
     this.textEl = this.el.find('.link-text');
     this.urlEl = this.el.find('.link-url');
