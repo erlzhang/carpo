@@ -14,22 +14,17 @@ var editor = new Simditor({
    'strikethrough',
    'fontScale',
    'color',
-   '|',
    'title',
    'ol',
    'ul',
    'blockquote',
-   '|',
    'code',
-   'table',
    'link',
    'image',
    'hr',
-   '|',
    'indent',
    'outdent',
    'alignment',
-   '|',
    'markdown'
   ]
 });

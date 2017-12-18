@@ -1,4 +1,4 @@
-%nav.navbar.navbar-light.bg-white.nav-expand-lg.fixed-top
+%nav.navbar.navbar-light.bg-white.nav-expand-lg.fixed-top.editor-top
   = link_to "BMS", admin_dashboard_path, :class => "navbar-brand"
 = form_for @post, :url => admin_book_posts_path(@book) do |f|
   = render :partial => "form", :locals => {:f => f}

@@ -61,12 +61,12 @@ body.admin {
   transition: all .25s linear;
   color: #ccc;
 }
-.form-control {
+.input-group .form-control {
   border-width: 0 0 1px 0;
   border-radius: 0;
   position: relative;
 }
-.form-group-focus {
+.input-group .form-group-focus {
   content: "";
   position: absolute;
   width: 0;
@@ -78,19 +78,19 @@ body.admin {
   display: inline-block;
   z-index: 22222;
 }
-.form-control:focus {
+.input-group .form-control:focus {
   box-shadow: none;
   border-color: #ced4da;
 }
-.form-control:focus ~ .form-group-focus {
+.input-group .form-control:focus ~ .form-group-focus {
   width: 100%;
 }
-.form-control:focus ~ .input-label, .form-control:valid ~ .input-label {
+.input-group .form-control:focus ~ .input-label, .form-control:valid ~ .input-label {
   font-size: 14px;
   color: #ccc;
   margin-top: -30px;
 }
-.form-control:focus ~ .input-label {
+.input-group .form-control:focus ~ .input-label {
   color: $primary;
 }
 */

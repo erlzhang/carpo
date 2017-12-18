@@ -1,9 +1,123 @@
 // Place all the styles related to the admin::authors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.custom-control-description img {
-  border-radius: 50%;
+.authors.new {
+  .author-card {
+    display: none;
+  } 
 }
-.img-radio:checked ~ .custom-control-description img{
-  border: 3px solid rgba($primary, 0.3); 
+
+.author-new-progress{
+  list-style: none;
+  padding: 0;
+  position: relative;
+  height: 50px;
+  li {
+    display: inline-block; 
+    background-color: $gray-400;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 18px;
+    color: $primary;
+    z-index: 1;
+    &.active {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      position: relative;
+      box-shadow: 0 0 5px 5px rgba($gray-300, .5);
+      background-color: #fff;
+      &:after {
+        content: "";
+        width: 15px;
+        height: 15px;
+        background-color: $primary;
+        position: absolute;
+        top: 7.5px;
+        left: 7.5px;
+        border-radius: 50%;
+      }
+    }
+  }
+  &:after, &:before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    top: 24px;
+    z-index: -1;
+  }
+  &:after {
+    width: 100%;
+    background-color: $gray-400;
+  }
+  &:before {
+    width: 0;
+    background-color: $primary;
+    transition: all .3s linear;
+    z-index: 0;
+  }
+  &.half:before {
+    width: 50%;
+  }
+  &.done:before {
+    width: 100%;
+  }
+}
+.current-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 30px auto;
+  background-color: $gray-200;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.author-avatar-list .custom-radio{
+  padding-left: 0;
+  .custom-control-description img {
+    border-radius: 50%;
+    opacity: .7;
+  }
+  .img-radio:checked ~ .custom-control-description img{
+    border: 3px solid rgba($primary, 0.4); 
+    opacity: 1;
+  }
+}
+.avatar-plus {
+  width: 60px;
+  height:60px;
+  border: 1px dashed $gray-400;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 15px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.avatar-plus-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  position: relative;
+  &:after, &:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    background-color: $gray-400;
+  }
+  &:before {
+    width: 100%;
+    height: 2px;
+    top: 14px;
+    left: 0;
+  }
+  &:after {
+    width: 2px;
+    left: 14px;
+    height: 100%;
+    top: 0;
+  }
 }

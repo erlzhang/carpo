@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'admin/dashboard'
 
   namespace :admin do
-    resources :authors
+    resources :authors do
+      patch :update_avatar, :on => :member
+    end
     resources :books do
       get :sort_posts, :on => :member
       get :sort_volumes, :on => :member

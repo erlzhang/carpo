@@ -145,7 +145,7 @@
 
 .simditor {
   position: relative;
-  border: 1px solid $gray-300;
+  border: 0;
 }
 .simditor .simditor-wrapper {
   position: relative;
@@ -180,8 +180,7 @@
 .simditor .simditor-wrapper.toolbar-floating .simditor-toolbar {
   position: fixed;
   top: 0;
-  z-index: 10;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 11111;
 }
 .simditor .simditor-wrapper .simditor-image-loading {
   width: 100%;
@@ -256,9 +255,9 @@
   -webkit-user-select: text;
 }
 .simditor .simditor-toolbar {
-  border-bottom: 1px solid #eeeeee;
   background: $white;
   width: 100%;
+  padding: 0.5rem 0;
 }
 .simditor .simditor-toolbar > ul {
   margin: 0;

@@ -1,32 +1,53 @@
-.modal#author{:role => "dialog"}
-  .modal-dialog{:role => "document"}
-    .modal-content
+.row.mt-5
+  .col-md-6.offset-md-2
+    %h4.mb-4.text-center 我们需要一些内容来完善你的信息！
+    .author-new-steps
       .carousel.slide#authorProgress{"data-ride" => "carousel"}
+        %ol.author-new-progress.d-flex.justify-content-between.align-items-center
+          %li.active{"data-target" => "#step-1", "data-slide-to" => "0"}
+          %li{"data-target" => "#step-2", "data-slide-to" => "1"}
+          %li{"data-target" => "#step-3", "data-slide-to" => "2"}
         .carousel-inner
           .carousel-item#step-1
-            .modal-header
-              %h5 首先，你得有个名字吧！
+            %h5.mb-5.text-center 首先，你得有个名字吧！
             = form_for @author, :url => admin_authors_path, :remote => true do |f|
-              .modal-body
-                .form-group
-                  = f.label :name, :placeholder => "Your Name"
-                  = f.text_field :name, :class => input_class(@author, :name), :placeholder => "Name", :required => true
-            .modal-footer
-              = submit_tag "填完了，下一步！", :class => "btn btn-primary"
+              .row
+                .col-sm-10.offset-sm-1
+                  .form-group.mb-5
+                    = f.text_field :name, :class => input_class(@author, :name) + " form-control-lg", :placeholder => "Your name here", :required => true
+              .text-center
+                = submit_tag "填完了，下一步！", :class => "btn btn-primary btn-lg", :id => "submit_author_name", :disabled => "disabled"
           .carousel-item#step-2.active
-            .modal-header
-              %h5 然后，选个头像！
-            .modal-body
-              .author-avatar
-                - (0..9).each do |i|
+            %h5.mb-4.text-center 还需要一个头像！
+            .text-center.mb-4
+              .current-avatar.rounded
+            = form_tag nil, :id => "author_avatar", :remote => "true", :method => "patch", :multipart => true do
+              .author-avatar-list.mb-4.text-center
+                - (0..8).each do |i|
                   %label.custom-control.custom-radio
-                    = radio_button_tag 'avatar', i, false, :class => "custom-control-input img-radio"
+                    = radio_button_tag 'author[avatar_id]', i, false, :class => "custom-control-input img-radio"
                     //%span.custom-control-indicator
                     %span.custom-control-description
-                      = image_tag "avatar/" + i.to_s + ".png", :width => 50, :height => 50
-            .modal-footer
-              = link_to "选好了，继续！", nil, :class => "btn btn-primary"
+                      = image_tag "avatar/" + i.to_s + ".png", :width => 60, :height => 60
+                %label.avatar-plus{:title => "点击手动上传", "data-toggle" => "tooltips"}
+                  = file_field_tag "author[file_avatar]", :class => "custom-control-input"
+                  %i.avatar-plus-icon
+              .text-center
+                = submit_tag "选好了，继续！", :class => "btn btn-primary btn-lg", :id => "submit_author_avatar"
           .carousel-item#step-3
-            .modal-header
-              %h5 还有一些信息要填!
-            #extraInfo
+            %h5.mb-3.text-center 可填可不填的信息!
+            .row
+              .col-md-10.offset-md-1
+                = form_tag nil, :id => "init_author_info", :method => "patch" do
+                  .form-group
+                    = label_tag :birthday, "生日", :class => "col-form-label"
+                    = date_field_tag "author[birthday]", nil, :class => "form-control", :placeholder => "YY-mm-dd"
+                  .form-group
+                    = label_tag :url, "个人网站", :class => "col-form-label"
+                    = url_field_tag "author[url]", nil, :class => "form-control", :placeholder => "http://"
+                  .form-group
+                    = label_tag :introduction, "再来一段简介", :class => "col-form-label"
+                    = text_area_tag "author[introduction]", nil, :class => "form-control", :placeholder => "简要介绍一下自己吧", :rows => "5"
+                  .text-center
+                    = submit_tag "搞定！", :class => "btn btn-primary btn-lg"
+                    = link_to "太麻烦，以后再说！", nil, :class => "btn btn-default"

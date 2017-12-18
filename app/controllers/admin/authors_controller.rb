@@ -1,11 +1,11 @@
 class Admin::AuthorsController < ApplicationController
   layout "application_admin"
   before_action :authenticate_user!
-  before_action :set_author, only: [:edit, :update]
+  before_action :set_author, only: [:edit, :update, :update_avatar]
 
   def new
     if current_user.author
-      return redirect_to admin_dashboard_path
+      #return redirect_to admin_dashboard_path
     end
     @author = Author.new
   end
@@ -18,11 +18,12 @@ class Admin::AuthorsController < ApplicationController
     @author.user = current_user
     #先不要审核功能
     @author.status = 2
+    data = Hash.new
     if @author.save
-      flash[:success] = "个人信息创建成功"
-      redirect_to admin_dashboard_path
+      data[:id] = @author.id
+      render json: data
     else
-      render :new
+      render json: @author.errors, status: :unprocessable_entity
     end
   end
 
@@ -38,6 +39,10 @@ class Admin::AuthorsController < ApplicationController
   end
 
   def update_avatar
+    if @author.update(author_params)
+    else
+      render json: @author.errors, status: :unprocessable_entity
+    end
   end
 
   private

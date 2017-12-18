@@ -52,8 +52,6 @@ class Admin::BooksController < ApplicationController
     if @book.update(book_params)
       render json: @book
     else
-      #render :edit
-      #format.js
       render json: @book.errors, status: :unprocessable_entity
     end
   end
