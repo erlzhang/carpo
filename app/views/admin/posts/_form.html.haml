@@ -6,8 +6,9 @@
           %ol.breadcrumb.mb-0
             %li.breadcrumb-item
               = link_to @book.title, admin_book_path(@book)
-            %li.breadcrumb-item
-              = f.select :volume_id, get_volumes, {}, :class => "editor-select-volume"
+            - if params[:volume_id]
+              %li.breadcrumb-item
+                = f.select :volume_id, get_volumes, {}, :class => "editor-select-volume"
         = f.text_field :title, :class => "editor-input", :placeholder => "Your Title"
         - if is_invalid?(@post, :title)
           = invalid_message(@post, :title)
@@ -17,15 +18,11 @@
       = f.text_area :content, :class => "form-control editor", "data-autosave" => @post.id ? "editor-content" + @post.id.to_s : "editor-content-new-" + @book.id.to_s , :row => "20", :placeholder => "Content here!"
       - if is_invalid?(@post, :content)
         = invalid_message(@post, :content)
+      - if @post.errors
+        = @post.errors.full_messages
 .editor-infos
   %label.custom-control.custom-checkbox
     = f.check_box :status, :class => "custom-control-input"
     %span.custom-control-indicator.custom-toggle-indicator
     %span.custom-control-description.mr-2 直接发布
 = f.submit "保存", :class => "btn btn-primary mr-2 editor-submit"
--#
-  .form-group
-    = f.label :volume_id
-    = f.select :volume_id, get_volumes, {}, :class => "form-control" 
-  = f.submit "保存", :class => "btn btn-primary mr-2"
-  = link_to "取消", admin_book_path(@book, :volume => @post.volume || params[:volume_id]), :class => "btn btn-secondary"

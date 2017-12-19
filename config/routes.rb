@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :authors do
       patch :update_avatar, :on => :member
+      get :update_avatar, :on => :member
     end
     resources :books do
       get :sort_posts, :on => :member

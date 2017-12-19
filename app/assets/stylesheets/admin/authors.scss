@@ -70,10 +70,10 @@
   width: 120px;
   height: 120px;
   margin: 30px auto;
-  background-color: $gray-200;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-image: image-url("avatar/0.png");
 }
 .author-avatar-list .custom-radio{
   padding-left: 0;

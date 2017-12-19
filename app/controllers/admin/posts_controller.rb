@@ -18,6 +18,9 @@ class Admin::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.book = @book
+    unless @post.volume
+      @post.volume = @book.volumes.first
+    end
 
     #设置排序
     current_index = @book.current_post_index + 1

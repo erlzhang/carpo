@@ -84,6 +84,7 @@
   transform: translateX(400px);
   opacity: 0;
   transition: all 0.3s linear;
+  overflow-y: auto;
 }
 .book-side-form.on {
   transform: translateX(0);

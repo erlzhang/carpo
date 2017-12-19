@@ -13,7 +13,7 @@ $("#author_name").on("input", function(){
   }
 });
 var avatarList = document.getElementsByName("author[avatar_id]");
-var authorId = 5
+var authorId = 1
 for( var i = 0; i < avatarList.length; i++ ){
   avatarList[i].onclick = function() {
     if( this.checked ){
@@ -22,6 +22,7 @@ for( var i = 0; i < avatarList.length; i++ ){
       $(".current-avatar").css("background-image", "url(" + src + ")");
       currentImg = this.value
       imgType = "id"
+      $("#author_file_avatar").val("");
     }
   }
 }
@@ -29,6 +30,7 @@ $("#author_file_avatar").on("change", function(){
   var file = this.files[0];
   var url = getObjectURL(file);
   $(".current-avatar").css("background-image", "url( " + url + " )")
+  $(".img-radio").removeAttr("checked");
 });
 
 
@@ -66,35 +68,26 @@ $("#new_author").on("ajax:error", function(e ,xhr, status, error){
 
 var form = document.getElementById("author_avatar")
 form.action = "/admin/authors/" + authorId + "/update_avatar"
-$("#author_avatar").on("ajax:success", function(){
+$("#author_avatar").bind("ajax:success", function(e, data, status, xhr){
   console.log("success")
+  console.log(status)
+  step3();
+});
+$("#author_avatar").bind("ajax:remotipartComplete", function(e, data){
+  console.log(e, data)
 });
 $("#author_avatar").on("ajax:error", function(e, xhr, status, error){
+  console.log("false")
   console.log(error)
   console.log(status)
 });
-/*
-$("#submit_author_avatar").click(function() {
-  event.preventDefault();
-  var type = ""
-  console.log(currentImg)
-  $.ajax({
-    url: window.location.origin + "/admin/authors/" + authorId + "/update_avatar/",
-    data: "avatar=" + currentImg + "&avatar_type=" + imgType,
-    type: "POST",
-    success: function(data) {
-      console.log(data) 
-      $(".author-new-progress").removeClass("half").addClass("done");
-      setTimeout(function(){
-        $(".author-new-progress li").eq(2).addClass("active");
-        $("#authorProgress").carousel(2);
-      }, 300)
-      var form = document.getElementById("init_author_info")
-      form.action = "/admin/authors/" + authorId
-    },
-    error: function(respond) {
-      console.log(respond)
-    }
-  })
-});
-*/
+
+function step3() {
+  $(".author-new-progress").removeClass("half").addClass("done");
+  setTimeout(function(){
+    $(".author-new-progress li").eq(2).addClass("active");
+    $("#authorProgress").carousel(2);
+  }, 300)
+  var form = document.getElementById("init_author_info")
+  form.action = "/admin/authors/" + authorId
+}

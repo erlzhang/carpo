@@ -21,12 +21,11 @@
             %h5.mb-4.text-center 还需要一个头像！
             .text-center.mb-4
               .current-avatar.rounded
-            = form_tag nil, :id => "author_avatar", :remote => "true", :method => "patch", :multipart => true do
+            = form_tag nil, :id => "author_avatar", :remote => "true", :method => "patch", :multipart => true, :data => {:type => :json} do
               .author-avatar-list.mb-4.text-center
                 - (0..8).each do |i|
                   %label.custom-control.custom-radio
-                    = radio_button_tag 'author[avatar_id]', i, false, :class => "custom-control-input img-radio"
-                    //%span.custom-control-indicator
+                    = radio_button_tag 'author[avatar_id]', i, false, :class => "custom-control-input img-radio", :checked => i == 0 ? true : false
                     %span.custom-control-description
                       = image_tag "avatar/" + i.to_s + ".png", :width => 60, :height => 60
                 %label.avatar-plus{:title => "点击手动上传", "data-toggle" => "tooltips"}
