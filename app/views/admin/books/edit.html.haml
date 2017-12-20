@@ -1,7 +1,0 @@
-.container.mt-4
-  .col-md-8.offset-md-2
-    %h2.mb-3 修改书籍
-    %hr
-    = form_for @book, :url => admin_book_path(@book) do |f|
-      = render :partial => "form", :locals => { :f => f } 
-      = link_to "取消", admin_book_path(@book), :class => "btn btn-secondary"

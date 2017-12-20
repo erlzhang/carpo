@@ -21,12 +21,12 @@
                 %i.fa.fa-times
         - if @volumes.empty?
           %li.nav-item.plus
-            = link_to nil, :class => "nav-link disabled active", :id => "addVolume" do
+            = link_to "#", :class => "nav-link disabled active sort-disabled", :id => "addVolume" do
               %i.fa.fa-plus
               创建分卷
         - else
           %li.nav-item.plus
-            = link_to nil, :class => "nav-link disabled sort-disabled", :id => "addVolume" do
+            = link_to "#", :class => "nav-link disabled sort-disabled", :id => "addVolume" do
               %i.fa.fa-plus
         = form_for @new_volume, :url => admin_book_volumes_path(@book) do |f|
           = f.hidden_field :title
