@@ -2,10 +2,11 @@ class Admin::BooksController < ApplicationController
   layout 'application_admin'
   before_action :authenticate_user!
   before_action :current_author
-  before_action :set_book, :only => [:show, :edit, :update, :destroy, :sort_posts, :sort_volumes]
+  before_action :set_book, :only => [:show, :update, :destroy, :sort_posts, :sort_volumes]
   
   def index
     @books = current_author.books.order("created_at desc")
+    @book = Book.new
   end
 
   def show
@@ -26,10 +27,6 @@ class Admin::BooksController < ApplicationController
     end
   end
 
-  def new
-    @book = Book.new
-  end
-  
   def create
     @book = Book.new(book_params)
     @book.author = current_author
@@ -37,15 +34,10 @@ class Admin::BooksController < ApplicationController
     volume.book = @book
     if @book.save
       volume.save
-      #设置默认卷
-      flash[:success] = "书籍创建成功"
-      redirect_to admin_book_path(@book)
+      render json: @book
     else
-      render :new
+      render json: @book.errors, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
@@ -74,7 +66,7 @@ class Admin::BooksController < ApplicationController
     @data["from"] = params[:from]
     @data["to"] = params[:to]
 
-    #验证参数是否z存在
+    #验证参数是否存在
     unless params[:from] or params[:to]
       flash[:danger] = "非法操作!"
       redirect_to admin_book_path(@book)
@@ -117,6 +109,7 @@ class Admin::BooksController < ApplicationController
       @data["respond"] = false 
       @data["message"] = "系统原因导致操作失败，请刷新页面后重新操作！"
     end
+    render json: @data
   end
 
   def sort_volumes
@@ -170,6 +163,7 @@ class Admin::BooksController < ApplicationController
       @data["respond"] = false 
       @data["message"] = "系统原因导致操作失败，请刷新页面后重新操作！"
     end
+    render json: @data
   end
 
   private

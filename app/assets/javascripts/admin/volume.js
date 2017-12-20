@@ -1,6 +1,6 @@
 //= require sort
 
-$(".admin.books.show").ready(function(){
+$(".admin.books.index").ready(function(){
 
   newVolume(); 
   initVolumeAction();
@@ -109,7 +109,7 @@ function newVolume(){
 }
 
 //绑定卷初始功能
-function initVolumeAction() {
+function init_volume_action() {
   var volumeList = $(".volume");
   updateVolumeName();
   /*tab切换卷*/

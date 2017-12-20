@@ -1,7 +1,7 @@
 .container.mt-4
   .row.mt-3
     - @books.each do |book|
-      .col-md-3
+      .col-md-3.mb-3
         = link_to admin_book_path(book), :class => "card book-card border-light" do
           .card-body.d-flex.flex-column
             %h4.card-title= book.title
@@ -9,10 +9,29 @@
             %small.text-muted
               更新于
               = last_updated(book)
-    .col-md-3
-      = link_to new_admin_book_path do
+    .col-md-3.mb-3
+      = link_to "#", "data-toggle" => "modal", :id => "btnNewBook", "data-target" => "#newBookModal" do
         .card.book-card.d-table.w-100.border-light
           .card-body.text-center.d-table-cell.h-100.align-middle
             .card-book-plus
               %span.plus-col
               %span.plus-row
+.modal.fade#newBookModal{:role => "dialog", "aria-labelledby" => "btnNewBook", "aria-hidden" => "true"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title New
+      = form_for @book, :url => admin_books_path, :remote => true do |f|
+        .modal-body
+          .form-group
+            = f.label :title, "书名"
+            = f.text_field :title, :class => input_class(@book, :title)
+            - if is_invalid?(@book, :title)
+              = invalid_message(@book, :title)
+          .form-group
+            = f.label :description, "摘要"
+            = f.text_area :description, :class => 'form-control', :rows => "5"
+        .modal-footer
+          = f.submit "提交", :class => 'btn btn-primary'
+        
+

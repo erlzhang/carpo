@@ -30,7 +30,7 @@ function ajaxSort(e){
         //$("#" + type +  "-" + data.from).insertBefore($("#drag-" + type + "-" + data.to));
         //$("#drag-" + type +  "-" + data.from).insertBefore($("#" + type + "-" + data.from));
       }else {
-        //应当阻止操作，但是插件没有该借口欸......
+        //应当阻止操作，但是插件没有该接口欸......
         //实在不行就强制页面刷新
         //操作异常提醒
         console.log(data.message)

@@ -15,6 +15,7 @@
 //= require jquery.remotipart
 //= require popper
 //= require bootstrap-sprockets
+//= require admin/custom
 
 $(function(){
   $('[data-toggle = "tooltip"]').tooltip();

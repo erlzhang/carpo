@@ -1,5 +1,5 @@
 $(".book-chapter-container").html("<%= escape_javascript(render :partial => 'information')%>")
-update_description();
+updateVolumeDescription();
 sortable('.sortable-list',{
   handle: ".post-handle",
   items: ":not(.sort-disabled)"

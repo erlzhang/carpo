@@ -37,3 +37,5 @@
     = form_for @book, :url => admin_book_path(@book), :remote => true, "data-type" => "json" do |f|
       = render :partial => "form", :locals => { :f => f } 
       = link_to "取消", "#", :class => "btn btn-secondary collapse-side-form"
+
+= javascript_include_tag "admin/book"
