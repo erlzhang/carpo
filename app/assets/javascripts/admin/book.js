@@ -46,8 +46,12 @@ addVolume.onclick = function() {
 
             /*绑定必要功能*/
             initVolumeAction();
+
+            /*提示信息*/
+            showAlert("success", data.message);
           }else {
             //分卷创建失败，删除已经添加的节点 
+            showAlert("warning", data.message);
           }
         },
         error: function(){
@@ -66,13 +70,17 @@ updateVolumeDescription();
 
 //ajax删除卷
 $(".delete-volume").each(function(){
-  $(this).on("ajax:success", function(event){
-    $(this).parents("li.nav-item").remove();
+  $(this).on("ajax:success", function(e, data){
+    if( data.respond ){
+      showAlert("success", data.message)
+      $(this).parents("li.nav-item").remove();
+    }else {
+      showAlert("warning", data.message);
+    }
   });
-});
-$(".delete-volume").each(function(){
   $(this).on("ajax:error", function(event){
     //提示错误信息
+    showAlert("danger", "网络原因导致操作失败！请刷新页面后重试！");
   });
 });
 
@@ -84,11 +92,13 @@ $(".collapse-side-form").click(function() {
   $(".book-side-form").removeClass("on")
 });
 
-$('.edit_book[data-remote="true"]').on("ajax:success", function(e, data, status, xhr) {
+$('.edit_book[data-remote="true"]').on("ajax:success", function(e, data, status) {
   if( status == "success" ){
-    $(".book-title").text(data.title);
-    $(".book-description").text(data.description);
+    console.log(data)
+    $(".book-title").html(data.title);
+    $(".book-description").html(data.description);
     $(".book-side-form").removeClass("on");
+    showAlert("success", data.message);
   }
 });
 $('.edit_book[data-remote="true"]').on("ajax:error", function(e, xhr, status, error) {

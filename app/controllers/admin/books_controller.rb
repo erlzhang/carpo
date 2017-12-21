@@ -3,6 +3,8 @@ class Admin::BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :current_author
   before_action :set_book, :only => [:show, :update, :destroy, :sort_posts, :sort_volumes]
+
+  include ApplicationHelper
   
   def index
     @books = current_author.books.order("created_at desc")
@@ -41,8 +43,12 @@ class Admin::BooksController < ApplicationController
   end
 
   def update
+    @data = Hash.new
     if @book.update(book_params)
-      render json: @book
+      @data["title"] = @book.title
+      @data["description"] = @book.description
+      @data["message"] = "书籍信息更新成功"
+      render json: @data
     else
       render json: @book.errors, status: :unprocessable_entity
     end
@@ -59,17 +65,13 @@ class Admin::BooksController < ApplicationController
   end
 
   def sort_posts
-    #全部json数据用一个hash包裹
     @data = Hash.new
-    #初始结果设定为true，只有发生情况会抛出false
-    @data["respond"] = true
-    @data["from"] = params[:from]
-    @data["to"] = params[:to]
 
     #验证参数是否存在
     unless params[:from] or params[:to]
-      flash[:danger] = "非法操作!"
-      redirect_to admin_book_path(@book)
+      @data["respond"] = false
+      @data["message"] = "内部错误或是无效操作！"
+      return render json: @data
     end
 
     from = Post.find(params[:from])
@@ -79,7 +81,7 @@ class Admin::BooksController < ApplicationController
     unless from or to
       @data["respond"] = false
       @data["message"] = "内部错误或是无效操作！"
-      return
+      return render json: @data
     end
 
     from_index = from.post_index
@@ -106,24 +108,22 @@ class Admin::BooksController < ApplicationController
         from.update_attributes!(:post_index => to_index)
       end
     rescue
-      @data["respond"] = false 
-      @data["message"] = "系统原因导致操作失败，请刷新页面后重新操作！"
+      @data["respond"] = false
+      @data["message"] = "网络通讯原因导致操作失败，请刷新页面后重试！"
     end
     render json: @data
   end
 
   def sort_volumes
-    #全部json数据用一个hash包裹
     @data = Hash.new
-    #初始结果设定为true，只有发生情况会抛出false
     @data["respond"] = true
-    @data["from"] = params[:from]
-    @data["to"] = params[:to]
+    @data["message"] = "操作成功！"
 
-    #验证参数是否z存在
+    #验证参数是否存在
     unless params[:from] or params[:to]
-      flash[:danger] = "非法操作!"
-      redirect_to admin_book_path(@book)
+      @data["respond"] = false
+      @data["message"] = "内部错误或是无效操作！"
+      return render json: @data
     end
 
     from = Volume.find(params[:from])
@@ -133,7 +133,7 @@ class Admin::BooksController < ApplicationController
     unless from or to
       @data["respond"] = false
       @data["message"] = "内部错误或是无效操作！"
-      return
+      return render json: @data
     end
 
     from_index = from.volume_index
@@ -160,8 +160,8 @@ class Admin::BooksController < ApplicationController
         from.update_attributes!(:volume_index => to_index)
       end
     rescue
-      @data["respond"] = false 
-      @data["message"] = "系统原因导致操作失败，请刷新页面后重新操作！"
+      @data["respond"] = false
+      @data["message"] = "网络通讯原因导致操作失败，请刷新页面后重试！"
     end
     render json: @data
   end

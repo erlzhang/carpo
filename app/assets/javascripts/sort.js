@@ -26,19 +26,18 @@ function ajaxSort(e){
     success: function(data) {
       console.log("success")
       if( data.respond ) {
-        console.log("success")
+        showAlert("success", data.message);
         //$("#" + type +  "-" + data.from).insertBefore($("#drag-" + type + "-" + data.to));
         //$("#drag-" + type +  "-" + data.from).insertBefore($("#" + type + "-" + data.from));
       }else {
         //应当阻止操作，但是插件没有该接口欸......
         //实在不行就强制页面刷新
         //操作异常提醒
-        console.log(data.message)
+        showAlert("danger", data.message);
       }
     },
     error: function() {
-      //通讯异常提醒
-      console.log("error")
+      showAlert("danger", "网络错误！请刷新页面后重试！" )
     }
   });
 }

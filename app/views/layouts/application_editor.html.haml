@@ -4,6 +4,6 @@
     %title BookApp
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body.pt-5{:class => namespace_controller_name}
     = yield
-    = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track': 'reload'

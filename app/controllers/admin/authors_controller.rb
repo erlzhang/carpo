@@ -23,7 +23,7 @@ class Admin::AuthorsController < ApplicationController
       data[:id] = @author.id
       render json: data
     else
-      render json: @author.errors, status: :unprocessable_entity
+      render json: @author.errors, STATus: :unprocessable_entity
     end
   end
 

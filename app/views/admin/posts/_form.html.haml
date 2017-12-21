@@ -16,10 +16,6 @@
   .row
     .col-md-8.offset-md-2
       = f.text_area :content, :class => "form-control editor", "data-autosave" => @post.id ? "editor-content" + @post.id.to_s : "editor-content-new-" + @book.id.to_s , :row => "20", :placeholder => "Content here!"
-      - if is_invalid?(@post, :content)
-        = invalid_message(@post, :content)
-      - if @post.errors
-        = @post.errors.full_messages
 .editor-infos
   %label.custom-control.custom-checkbox
     = f.check_box :status, :class => "custom-control-input"

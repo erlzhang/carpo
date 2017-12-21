@@ -64,6 +64,9 @@ class Admin::PostsController < ApplicationController
     
     def set_book
       @book = Book.find(params[:book_id])
+      if @book.author != current_author
+        redirect_to admin_books_path
+      end
     end
 
     def set_post

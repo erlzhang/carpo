@@ -36,11 +36,13 @@ class Admin::VolumesController < ApplicationController
         end 
         @data["message"] = "成功创建卷!"
         @data["id"] = @volume.id
+        @data["url"] = admin_book_volume_path(@book, @volume)
       end
     rescue
       @data["respond"] = false
       @data["message"] = "系统错误，请刷新后重试！"
     end
+    render json: @data
   end
 
   def update_name
@@ -52,12 +54,16 @@ class Admin::VolumesController < ApplicationController
   end
 
   def destroy
+    @data = Hash.new
     if @volume.posts.size > 0
-      flash[:danger] = "操作失败，请先移除该卷下全部章节！"
+      @data["respond"] = false
+      @data["message"] = "操作失败，请先移除该卷下全部章节！"
     else
       @volume.delete
-      flash[:warning] = "成功删除卷！"  
+      @data["respond"] = true
+      @data["message"] = "成功删除卷！"
     end
+    render json: @data
   end
 
   private
