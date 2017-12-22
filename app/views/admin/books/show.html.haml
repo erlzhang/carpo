@@ -17,8 +17,7 @@
             = link_to admin_book_volume_path(@book, volume), :class => @volume.id == volume.id ? "nav-link volume active" : "nav-link volume", :id => "volume-#{volume.id}", :remote => true do
               = volume.title
             - unless volume.posts.count > 0
-              = link_to admin_book_volume_path(@book, volume), "data-remote" => "true", :method => :delete, :class => 'delete-volume' do
-                %i.fa.fa-times
+              = link_to admin_book_volume_path(@book, volume), "data-remote" => "true", :method => :delete, :class => 'delete-volume close-icon'
         - if @volumes.empty?
           %li.nav-item.plus
             = link_to "#", :class => "nav-link disabled active sort-disabled", :id => "addVolume" do

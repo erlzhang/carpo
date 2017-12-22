@@ -36,15 +36,38 @@
 .sortable-placeholder {
   list-style: none;
 }
-.delete-volume {  
+$init-width: 15px;
+.delete-volume {
   position: absolute;
-  right: -5px;
-  top: -10px;
-  display: none;
+  width: $init-width;
+  height: $init-width;
+  display: inline-block;
+  left: -$init-width/2;
+  top: -$init-width/2;
+  background-color: #ccc;
+  border-radius: 50%;
+  opacity: 0;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 60%;
+    top: 50%;
+    left: 20%;
+    margin-top: -1px;
+    background: #fff;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
 }
 .volume-list .nav-item:hover {
   .delete-volume {
-    display: inline-block;
+    transform: scale(1.4, 1.4);
+    opacity: 1;
   }
 }
 .post-handle {
