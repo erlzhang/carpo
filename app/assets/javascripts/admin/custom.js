@@ -11,6 +11,13 @@ function invalidInput(errors, modal){
 }
 
 function showAlert(type, message){
+  if( !message ) {
+    if( type == "success" ){
+      message = "操作成功！"
+    }else {
+      message = "网络通讯错误！请检查当前网络或联系管理员！"
+    }
+  }
   var content = "";
   content += '<div class="alert alert-' + type + ' alert-float fixed-bottom" role="alert">'
   content += message

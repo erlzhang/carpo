@@ -1,7 +1,7 @@
 - if @volume
   .book-volume-info
     - if @volume.description.blank?  
-      %p.card-text.text-muted.volume-description{"data-volume" => @volume.id} 双击可添加描述
+      %p.card-text.text-muted.volume-description{"data-url-updatedescription" => update_description_admin_book_volume_path(@book, @volume)} 双击可添加描述
     - else
       %p.card-text.text-secondary.volume-description{"data-volume" => @volume.id}= @volume.description
 .add-chapter.text-right
@@ -16,16 +16,14 @@
           %i.fa.fa-arrows-alt.post-handle.mr-2.text-muted
       = post.title
       .float-right
-        - if post.status == 0
-          = link_to release_admin_book_post_path(@book, post), :class => "btn btn-outline-success btn-sm rounded-circle mr-2", :title => "发布", "data-toggle" => "tooltip" do
-            %i.fa.fa-send
-        - else
-          = link_to withdraw_admin_book_post_path(@book, post), :class => "btn btn-outline-warning btn-sm rounded-circle mr-2", :title => "撤回", "data-toggle" => "tooltip" do
-            %i.fa.fa-low-vision
+        = link_to release_admin_book_post_path(@book, post), :class => "btn btn-outline-success btn-sm rounded-circle mr-2 release-post" + ( post.status == 0 ? "" : " d-none"), :title => "发布", "data-toggle" => "tooltip", "remote" => true do
+          %i.fa.fa-send
+        = link_to withdraw_admin_book_post_path(@book, post), :class => "btn btn-outline-warning btn-sm rounded-circle mr-2 post-withdraw" + ( post.status == 1 ? "" : " d-none"), :title => "撤回", "data-toggle" => "tooltip", "remote" => true do
+          %i.fa.fa-low-vision
         = link_to admin_book_post_path(@book, post), :class => "btn btn-outline-info btn-sm rounded-circle mr-2", :title => "预览", "data-toggle" => "tooltip" do
           %i.fa.fa-eye
         = link_to edit_admin_book_post_path(@book, post), :class => "btn btn-outline-primary btn-sm rounded-circle mr-2", :title => "修改", "data-toggle" => "tooltip" do
           %i.fa.fa-pencil
-        = link_to admin_book_post_path(@book, post), :class => "btn btn-outline-danger btn-sm rounded-circle ", :method => :delete, :title => "删除", "data-toggle" => "tooltip" do
+        = link_to admin_book_post_path(@book, post), :class => "btn btn-outline-danger btn-sm rounded-circle delete-post", :method => :delete, :title => "删除", "data-toggle" => "tooltip", "remote" => true do
           %i.fa.fa-trash
       //%p.text-muted= truncate(strip_tags(post.content), length: 100, omission: "...")

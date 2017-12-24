@@ -1,3 +1,17 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.login-bg {
+}
+.login-mask {
+  //background-image: linear-gradient(to bottom, rgba($primary, 0.8), rgba($white, 0.8));
+}
+.login-left {
+  background-image: image-url("login_l.jpg");
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.login-words {
+  background-color: rgba($white, 0.25);
+}

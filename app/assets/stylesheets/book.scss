@@ -33,11 +33,22 @@
 }
 
 //books show
+.nav-slide-controls {
+  position: absolute;
+  right: 0;
+  padding: 0.5rem 0;
+  i {
+    padding: 0 0.5rem;
+    color: $primary;
+    font-weight: 600;
+  }
+
+}
 .sortable-placeholder {
   list-style: none;
 }
 $init-width: 15px;
-.delete-volume {
+.close-icon {
   position: absolute;
   width: $init-width;
   height: $init-width;
@@ -70,17 +81,23 @@ $init-width: 15px;
     opacity: 1;
   }
 }
+.list-group-item {
+  border-left: 0;
+  border-right: 0;
+  padding-left: 0;
+}
 .post-handle {
   cursor: move;
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   position: relative;
+  margin: 3px 0 -20px 0;
   &:after, &:before {
     content: "";
     display: inline-block;
     background-color: $gray-200;
-    width: 5px;
+    width: 2px;
     height: 100%;
     top: 0;
     position: absolute;
@@ -89,12 +106,8 @@ $init-width: 15px;
     left: 5px; 
   }
   &:before {
-    left: 15px;
+    left: 12px;
   }
-}
-.list-group-item {
-  border-left: 0;
-  border-right: 0;
 }
 .book-side-form {
   position: fixed;

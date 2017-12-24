@@ -20,6 +20,12 @@ class Admin::VolumesController < ApplicationController
     @data = Hash.new
     @data["respond"] = true
 
+    if @book.volumes.size > 5
+      @data["respond"] = false
+      @data["message"] = "分卷创建失败！当前书籍分卷数量已达上限！"
+      return render json: @data
+    end
+
     #设置排序
     current_index = @book.current_volume_index + 1
     @volume.volume_index = current_index
@@ -37,6 +43,9 @@ class Admin::VolumesController < ApplicationController
         @data["message"] = "成功创建卷!"
         @data["id"] = @volume.id
         @data["url"] = admin_book_volume_path(@book, @volume)
+        if @book.volumes.size > 5
+          @data["max"] = true
+        end
       end
     rescue
       @data["respond"] = false
@@ -60,6 +69,9 @@ class Admin::VolumesController < ApplicationController
       @data["message"] = "操作失败，请先移除该卷下全部章节！"
     else
       @volume.delete
+      if @book.volumes.size > 5
+        @data["max"] = true
+      end
       @data["respond"] = true
       @data["message"] = "成功删除卷！"
     end

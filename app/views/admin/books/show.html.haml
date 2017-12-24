@@ -1,4 +1,4 @@
-.mt-4.container
+.mt-4.container.book-container{"data-book" => @book.id}
   .card-body
     .row
       .col-md-10
@@ -7,26 +7,35 @@
           = simple_format @book.description
       .col-md-2
         %p
-          = link_to "#", :class => "btn btn-secondary toggle-side-form" do
+          = link_to "#", :class => "btn btn-default toggle-side-form" do
             编辑基本信息
+            %i.fa.fa-angle-right.ml-1
   .card.border-light.shadow
-    .card-header
+    .card-header.book-card-header
       %ul.nav.nav-tabs.card-header-tabs.sortable-head.volume-list
         - @volumes.each do |volume|
           %li.nav-item.position-relative
-            = link_to admin_book_volume_path(@book, volume), :class => @volume.id == volume.id ? "nav-link volume active" : "nav-link volume", :id => "volume-#{volume.id}", :remote => true do
+            = link_to admin_book_volume_path(@book, volume), :class => @volume.id == volume.id ? "nav-link volume active text-truncate" : "nav-link volume text-truncate", :id => "volume-#{volume.id}", "data-url-updatename" => update_name_admin_book_volume_path(@book, @volume), :remote => true do
               = volume.title
             - unless volume.posts.count > 0
-              = link_to admin_book_volume_path(@book, volume), "data-remote" => "true", :method => :delete, :class => 'delete-volume close-icon'
+              = link_to "", admin_book_volume_path(@book, volume), "data-remote" => "true", :method => :delete, :class => 'delete-volume close-icon'
         - if @volumes.empty?
           %li.nav-item.plus
             = link_to "#", :class => "nav-link disabled active sort-disabled", :id => "addVolume" do
               %i.fa.fa-plus
               创建分卷
+        - elsif @volumes.size >= 5
+          %li.nav-item.plus.d-none
+            = link_to "#", :class => "nav-link disabled sort-disabled", :id => "addVolume" do
+              %i.fa.fa-plus
         - else
           %li.nav-item.plus
             = link_to "#", :class => "nav-link disabled sort-disabled", :id => "addVolume" do
               %i.fa.fa-plus
+        -#
+          %span.nav-slide-controls
+            %i.fa.fa-angle-left.left
+            %i.fa.fa-angle-right.right
         = form_for @new_volume, :url => admin_book_volumes_path(@book) do |f|
           = f.hidden_field :title
     .card-body.book-chapter-container

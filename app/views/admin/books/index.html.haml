@@ -20,7 +20,7 @@
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
-        %h5.modal-title New
+        %h5.modal-title 新建书籍
       = form_for @book, :url => admin_books_path, :remote => true do |f|
         .modal-body
           .form-group

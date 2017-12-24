@@ -5,7 +5,7 @@ var addVolume = document.getElementById("addVolume");
 addVolume.onclick = function() {
   /*新卷框架*/
   var newVolume = document.createElement("li")
-  newVolume.className = "nav-item nav-link active new"
+  newVolume.className = "nav-item nav-link active new position-relative"
   newVolume.contentEditable = true
   $(newVolume).insertBefore($(addVolume).parent(".nav-item"))
   $(newVolume).focus()
@@ -33,12 +33,12 @@ addVolume.onclick = function() {
             //分卷创建成功，添加id，创建拖动感应区
             var current = $(".nav-item.new")
             var title = current.text();
-            var link = '<a data-remote="true" id="volume-' + data.id + '" class="nav-link" href="' + data.url + '">' + title + '</a>'
+            var link = '<a data-remote="true" id="volume-' + data.id + '" class="nav-link volume text-truncate" href="' + data.url + '">' + title + '</a>'
             $(current).html(link)
             $(current).removeClass("active nav-link new")
 
             //创建删除链接
-            var delete_link = '<a class="delete-volume" data-remote="true" data-method="delete" href="' + data.url + '"><i class="fa fa-times"></i></a>'
+            var delete_link = '<a class="delete-volume close-icon" data-remote="true" data-method="delete" href="' + data.url + '"></a>'
             $(current).append(delete_link)
 
             //重载拖动列表
@@ -49,13 +49,18 @@ addVolume.onclick = function() {
 
             /*提示信息*/
             showAlert("success", data.message);
+
+            /*判断当前分卷是否已达上限*/
+            if( data.max ) {
+              $(".nav-item.plus").addClass("d-none");
+            }
           }else {
             //分卷创建失败，删除已经添加的节点 
             showAlert("warning", data.message);
           }
         },
         error: function(){
-          console.log("error")
+          showAlert("danger");
         }
       });
       /*成功后取消contenteditable*/
@@ -68,19 +73,24 @@ initVolumeAction();
 
 updateVolumeDescription();
 
+initPostActions();
+
 //ajax删除卷
 $(".delete-volume").each(function(){
   $(this).on("ajax:success", function(e, data){
     if( data.respond ){
       showAlert("success", data.message)
       $(this).parents("li.nav-item").remove();
+      if( !data.max ){
+        $(".nav-item.plus").removeClass("d-none");
+      }
     }else {
       showAlert("warning", data.message);
     }
   });
   $(this).on("ajax:error", function(event){
     //提示错误信息
-    showAlert("danger", "网络原因导致操作失败！请刷新页面后重试！");
+    showAlert("danger");
   });
 });
 
@@ -102,15 +112,67 @@ $('.edit_book[data-remote="true"]').on("ajax:success", function(e, data, status)
   }
 });
 $('.edit_book[data-remote="true"]').on("ajax:error", function(e, xhr, status, error) {
-  console.log(xhr)
   var errors = xhr.responseJSON
-  for( var key in errors ){
-    console.log(key)
-    console.log(errors[key])
-    var input = $("#book_" + key)
-    input.addClass("is-invalid");
-  }
+  invalidInput("book", errors);
 });
+
+//卷折行处理
+/*
+var ifVolumeSlide = 0
+var slideStart = 0;
+var slideEnd = 0;
+volumeSlide();
+
+function volumeSlide() {
+  var items = $(".card-header-tabs .nav-item");
+  var containerWidth = $(".card-header-tabs").width() - 65;
+  console.log(containerWidth)
+  var width = 0
+  for( var i = 0, len = items.length - 1; i < len; i++ ){
+    var w = items.eq(i).width();
+    width += w + 16
+    if( width > containerWidth ){
+      items.eq(i).hide();
+      if( slideEnd == 0 ){
+        slideEnd = i;
+      }
+    }
+  }
+  $(".nav-slide-controls .right").click(function() {
+    items.eq(slideEnd).show(); 
+    var itemWidth = items.eq(slideEnd).width();
+    var startWidth = 0
+    for( var i = slideStart; i < slideEnd; i ++ ){
+      startWidth += items.eq(i).width();
+      if( startWidth <= itemWidth ){
+        items.eq(i).hide();
+        slideStart = i;
+      } 
+    }
+    
+  });
+}
+*/
+
+function initPostActions() {
+  //ajax删除文章
+  $(".delete-post").on("ajax:success", function() {
+    $(this).parents(".list-group-item").remove();
+    showAlert("success");
+  });
+
+  //ajax发布文章
+  $(".release-post").on("ajax:success", function() {
+    $(this).addClass("d-none");
+    $(this).siblings(".post-withdraw").removeClass("d-none");
+    showAlert("success");
+  });
+  $(".post-withdraw").on("ajax:complete", function() {
+    $(this).addClass("d-none");
+    $(this).siblings(".release-post").removeClass("d-none");
+    showAlert("success");
+  });
+}
 
 //绑定卷初始功能
 function initVolumeAction() {
@@ -120,7 +182,7 @@ function initVolumeAction() {
   volumeList.on("click", function() {
     volumeList.removeClass("active");
     $(event.target).addClass("active")
-    update_name();
+    updateVolumeName();
   });
 }
 
@@ -143,19 +205,19 @@ function updateVolumeName(){
         this.innerText = originalText
       }else if( newText != originalText ){
         /*Ajax修改卷名*/
-        console.log("The volume name should be changed!")
-        var url = window.location.href + "/volumes/" + this.id.slice(7) + "/update_name"
+        var url = window.location.origin + $(this).data("url-updatename")
+        console.log(url)
         $.ajax({
           type: "get",
           url: url,
           data: {
             title: newText 
           },
-          success: function() {
-            console.log("success")
+          success: function(data) {
+            showAlert("success");
           },
           error: function() {
-            console.log("error")
+            showAlert("danger");
             $(currentVolume).text(originalText)
           }
 
@@ -183,7 +245,7 @@ function updateVolumeDescription() {
       if( newText == ""  ){
         this.innerText = originalText
       }else if( newText != originalText ){
-        var url = window.location.href + "/volumes/" + this.getAttribute("data-volume") + "/update_description"
+        var url = window.location.origin + $(this).data("url-updatedescription"); 
         $.ajax({
           type: "get",
           url: url,
@@ -191,10 +253,10 @@ function updateVolumeDescription() {
             description: newText 
           },
           success: function() {
-            console.log("success")
+            showAlert("success");
           },
           error: function() {
-            console.log("error")
+            showAlert("danger");
           }
         });
       }

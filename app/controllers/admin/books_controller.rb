@@ -66,6 +66,7 @@ class Admin::BooksController < ApplicationController
 
   def sort_posts
     @data = Hash.new
+    @data["respond"] = true
 
     #验证参数是否存在
     unless params[:from] or params[:to]

@@ -47,17 +47,14 @@ class Admin::PostsController < ApplicationController
   
   def destroy
     @post.destroy
-    redirect_to admin_book_path(@book)
   end
 
   def release
     @post.update_attribute(:status, 1)
-    redirect_to admin_book_path(@book, :volume => @post.volume)
   end
 
   def withdraw
     @post.update_attribute(:status, 0)
-    redirect_to admin_book_path(@book, :volume => @post.volume)
   end
 
   private

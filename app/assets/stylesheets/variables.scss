@@ -10,17 +10,6 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black:    #000 !default;
 
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
-
 //主色
 $mojo:    #c34d34 !default;
 $patina:    #64a28d !default;
@@ -41,6 +30,18 @@ $fruitsalad: #53ab62 !default;
 //blue
 $cornflower: #60abe8 !default;
 $steelblue: #5288c4!default;
+
+$blue:    #60abe8 !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #f44336 !default;
+$orange:  #ed8210 !default;
+$yellow:  #ffc107 !default;
+$green:   #53ab62 !default;
+$teal:    #64a28d !default;
+$cyan:    #5288c4 !default;
+
 
 
 
@@ -69,7 +70,7 @@ $nav-tabs-link-active-bg: $white !default;
 $nav-tabs-border-color: $gray-200 !default;
 $nav-tabs-link-active-border-color: $gray-200 !default;
 
-$card-cap-bg: $body-bg;
+//$card-cap-bg: $body-bg;
 
 $list-group-border-color: $gray-200 !default;
 

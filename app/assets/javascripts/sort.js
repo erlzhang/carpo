@@ -1,5 +1,7 @@
 //= require html.sortable
 
+var bookId = $(".book-container").data("book");
+
 function ajaxSort(e){
   var item = e.detail.item
   var fromId = item.id.slice(5)
@@ -15,7 +17,7 @@ function ajaxSort(e){
   var toId = to[0].id.slice(5)
 
   //ajax排序
-  var url = window.location.href + "/sort_posts"
+  var url = window.location.origin + "/admin/books/" + bookId + "/sort_posts"
   $.ajax({
     type: "get",
     url: url,
@@ -24,20 +26,14 @@ function ajaxSort(e){
       to:   toId
     },
     success: function(data) {
-      console.log("success")
       if( data.respond ) {
         showAlert("success", data.message);
-        //$("#" + type +  "-" + data.from).insertBefore($("#drag-" + type + "-" + data.to));
-        //$("#drag-" + type +  "-" + data.from).insertBefore($("#" + type + "-" + data.from));
       }else {
-        //应当阻止操作，但是插件没有该接口欸......
-        //实在不行就强制页面刷新
-        //操作异常提醒
-        showAlert("danger", data.message);
+        showAlert("warning", data.message);
       }
     },
     error: function() {
-      showAlert("danger", "网络错误！请刷新页面后重试！" )
+      showAlert("danger")
     }
   });
 }
@@ -52,9 +48,6 @@ sortable('.sortable-list')[0].addEventListener('sortupdate', function(e){
 
 sortable('.sortable-head');
 sortable('.sortable-head')[0].addEventListener('sortupdate', function(e) {
-  //与章节排序基本一致，应当写成函数
-  //不同之处在于id绑在了a标签上
-  //添加卷不应当参加排序
   var item = $(e.detail.item).find("a")[0]
   var fromId = item.id.slice(7)
   var index = e.detail.elementIndex
@@ -69,7 +62,7 @@ sortable('.sortable-head')[0].addEventListener('sortupdate', function(e) {
   var toId = to[0].id.slice(7)
 
   //ajax排序
-  var url = window.location.href + "/sort_volumes"
+  var url = window.location.origin + "/admin/books/" + bookId + "/sort_volumes"
   $.ajax({
     type: "get",
     url: url,
@@ -78,21 +71,15 @@ sortable('.sortable-head')[0].addEventListener('sortupdate', function(e) {
       to:   toId
     },
     success: function(data) {
-      console.log("success")
       if( data.respond ) {
-        console.log("success")
-        //$("#" + type +  "-" + data.from).insertBefore($("#drag-" + type + "-" + data.to));
-        //$("#drag-" + type +  "-" + data.from).insertBefore($("#" + type + "-" + data.from));
+        showAlert("success", data.message)
       }else {
-        //应当阻止操作，但是插件没有该借口欸......
-        //实在不行就强制页面刷新
-        //操作异常提醒
-        console.log(data.message)
+        showAlert("warning", data.message);
       }
     },
     error: function() {
       //通讯异常提醒
-      console.log("error")
+      showAlert("danger");
     }
   });
 });

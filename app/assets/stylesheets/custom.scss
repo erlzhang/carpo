@@ -11,6 +11,12 @@ body.admin {
 .flex-1 {
   flex: 1;
 }
+.w-40 {
+  width: 40%;
+}
+.w-60 {
+  width: 60%;
+}
 .nav-item {
   margin: 0 0.5rem;
 }
@@ -54,9 +60,14 @@ body.admin {
   border-bottom: 1px solid $gray-200;
 }
 .card-header-tabs {
+  height: 41px;
+  .nav-link {
+    max-width: 8em;
+  }
   .nav-link.active {
     border-top: 2px solid $primary;
     margin-top: -1px;
+    max-width: 100%;
   }
 }
 
@@ -73,4 +84,9 @@ body.admin {
 .alert-float {
   animation: fadeInOut 3s ease-in-out;
   animation-fill-mode: forwards; 
+  border: 0;
+  border-left: 3px solid transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
