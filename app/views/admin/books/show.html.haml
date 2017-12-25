@@ -21,17 +21,17 @@
               = link_to "", admin_book_volume_path(@book, volume), "data-remote" => "true", :method => :delete, :class => 'delete-volume close-icon'
         - if @volumes.empty?
           %li.nav-item.plus
-            = link_to "#", :class => "nav-link disabled active sort-disabled", :id => "addVolume" do
-              %i.fa.fa-plus
+            = link_to "#", :class => "nav-link active sort-disabled", :id => "addVolume" do
+              %span.icon-add
               创建分卷
         - elsif @volumes.size >= 5
           %li.nav-item.plus.d-none
-            = link_to "#", :class => "nav-link disabled sort-disabled", :id => "addVolume" do
-              %i.fa.fa-plus
+            = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
+              %span.icon-add
         - else
           %li.nav-item.plus
-            = link_to "#", :class => "nav-link disabled sort-disabled", :id => "addVolume" do
-              %i.fa.fa-plus
+            = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
+              %span.icon-add
         -#
           %span.nav-slide-controls
             %i.fa.fa-angle-left.left

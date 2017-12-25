@@ -5,6 +5,7 @@
         %nav.editor-nav
           %ol.breadcrumb.mb-0
             %li.breadcrumb-item
+              %span.icon-book.mr-1.text-primary
               = link_to @book.title, admin_book_path(@book)
             - if params[:volume_id]
               %li.breadcrumb-item

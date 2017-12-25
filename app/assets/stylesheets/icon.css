@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  asset-url('icomoon.eot?szoamy');
+  src:  asset-url('icomoon.eot?szoamy#iefix') format('embedded-opentype'),
+    asset-url('icomoon.ttf?szoamy') format('truetype'),
+    asset-url('icomoon.woff?szoamy') format('woff'),
+    asset-url('icomoon.svg?szoamy#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-warning:before {
+  content: "\e900";
+}
+.icon-checkmark:before {
+  content: "\e901";
+}
+.icon-user:before {
+  content: "\e971";
+}
+.icon-cancel:before {
+  content: "\e902";
+}
+.icon-book:before {
+  content: "\e903";
+}
+.icon-cloud-download:before {
+  content: "\f00b";
+}
+.icon-cloud-upload:before {
+  content: "\f00c";
+}
+.icon-pencil:before {
+  content: "\f058";
+}
+.icon-pencil2:before {
+  content: "\e906";
+}
+.icon-quill:before {
+  content: "\e907";
+}
+.icon-bin:before {
+  content: "\e9ac";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-exit:before {
+  content: "\ea14";
+}
+.icon-add:before {
+  content: "\e145";
+}
+.icon-check:before {
+  content: "\e5ca";
+}
+.icon-check_circle:before {
+  content: "\e86c";
+}
+.icon-navigate_before:before {
+  content: "\e408";
+}
+.icon-navigate_next:before {
+  content: "\e409";
+}
+.icon-close:before {
+  content: "\e5cd";
+}
+.icon-expand_less:before {
+  content: "\e5ce";
+}
+.icon-expand_more:before {
+  content: "\e5cf";
+}
+.icon-favorite:before {
+  content: "\e87d";
+}
+.icon-favorite_border:before {
+  content: "\e87e";
+}
+.icon-star:before {
+  content: "\e838";
+}
+.icon-notifications:before {
+  content: "\e7f4";
+}
+.icon-star_border:before {
+  content: "\e83a";
+}

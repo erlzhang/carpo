@@ -31,6 +31,18 @@
     top: 47.5px;
   }
 }
+.nav-item.plus-i {
+  a {
+    padding: 4px 8px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid transparent;
+    border-radius: 3px;
+  }
+  &:hover a{
+    border: 1px solid $gray-300;
+  }
+}
 
 //books show
 .nav-slide-controls {
@@ -46,6 +58,8 @@
 }
 .sortable-placeholder {
   list-style: none;
+  height: 50px;
+  background-color: $gray-100;
 }
 $init-width: 15px;
 .close-icon {

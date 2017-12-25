@@ -6,24 +6,25 @@
       %p.card-text.text-secondary.volume-description{"data-volume" => @volume.id}= @volume.description
 .add-chapter.text-right
   = link_to new_admin_book_post_path(@book, :volume_id => @volume), :class => "btn btn-outline-primary" do
-    %i.fa.fa-plus
-    添加文章
+    %span.icon-quill
+    撰写文章
 %ul.list-group.sortable-list.mt-4
   - @posts.each do |post|
     %li.list-group-item{:id => "post-#{post.id}"}
-      .post-handle.float-left.mr-2{:title => "试试看，拽住拖动可以排序哦！", "data-toggle" => "tooltip"}
+      .post-handle.float-left.mr-2
         -#
           %i.fa.fa-arrows-alt.post-handle.mr-2.text-muted
       = post.title
       .float-right
         = link_to release_admin_book_post_path(@book, post), :class => "btn btn-outline-success btn-sm rounded-circle mr-2 release-post" + ( post.status == 0 ? "" : " d-none"), :title => "发布", "data-toggle" => "tooltip", "remote" => true do
-          %i.fa.fa-send
+          %span.icon-cloud-upload
         = link_to withdraw_admin_book_post_path(@book, post), :class => "btn btn-outline-warning btn-sm rounded-circle mr-2 post-withdraw" + ( post.status == 1 ? "" : " d-none"), :title => "撤回", "data-toggle" => "tooltip", "remote" => true do
-          %i.fa.fa-low-vision
+          %span.icon-cloud-download
         = link_to admin_book_post_path(@book, post), :class => "btn btn-outline-info btn-sm rounded-circle mr-2", :title => "预览", "data-toggle" => "tooltip" do
-          %i.fa.fa-eye
+          //%i.fa.fa-eye
+          %span.icon-eye
         = link_to edit_admin_book_post_path(@book, post), :class => "btn btn-outline-primary btn-sm rounded-circle mr-2", :title => "修改", "data-toggle" => "tooltip" do
-          %i.fa.fa-pencil
+          %span.icon-pencil
         = link_to admin_book_post_path(@book, post), :class => "btn btn-outline-danger btn-sm rounded-circle delete-post", :method => :delete, :title => "删除", "data-toggle" => "tooltip", "remote" => true do
-          %i.fa.fa-trash
+          %span.icon-bin
       //%p.text-muted= truncate(strip_tags(post.content), length: 100, omission: "...")

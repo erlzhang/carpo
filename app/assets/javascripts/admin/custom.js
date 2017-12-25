@@ -19,7 +19,13 @@ function showAlert(type, message){
     }
   }
   var content = "";
+  var icons = {
+    "success": "checkmark",
+    "warning": "warning",
+    "danger": "cancel" 
+  }
   content += '<div class="alert alert-' + type + ' alert-float fixed-bottom" role="alert">'
+  content += '<span class="icon-' + icons[type] + ' mr-3"></span>'
   content += message
   content += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
   content += '</div>'

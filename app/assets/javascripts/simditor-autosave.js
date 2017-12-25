@@ -56,11 +56,18 @@ SimditorAutosave = (function(superClass) {
         return _this.storage.set(_this.path, _this.editor.getValue());
       };
     })(this));
+    this.editor.el.closest('form').on("submit", (function(_this) {
+      return function(e) {
+        return _this.storage.remove(_this.path);
+      };
+    })(this));
+    /*
     this.editor.el.closest('form').on('ajax:success.simditor-' + this.editor.id, (function(_this) {
       return function(e) {
         return _this.storage.remove(_this.path);
       };
     })(this));
+    */
     val = this.storage.get(this.path);
     if (!val) {
       return;

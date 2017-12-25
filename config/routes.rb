@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'admin/dashboard'
+  get 'admin/demo'
 
   namespace :admin do
     resources :authors do

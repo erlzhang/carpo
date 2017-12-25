@@ -11,12 +11,12 @@
         .row
           .col
             .lead.text-primary
-              %strong= @author.books.count
+              %strong= author_count(@author)[:book]
             %p.mb-0
               %small.text-muted Books
           .col
             .lead.text-primary
-              %strong= author_post_count(@author)
+              %strong= author_count(@author)[:post]
             %p.mb-0
               %small.text-muted Posts
   -#

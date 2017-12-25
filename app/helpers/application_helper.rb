@@ -24,11 +24,11 @@ module ApplicationHelper
     model.errors.include?(attr)
   end
 
-  def author_post_count(author)
-    count = 0
-    author.books.each do |book|
-      count += book.posts.count
-    end
+  def author_count(author)
+    count = Hash.new
+    books = author.books
+    count[:book] = books.size
+    count[:post] = Post.where(:book_id => books).count
     return count
   end
 end
