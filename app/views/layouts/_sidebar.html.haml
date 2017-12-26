@@ -2,10 +2,8 @@
   .card.border-light.text-center.mb-3.shadow.author-card
     .card-body
       - if @author = @author || current_user.author
-        - if @author.file_avatar.blank?
-          = image_tag "avatar.jpg", :class => "img-fluid rounded-circle mb-2"
-        - else
-          = image_tag @author.file_avatar.thumb.url, :class => "img-fluid rounded-circle mb-2" 
+        .mb-2
+          = get_avatar(@author)
         %h4.card-title= @author.name
         %p.text-muted.card-text= @author.introduction
         .row
@@ -22,10 +20,10 @@
   -#
     %nav.nav.nav-pills.flex-column
       %li.nav-item
-        = link_to admin_dashboard_path, :class => params[:action] == "dashboard" ? "nav-link active" : "nav-link" do
+        = link_to manage_dashboard_path, :class => params[:action] == "dashboard" ? "nav-link active" : "nav-link" do
           Dashboard
       %li.nav-item
-        = link_to admin_books_path, :class => params[:controller] == "admin/books" ? "nav-link active" : "nav-link" do
+        = link_to manage_books_path, :class => params[:controller] == "manage/books" ? "nav-link active" : "nav-link" do
           书籍管理
       %li.nav-item
         = link_to "#", :class => "nav-link disabled" do

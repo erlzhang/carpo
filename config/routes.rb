@@ -3,14 +3,10 @@ Rails.application.routes.draw do
   root :to =>  'home#index'
 
   devise_for :users
-  get 'admin/dashboard'
-  get 'admin/demo'
+  get 'manage/dashboard'
+  get 'manage/demo'
 
-  namespace :admin do
-    resources :authors do
-      patch :update_avatar, :on => :member
-      get :update_avatar, :on => :member
-    end
+  namespace :manage do
     resources :books do
       get :sort_posts, :on => :member
       get :sort_volumes, :on => :member
@@ -24,6 +20,15 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  #profile => author
+  get 'complete_your_information', :to =>"profile#new" 
+  get 'edit_profile', :to => "profile#edit"
+  patch 'profile/update'
+  patch 'profile/update_avatar'
+  get 'profile/update'
+  get 'profile/update_avatar'
+  post 'profile/create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

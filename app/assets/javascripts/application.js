@@ -12,10 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require jquery.remotipart
 //= require popper
 //= require bootstrap-sprockets
-//= require admin/custom
+//= require manage/custom
 
 $(function(){
   $('[data-toggle = "tooltip"]').tooltip();

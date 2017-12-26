@@ -7,16 +7,16 @@ class ApplicationController < ActionController::Base
         if current_user.author.status == 2
           return current_user.author
         else
-          redirect_to admin_dashboard_path
+          redirect_to manage_dashboard_path
         end
       else
-        redirect_to admin_dashboard_path
+        redirect_to manage_dashboard_path
       end
     end
   end
 
   def after_sign_in_path_for(resource)
-    admin_dashboard_path
+    manage_dashboard_path
   end
 
 end

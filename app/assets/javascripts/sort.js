@@ -17,7 +17,7 @@ function ajaxSort(e){
   var toId = to[0].id.slice(5)
 
   //ajax排序
-  var url = window.location.origin + "/admin/books/" + bookId + "/sort_posts"
+  var url = window.location.origin + "/manage/books/" + bookId + "/sort_posts"
   $.ajax({
     type: "get",
     url: url,
@@ -62,7 +62,7 @@ sortable('.sortable-head')[0].addEventListener('sortupdate', function(e) {
   var toId = to[0].id.slice(7)
 
   //ajax排序
-  var url = window.location.origin + "/admin/books/" + bookId + "/sort_volumes"
+  var url = window.location.origin + "/manage/books/" + bookId + "/sort_volumes"
   $.ajax({
     type: "get",
     url: url,

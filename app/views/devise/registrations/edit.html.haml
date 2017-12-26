@@ -29,7 +29,7 @@
                   %small.form-text.text-muted 请输入当前密码
               .form-group
                 = f.submit "确认更改", :class => "btn btn-primary"
-                = link_to "返回", admin_dashboard_path, :class => "btn btn-secondary"
+                = link_to "返回", manage_dashboard_path, :class => "btn btn-secondary"
               -#
                 暂时不能注销用户
                 = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete </p>

@@ -4,6 +4,6 @@
     %hr
     %p.lead.mt-4
       - if current_user
-        = link_to "Dashboard", admin_dashboard_path, :class => "btn btn-primary btn-lg"
+        = link_to "Dashboard", manage_dashboard_path, :class => "btn btn-primary btn-lg"
       - else
         = link_to "登陆", new_user_session_path, :class => "btn btn-primary btn-lg"

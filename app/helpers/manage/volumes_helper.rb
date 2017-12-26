@@ -1,0 +1,2 @@
+module Manage::VolumesHelper
+end

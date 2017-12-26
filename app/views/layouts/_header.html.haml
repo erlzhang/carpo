@@ -1,10 +1,10 @@
 %nav.navbar.navbar-dark.bg-primary.navbar-expand-lg.fixed-top
-  = link_to "Demo", admin_dashboard_path, :class => "navbar-brand"
+  = link_to "Demo", manage_dashboard_path, :class => "navbar-brand"
   %ul.navbar-nav
     %li.nav-item
       = link_to "Home", root_path, :class => "nav-link"
     %li.nav-item
-      = link_to "Dashboard", admin_dashboard_path, :class => "nav-link active"
+      = link_to "Dashboard", manage_dashboard_path, :class => "nav-link active"
   %ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
     - if current_user.author
       - @author = current_user.author
@@ -13,7 +13,7 @@
           //%i.fa.fa-user
           %span.icon-user
         .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
-          = link_to "个人信息", edit_admin_author_path(@author), :class => "dropdown-item"
+          = link_to "个人信息", edit_profile_path, :class => "dropdown-item"
           = link_to "修改密码", edit_user_registration_path, :class => "dropdown-item"
     %li.nav-item
       = link_to destroy_user_session_path, :method => :delete, :class => "nav-link", :title => "注销", "data-toggle" => "tooltip" do

@@ -1,0 +1,49 @@
+.mt-4.container.book-container{"data-book" => @book.id}
+  .card-body
+    .row
+      .col-md-10
+        %h2.card-title.book-title= @book.title
+        .text-secondary.card-text.book-description
+          = simple_format @book.description
+      .col-md-2
+        %p
+          = link_to "#", :class => "btn btn-default toggle-side-form" do
+            编辑基本信息
+            %i.fa.fa-angle-right.ml-1
+  .card.border-light.shadow
+    .card-header.book-card-header
+      %ul.nav.nav-tabs.card-header-tabs.sortable-head.volume-list
+        - @volumes.each do |volume|
+          %li.nav-item.position-relative
+            = link_to manage_book_volume_path(@book, volume), :class => @volume.id == volume.id ? "nav-link volume active text-truncate" : "nav-link volume text-truncate", :id => "volume-#{volume.id}", "data-url-updatename" => update_name_manage_book_volume_path(@book, @volume), :remote => true do
+              = volume.title
+            - unless volume.posts.count > 0
+              = link_to "", manage_book_volume_path(@book, volume), "data-remote" => "true", :method => :delete, :class => 'delete-volume close-icon'
+        - if @volumes.empty?
+          %li.nav-item.plus
+            = link_to "#", :class => "nav-link active sort-disabled", :id => "addVolume" do
+              %span.icon-add
+              创建分卷
+        - elsif @volumes.size >= 5
+          %li.nav-item.plus.d-none
+            = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
+              %span.icon-add
+        - else
+          %li.nav-item.plus
+            = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
+              %span.icon-add
+        -#
+          %span.nav-slide-controls
+            %i.fa.fa-angle-left.left
+            %i.fa.fa-angle-right.right
+        = form_for @new_volume, :url => manage_book_volumes_path(@book) do |f|
+          = f.hidden_field :title
+    .card-body.book-chapter-container
+      = render "manage/volumes/information"
+.book-side-form.col-md-3.pt-5
+  .card-body.mt-5
+    = form_for @book, :url => manage_book_path(@book), :remote => true, "data-type" => "json" do |f|
+      = render :partial => "form", :locals => { :f => f } 
+      = link_to "取消", "#", :class => "btn btn-secondary collapse-side-form"
+
+= javascript_include_tag "manage/book"

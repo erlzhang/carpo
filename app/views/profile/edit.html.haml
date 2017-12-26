@@ -1,0 +1,45 @@
+.container.mt-4
+  .row
+    .col-md-8.offset-md-2
+      %h5.mb-2.mt-3 个人信息
+      %hr
+      = form_for @author, :url => profile_update_path do |f|
+        .form-group.row
+          = f.label :name, :class => "col-sm-2 col-form-label"
+          .col-sm-10
+            = f.text_field :name, :class => input_class(@author, :name), :placeholder => "Name", :required => true
+            - if is_invalid?(@author, :name)
+              = invalid_message(@author, :name)
+        .form-group.row
+          = f.label :birthday, :class => "col-sm-2 col-form-label"
+          .col-sm-10
+            = f.date_field :birthday, :class => "form-control", :placeholder => "YY-mm-dd"
+        .form-group.row
+          = f.label :url, :class => "col-sm-2 col-form-label"
+          .col-sm-10
+            = f.url_field :url, :class => "form-control", :placeholder => "http://"
+        .form-group.row
+          = f.label :introduction, :class => "col-sm-2 col-form-label"
+          .col-sm-10
+            = f.text_area :introduction, :class => "form-control", :placeholder => "简要介绍一下自己吧", :rows => "5"
+        %h5.mb-2 头像
+        %hr
+        .form-group.row
+          .col-sm-10
+            = f.file_field :file_avatar, :class => "form-control"
+            = f.hidden_field :file_avatar_cache
+            - unless @author.file_avatar.blank?
+              = image_tag @author.file_avatar.thumb.url, :class => "mt-2"
+              %br
+              %label.custom-control.custom-checkbox
+                = f.check_box :remove_file_avatar, :class => "custom-control-input"
+                %span.custom-control-indicator
+                %span.custom-control-description 移除头像
+            .author-avatar-list.mb-4.text-center
+              - (0..8).each do |i|
+                %label.custom-control.custom-radio
+                  = radio_button_tag 'author[avatar_id]', i, false, :class => "custom-control-input img-radio", :checked => i == @author.avatar_id ? true : false
+                  %span.custom-control-description
+                    = image_tag "avatar/" + i.to_s + ".png", :width => 60, :height => 60
+        = submit_tag "提交", :class => "btn btn-primary"
+        = link_to "返回", :back, :class => "btn btn-secondary"
