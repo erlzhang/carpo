@@ -1,17 +1,16 @@
-%nav.navbar.navbar-dark.bg-primary.navbar-expand-lg.fixed-top
-  = link_to "Demo", manage_dashboard_path, :class => "navbar-brand"
-  %ul.navbar-nav
-    %li.nav-item
-      = link_to "Home", root_path, :class => "nav-link"
-    %li.nav-item
-      = link_to "Dashboard", manage_dashboard_path, :class => "nav-link active"
+%nav.navbar.navbar-dark.bg-primary.navbar-expand-lg.fixed-top.pl-5
+  .logo-fixed.rounded-circle
+    = image_tag "logo.svg", :width => "30", :height => "30", :class => "d-inline-block align-top"
+
+  = link_to root_path, :class => "navbar-brand ml-4" do
+    ForWriter
   %ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
     - if current_user.author
       - @author = current_user.author
       %li.nav-item.dropdown
         = link_to "#", :class => "nav-link  dropdown-toggle",:id => "navbarDropdownMenuLink", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false" do
-          //%i.fa.fa-user
-          %span.icon-user
+          = get_avatar(@author, 30, "mr-2")
+          = @author.name
         .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
           = link_to "个人信息", edit_profile_path, :class => "dropdown-item"
           = link_to "修改密码", edit_user_registration_path, :class => "dropdown-item"

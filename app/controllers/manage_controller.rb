@@ -7,7 +7,7 @@ class ManageController < ApplicationController
       @author = current_user.author
       if @author.status == 2
         #dashboard没有内容，填完信息直接转调到书籍管理页面
-        redirect_to manage_books_path
+        #redirect_to manage_books_path
       else
         redirect_to root_path
       end

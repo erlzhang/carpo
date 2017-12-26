@@ -12,9 +12,9 @@
     = render "layouts/header"
     .container-fluid.pt-5.flex-1
       .row
-        .col-md-2
+        .col-md-2.col-sm-3.sidebar.bg-white
           = render "layouts/sidebar"
-        .col-md-10
-          = render "layouts/flash"
+        %main.col-md-10.col-sm-9.ml-sm-auto
           = yield
-    = render "layouts/footer"
+    //= render "layouts/footer"
+    = render "layouts/flash"

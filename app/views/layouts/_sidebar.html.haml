@@ -1,36 +1,39 @@
-.mt-4
-  .card.border-light.text-center.mb-3.shadow.author-card
-    .card-body
-      - if @author = @author || current_user.author
-        .mb-2
-          = get_avatar(@author)
-        %h4.card-title= @author.name
-        %p.text-muted.card-text= @author.introduction
-        .row
-          .col
-            .lead.text-primary
-              %strong= author_count(@author)[:book]
-            %p.mb-0
-              %small.text-muted Books
-          .col
-            .lead.text-primary
-              %strong= author_count(@author)[:post]
-            %p.mb-0
-              %small.text-muted Posts
-  -#
-    %nav.nav.nav-pills.flex-column
-      %li.nav-item
-        = link_to manage_dashboard_path, :class => params[:action] == "dashboard" ? "nav-link active" : "nav-link" do
-          Dashboard
-      %li.nav-item
-        = link_to manage_books_path, :class => params[:controller] == "manage/books" ? "nav-link active" : "nav-link" do
-          书籍管理
-      %li.nav-item
-        = link_to "#", :class => "nav-link disabled" do
-          专栏管理
-      %li.nav-item
-        = link_to "#", :class => "nav-link disabled" do
-          评论管理
-      %li.nav-item
-        = link_to "#", :class => "nav-link disabled" do
-          资料集
+-#
+  .text-center.mt-5
+    - if @author = @author || current_user.author
+      .mb-2
+        = get_avatar(@author)
+      %h4.card-title= @author.name
+      .row
+        .col
+          .lead.text-primary
+            %strong= author_count(@author)[:book]
+          %p.mb-0
+            %small.text-muted Books
+        .col
+          .lead.text-primary
+            %strong= author_count(@author)[:post]
+          %p.mb-0
+            %small.text-muted Posts
+  %hr
+%nav.nav.nav-pills.flex-column.mt-5
+  %li.nav-item
+    = link_to manage_dashboard_path, :class => params[:action] == "dashboard" ? "nav-link active" : "nav-link" do
+      %i.fa.fa-dashboard.mr-1
+      Dashboard
+  %li.nav-item
+    = link_to manage_books_path, :class => params[:controller] == "manage/books" ? "nav-link active" : "nav-link" do
+      %span.icon-book.mr-1
+      书籍管理
+  %li.nav-item
+    = link_to "#", :class => "nav-link disabled" do
+      %i.fa.fa-vcard.mr-1
+      专栏管理
+  %li.nav-item
+    = link_to "#", :class => "nav-link disabled" do
+      %i.fa.fa-comments.mr-1
+      评论管理
+  %li.nav-item
+    = link_to "#", :class => "nav-link disabled" do
+      %i.fa.fa-archive.mr-1
+      资料集
