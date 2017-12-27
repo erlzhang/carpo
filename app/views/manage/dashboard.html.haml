@@ -1,6 +1,51 @@
 .container.mt-4
   - if @author
     - if @author.status == 2
+      .card.border-light
+        .card-body.d-flex
+          .mr-3
+            = get_avatar(@author, 100);
+          %div
+            %h2.text-primary.text-capitalize.mt-2
+              = @author.name
+            %small.badge.badge-secondary.mb-1 Lv 0
+            = link_to edit_profile_path, :class => "btn btn-link btn-sm text-secondary" do
+              %span.icon-pencil
+              编辑个人信息
+            %p
+      .row.mt-3
+        .col-md-3
+          .card.border-light
+            .card-body.text-center
+              %span.icon-archive.text-info.fa-2x
+              %p.text-secondary.text-capitalize.mb-1 创建了书
+              %h1.text-info
+                = @count[:book]
+                %small.text-secondary.f-1x 本
+        .col-md-3
+          .card.border-light
+            .card-body.text-center
+              %span.icon-pen.text-warning.fa-2x
+              %p.text-secondary.text-capitalize.mb-1 撰写了文章
+              %h1.text-warning
+                = @count[:post]
+                %small.text-secondary.f-1x 篇
+        .col-md-3
+          .card.border-light
+            .card-body.text-center
+              %span.icon-keyboard.text-danger.fa-2x
+              %p.text-secondary.text-capitalize.mb-1 码了
+              %h1.text-danger
+                = @count[:word]
+                %small.text-secondary.f-1x 字
+        .col-md-3
+          .card.border-light
+            .card-body.text-center
+              %span.icon-calendar.text-primary.fa-2x
+              %p.text-secondary.text-capitalize.mb-1 注册了
+              %h1.text-primary
+                = @count[:day]
+                %small.text-secondary.f-1x 天
     - elsif @author.status == 3
       .alert.alert-danger
         您的个人信息没有审核通过，暂时无法使用其他功能！

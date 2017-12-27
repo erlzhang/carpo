@@ -4,6 +4,13 @@
 
   = link_to root_path, :class => "navbar-brand ml-4" do
     ForWriter
+  %ul.navbar-nav
+    %li.nav-item
+      = link_to "Home", root_path, :class => "nav-link"
+    %li.nav-item
+      = link_to "Dashboard", manage_dashboard_path, :class => "nav-link active"
+    %li.nav-item
+      = link_to "Books", manage_books_path, :class => "nav-link"
   %ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
     - if current_user.author
       - @author = current_user.author

@@ -17,9 +17,9 @@
       = post.title
       .float-right
         = link_to release_manage_book_post_path(@book, post), :class => "btn btn-outline-success btn-sm rounded-circle mr-2 release-post" + ( post.status == 0 ? "" : " d-none"), :title => "发布", "data-toggle" => "tooltip", "remote" => true do
-          %span.icon-cloud-upload
+          %span.icon-repo-push
         = link_to withdraw_manage_book_post_path(@book, post), :class => "btn btn-outline-warning btn-sm rounded-circle mr-2 post-withdraw" + ( post.status == 1 ? "" : " d-none"), :title => "撤回", "data-toggle" => "tooltip", "remote" => true do
-          %span.icon-cloud-download
+          %span.icon-repo-pull
         = link_to manage_book_post_path(@book, post), :class => "btn btn-outline-info btn-sm rounded-circle mr-2", :title => "预览", "data-toggle" => "tooltip" do
           //%i.fa.fa-eye
           %span.icon-eye

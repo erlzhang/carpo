@@ -11,10 +11,11 @@
   %body{:class => namespace_controller_name + " " + params[:action]}
     = render "layouts/header"
     .container-fluid.pt-5.flex-1
-      .row
-        .col-md-2.col-sm-3.sidebar.bg-white
-          = render "layouts/sidebar"
-        %main.col-md-10.col-sm-9.ml-sm-auto
-          = yield
+      -#
+        .row
+          .col-md-2.col-sm-3.sidebar.bg-white
+            = render "layouts/sidebar"
+          %main.col-md-10.col-sm-9.ml-sm-auto
+      = yield
     //= render "layouts/footer"
     = render "layouts/flash"
