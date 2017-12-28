@@ -55,13 +55,16 @@ class Manage::BooksController < ApplicationController
   end
 
   def destroy
+    @data = Hash.new
+    @data["respond"] = true
     if @book.posts.size > 0
-      flash[:danger] = "操作失败！已有文章的书籍不能删除！"
-      redirect_to manage_books_path
+      @data["respond"] = false
+      @data["message"] = "请先清空该书籍下全部文章在进行后续操作！"
     else
       @book.destroy
-      redirect_to manage_books_path
+      @data["can_add"] = @book.author.can_create_book?
     end
+    return render json: @data
   end
 
   def sort_posts

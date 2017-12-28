@@ -7,4 +7,8 @@ module Manage::BooksHelper
       return book.updated_at.strftime("%Y-%m-%d")
     end
   end
+
+  def can_create_book?(author)
+    author.books.size <= 8
+  end
 end

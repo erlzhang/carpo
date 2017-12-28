@@ -1,0 +1,5 @@
+defaults: &defaults
+  books:
+    limit: 8
+  volumes:
+    limit: 5

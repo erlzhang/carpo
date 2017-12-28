@@ -7,6 +7,9 @@
 .book-card:hover{
   text-decoration: none;
   box-shadow: 0 1px 12px 2px rgba($gray-400, .2);
+  a {
+    text-decoration: none;
+  }
 }
 .card-book-plus {
   width: 100px;
@@ -89,8 +92,8 @@ $init-width: 15px;
     transform: rotate(-45deg);
   }
 }
-.volume-list .nav-item:hover {
-  .delete-volume {
+.volume-list .nav-item:hover, .book-card:hover {
+  .close-icon {
     transform: scale(1.4, 1.4);
     opacity: 1;
   }

@@ -41,14 +41,44 @@
 .icon-cancel:before {
   content: "\e902";
 }
+.icon-locked:before {
+  content: "\e90d";
+}
 .icon-archive:before {
   content: "\e907";
 }
 .icon-diamond:before {
   content: "\e908";
 }
+.icon-resize:before {
+  content: "\e90e";
+}
 .icon-bookmark:before {
   content: "\e909";
+}
+.icon-addressbook:before {
+  content: "\e90f";
+}
+.icon-rain:before {
+  content: "\e910";
+}
+.icon-snow:before {
+  content: "\e911";
+}
+.icon-lightning:before {
+  content: "\e912";
+}
+.icon-sun:before {
+  content: "\e913";
+}
+.icon-moon:before {
+  content: "\e914";
+}
+.icon-cloudy:before {
+  content: "\e915";
+}
+.icon-cloudy2:before {
+  content: "\e916";
 }
 .icon-book:before {
   content: "\e903";
@@ -65,8 +95,20 @@
 .icon-cloud-upload:before {
   content: "\f00c";
 }
+.icon-gift:before {
+  content: "\f042";
+}
+.icon-key:before {
+  content: "\f049";
+}
+.icon-location:before {
+  content: "\f060";
+}
 .icon-pencil:before {
   content: "\f058";
+}
+.icon-plus:before {
+  content: "\f05d";
 }
 .icon-repo-pull:before {
   content: "\f006";
@@ -77,11 +119,20 @@
 .icon-sign-out:before {
   content: "\f032";
 }
+.icon-home:before {
+  content: "\e917";
+}
+.icon-office:before {
+  content: "\e918";
+}
 .icon-pencil2:before {
   content: "\e906";
 }
 .icon-quill:before {
   content: "\e90c";
+}
+.icon-camera:before {
+  content: "\e919";
 }
 .icon-user:before {
   content: "\e971";

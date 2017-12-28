@@ -22,20 +22,16 @@
         - if @volumes.empty?
           %li.nav-item.plus
             = link_to "#", :class => "nav-link active sort-disabled", :id => "addVolume" do
-              %span.icon-add
+              %span.icon-plus
               创建分卷
         - elsif @volumes.size >= 5
           %li.nav-item.plus.d-none
             = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
-              %span.icon-add
+              %span.icon-plus
         - else
           %li.nav-item.plus
             = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
-              %span.icon-add
-        -#
-          %span.nav-slide-controls
-            %i.fa.fa-angle-left.left
-            %i.fa.fa-angle-right.right
+              %span.icon-plus
         = form_for @new_volume, :url => manage_book_volumes_path(@book) do |f|
           = f.hidden_field :title
     .card-body.book-chapter-container
