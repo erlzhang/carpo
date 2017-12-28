@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   root :to =>  'home#index'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
   get 'manage/dashboard'
   get 'manage/demo'
 
@@ -21,6 +24,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :books, only: [:show] do
+    get :query_post, :on => :member
+  end
+
   #profile => author
   get 'complete_your_information', :to =>"profile#new" 
   get 'edit_profile', :to => "profile#edit"
@@ -30,5 +37,4 @@ Rails.application.routes.draw do
   get 'profile/update_avatar'
   post 'profile/create'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

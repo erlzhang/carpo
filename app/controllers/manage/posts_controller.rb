@@ -1,5 +1,5 @@
 class Manage::PostsController < ApplicationController
-  layout 'application_editor'
+  layout 'editor'
   before_action :authenticate_user!
   before_action :current_author
   before_action :set_book

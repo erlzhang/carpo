@@ -1,0 +1,17 @@
+.container-fluid
+  .row
+    .col-md-2.col-sm-3.navbar.bg-light.d-sm-block.d-none
+      %ul.nav.flex-column
+        - @book.posts.each do |post|
+          = link_to post.title, "#", :class => "nav-link post-link", "data-post" => post.id
+    .col-md-10.col-sm-9.ml-sm-auto
+      .container
+        .row
+          .col-md-10.offset-md-1
+            .mt-5#postContainer{"data-book" => @book.id}
+              .post
+                %h1.post-title= @init_post.title
+                .post-content
+                  = raw @init_post.content
+
+= javascript_include_tag "templates/paper"

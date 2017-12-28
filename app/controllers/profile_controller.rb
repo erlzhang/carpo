@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  layout "application_manage"
+  layout "manage"
   before_action :authenticate_user!
   before_action :set_author, only: [:edit, :update, :update_avatar]
 

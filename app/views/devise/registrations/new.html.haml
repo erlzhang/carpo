@@ -1,38 +1,25 @@
-%h1.text-center.mb-5.text-secondary.font-weight-normal
-  = image_tag "logo.svg", :width => "80", :height => "80", :class => "align-bottom"
-  Start for Writing?
-.card.w-50.border-0.shadow
-  .d-flex
-    .login-left.w-40.rounded-left
-      .login-words.w-100.h-100.p-4.text-right.d-flex.rounded-left
-        .align-self-end.w-100
-          %p 生活就是
-          %p 一本书
-          %p 一壶茶
-          %p 一个阳光明媚的下午
-    .card-body.w-60.pt-5.pl-5.pr-5.pb-3
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        .form-group
-          = f.email_field :email, autofocus: true, :class => input_class(@user, :email), :placeholder => "Email"
-          - if is_invalid?(@user, :email)
-            = invalid_message(@user, :email)
-          - else
-            %small.form-text.text-muted 邮箱地址将作为登陆账号使用，请认真填写
-        .form-group
-          = f.password_field :password, :class => input_class(@user, :password), autocomplete: "off", :placeholder => "Password"
-          - if is_invalid?(@user, :password)
-            = invalid_message(@user,:password)
-          - else
-            %small.form-text.text-muted
-              密码至少
-              = @minimum_password_length
-              位
-        .form-group
-          = f.password_field :password_confirmation, autocomplete: "off", :class => input_class(@user, :password_confirmation), :placeholder => "Password again"
-          - if is_invalid?(@user, :password_confirmation)
-            = invalid_message(@user,:password_confirmation)
-        .form-group.mb-1
-          = f.submit "提交", :class => "btn btn-primary btn-block"
-        = render "devise/shared/links"
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  .form-group
+    = f.email_field :email, autofocus: true, :class => input_class(@user, :email), :placeholder => "Email"
+    - if is_invalid?(@user, :email)
+      = invalid_message(@user, :email)
+    - else
+      %small.form-text.text-muted 邮箱地址将作为登陆账号使用，请认真填写
+  .form-group
+    = f.password_field :password, :class => input_class(@user, :password), autocomplete: "off", :placeholder => "Password"
+    - if is_invalid?(@user, :password)
+      = invalid_message(@user,:password)
+    - else
+      %small.form-text.text-muted
+        密码至少
+        = @minimum_password_length
+        位
+  .form-group
+    = f.password_field :password_confirmation, autocomplete: "off", :class => input_class(@user, :password_confirmation), :placeholder => "Password again"
+    - if is_invalid?(@user, :password_confirmation)
+      = invalid_message(@user,:password_confirmation)
+  .form-group.mb-1
+    = f.submit "提交", :class => "btn btn-primary btn-block"
+  = render "devise/shared/links"
 
 

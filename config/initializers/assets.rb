@@ -11,4 +11,5 @@ Rails.application.config.assets.paths << Rails.root.join("app","assets","fonts")
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-Rails.application.config.assets.precompile += %w( profile.js manage/books.js manage/posts.js manage/book.js )
+Rails.application.config.assets.precompile += %w( profile.js manage/books.js manage/posts.js manage/book.js templates/paper.js)
+Rails.application.config.assets.precompile += %w( templates/paper.scss )

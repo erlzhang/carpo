@@ -1,5 +1,5 @@
 class ManageController < ApplicationController
-  layout 'application_manage'
+  layout 'manage'
   before_action :authenticate_user!
 
   def dashboard

@@ -1,5 +1,5 @@
 class Manage::BooksController < ApplicationController
-  layout 'application_manage'
+  layout 'manage'
   before_action :authenticate_user!
   before_action :current_author
   before_action :set_book, :only => [:show, :update, :destroy, :sort_posts, :sort_volumes]
