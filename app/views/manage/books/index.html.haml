@@ -1,24 +1,31 @@
 .container.mt-4
-  .row.mt-5
-    - @books.each do |book|
-      .col-md-3.mb-3.book-col
-        .card.book-card.border-light
-          = link_to manage_book_path(book), :class => "d-block w-100 h-100" do
-            .card-body.d-flex.flex-column
-              %h4.card-title= book.title
-              %p.card-text.text-secondary.flex-1= truncate(book.description, length: 50, omission: "...")
-              %small.text-muted
-                更新于
-                = last_updated(book)
-          - unless book.posts.count > 0
-            = link_to "", manage_book_path(book), "data-remote" => "true", :method => :delete, :class => 'close-icon delete-book'
-    .col-md-3.mb-3.add-book-col{:class => current_user.author.can_create_book? ? "" : "d-none"}
-      = link_to "#", "data-toggle" => "modal", :id => "btnNewBook", "data-target" => "#newBookModal" do
-        .card.book-card.d-table.w-100.border-light
-          .card-body.text-center.d-table-cell.h-100.align-middle
-            .card-book-plus
-              %span.plus-col
-              %span.plus-row
+  - if @books.size == 0
+    .d-flex.w-100.align-items-center.justify-content-center.mt-5.pt-4
+      .blank-slate-book.text-center
+        %span.iconfont.icon-book1.fa-4x.text-muted
+        %p.text-muted.lead.mt-3 Nothing here!
+        = link_to "Create your new book!", "#", "data-toggle" => "modal", :id => "btnNewBook", "data-target" => "#newBookModal", :class => "btn btn-secondary"
+  - else
+    .row.mt-5
+      - @books.each do |book|
+        .col-md-3.mb-3.book-col
+          .card.book-card.border-light
+            = link_to manage_book_path(book), :class => "d-block w-100 h-100" do
+              .card-body.d-flex.flex-column
+                %h4.card-title= book.title
+                %p.card-text.text-secondary.flex-1= truncate(book.description, length: 50, omission: "...")
+                %small.text-muted
+                  更新于
+                  = last_updated(book)
+            - unless book.posts.count > 0
+              = link_to "", manage_book_path(book), "data-remote" => "true", :method => :delete, :class => 'close-icon delete-book'
+      .col-md-3.mb-3.add-book-col{:class => current_user.author.can_create_book? ? "" : "d-none"}
+        = link_to "#", "data-toggle" => "modal", :id => "btnNewBook", "data-target" => "#newBookModal" do
+          .card.book-card.d-table.w-100.border-light
+            .card-body.text-center.d-table-cell.h-100.align-middle
+              .card-book-plus
+                %span.plus-col
+                %span.plus-row
 .modal.fade#newBookModal{:role => "dialog", "aria-labelledby" => "btnNewBook", "aria-hidden" => "true"}
   .modal-dialog{:role => "document"}
     .modal-content
