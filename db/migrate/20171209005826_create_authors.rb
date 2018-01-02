@@ -7,6 +7,7 @@ class CreateAuthors < ActiveRecord::Migration[5.1]
       t.string :file_avatar
       t.datetime :birthday
       t.integer :status, default: 0, null: false
+      t.integer :avatar_id, default: 0, null: false
       t.references :user
 
       t.timestamps
