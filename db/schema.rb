@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217042422) do
+ActiveRecord::Schema.define(version: 20171209005826) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -19,35 +19,39 @@ ActiveRecord::Schema.define(version: 20171217042422) do
     t.string "file_avatar"
     t.datetime "birthday"
     t.integer "status", default: 0, null: false
+    t.integer "avatar_id", default: 0, null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "avatar_id", default: 0, null: false
     t.index ["user_id"], name: "index_authors_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
     t.string "title", default: "", null: false
+    t.string "slug", default: "", null: false
     t.text "description"
+    t.integer "type", default: 0, null: false
+    t.integer "template", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.integer "openess", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "default_volume", default: 0, null: false
     t.integer "current_post_index", default: 0, null: false
     t.integer "current_volume_index", default: 0, null: false
+    t.string "file_cover"
     t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.string "title", default: "", null: false
     t.text "content"
     t.integer "post_index", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.integer "book_id"
     t.integer "volume_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
     t.index ["book_id"], name: "index_posts_on_book_id"
     t.index ["volume_id"], name: "index_posts_on_volume_id"
   end

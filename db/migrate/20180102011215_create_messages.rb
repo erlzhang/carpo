@@ -7,6 +7,7 @@ class CreateMessages < ActiveRecord::Migration[5.1]
       t.integer :recipient, null: false, default: 0
       t.integer :sender, null: false, default: 0
       t.integer :reply_to, null: false, default: 0
+      t.integer :status, null: false, default: 0
 
       t.timestamps
     end

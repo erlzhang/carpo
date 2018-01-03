@@ -1,5 +1,31 @@
 defaults: &defaults
-  books:
+  book:
+    type:
+      essays: 0
+      novel: 1
+      tutorials: 2
+      collections:
+        - novel
+        - essays
+        - tutorials
+    template:
+      collections:
+        - paper
     limit: 8
   volumes:
     limit: 5
+  message:
+    type:
+      notice: 0
+      email: 1
+      upgrade: 2
+      social: 3
+      feedback: 4
+      collections:
+        - notice
+        - email
+        - upgrade
+        - social
+        - feedback
+
+      

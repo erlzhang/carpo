@@ -6,8 +6,6 @@ class ManageController < ApplicationController
     if current_user.author
       @author = current_user.author
       if @author.status == 2
-        #dashboard没有内容，填完信息直接转调到书籍管理页面
-        #redirect_to manage_books_path
         @count = Hash.new 
         books = @author.books
         @count[:book] = books.size

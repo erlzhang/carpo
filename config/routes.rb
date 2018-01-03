@@ -28,6 +28,11 @@ Rails.application.routes.draw do
     get :query_post, :on => :member
   end
 
+  resources :messages, only: [:new, :show, :create, :destroy] do
+    get :inbox, :on => :collection
+    get :outbox, :on => :collection
+  end
+
   #profile => author
   get 'complete_your_information', :to =>"profile#new" 
   get 'edit_profile', :to => "profile#edit"

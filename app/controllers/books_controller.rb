@@ -2,6 +2,8 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @init_post = @book.posts.first
+    if @book.volumes.size > 1
+    end
   end
 
   def query_post

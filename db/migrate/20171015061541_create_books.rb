@@ -10,6 +10,7 @@ class CreateBooks < ActiveRecord::Migration[5.1]
       t.integer :openess, null:false, default: 0
       t.integer :current_post_index, null: false, default: 0
       t.integer :current_volume_index, null: false, default: 0
+      t.integer :likes, null: false, default: 0
       t.string :file_cover
       t.references :author
 

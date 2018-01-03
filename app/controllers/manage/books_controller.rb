@@ -180,7 +180,7 @@ class Manage::BooksController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:title, :description, :status, :openess)
+      params.require(:book).permit(:title, :description, :status, :openess, :slug, :type, :template, :file_cover)
     end
 
 end
