@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  validates :type, presence: true
+  validates :category, presence: true
   validates :title, presence: true
   validates :content, presence: true
   validates :recipient, presence: true

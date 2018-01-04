@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
   validates :title, presence: true
-  validates :type, presence: true
+  validates :category, presence: true
 
   has_many :posts, dependent: :destroy
   has_many :volumes, dependent: :destroy

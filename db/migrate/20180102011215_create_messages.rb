@@ -1,7 +1,7 @@
 class CreateMessages < ActiveRecord::Migration[5.1]
   def change
     create_table :messages do |t|
-      t.integer :type, null: false, default: 0
+      t.integer :category, null: false, default: 0
       t.string :title, null: false, default: ""
       t.text :content
       t.integer :recipient, null: false, default: 0
