@@ -27,7 +27,9 @@ for( var i = 0; i < avatarList.length; i++ ){
     }
   }
 }
+console.log("1111")
 $("#author_file_avatar").on("change", function(){
+  console.log("dddd")
   var file = this.files[0];
   var url = getObjectURL(file);
   $(".current-avatar").css("background-image", "url( " + url + " )")
@@ -49,7 +51,6 @@ function getObjectURL(file){
 }
 
 $("#new_author").on("ajax:success", function(e, data, status, xhr) {
-  console.log(data) 
   if( status == "success" ){
     authorId = data.id
     $(".author-new-progress").addClass("half");
@@ -71,8 +72,6 @@ $("#author_avatar").on("submit", function(){
 });
 
 $("#author_avatar").bind("ajax:success", function(e, data, status, xhr){
-  console.log("success")
-  console.log(status)
   step3();
 });
 $("#author_avatar").bind("ajax:remotipartComplete", function(e, data){

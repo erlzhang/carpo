@@ -1,7 +1,7 @@
 .container.mt-4
   - if @books.size == 0
-    .d-flex.w-100.align-items-center.justify-content-center.mt-5.pt-4
-      .blank-slate-book.text-center
+    .d-flex.w-100.align-items-center.justify-content-center.mt-5.pt-4.book-blank-slate
+      .text-center
         %span.iconfont.icon-book1.fa-4x.text-muted
         %p.text-muted.lead.mt-3 Nothing here!
         = link_to "Create your new book!", "#", "data-toggle" => "modal", :id => "btnNewBook", "data-target" => "#newBookModal", :class => "btn btn-secondary"

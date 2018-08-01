@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103063908) do
+ActiveRecord::Schema.define(version: 20171209005826) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -42,51 +42,6 @@ ActiveRecord::Schema.define(version: 20180103063908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_books_on_author_id"
-  end
-
-  create_table "buckets", force: :cascade do |t|
-    t.string "title", default: "", null: false
-    t.integer "category", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.text "content"
-    t.integer "reply_to", default: 0, null: false
-    t.integer "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_comments_on_book_id"
-  end
-
-  create_table "follows", force: :cascade do |t|
-    t.integer "from", default: 0, null: false
-    t.integer "to", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.integer "category", default: 0, null: false
-    t.string "title", default: "", null: false
-    t.text "content"
-    t.integer "recipient", default: 0, null: false
-    t.integer "sender", default: 0, null: false
-    t.integer "reply_to", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pieces", force: :cascade do |t|
-    t.string "title", default: "", null: false
-    t.text "content"
-    t.integer "category", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|

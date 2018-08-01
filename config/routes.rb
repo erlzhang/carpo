@@ -3,11 +3,9 @@ Rails.application.routes.draw do
   root :to =>  'home#index'
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    sessions: 'users/sessions'
   }
   get 'manage/dashboard'
-  get 'manage/demo'
 
   namespace :manage do
     resources :books do
@@ -26,11 +24,6 @@ Rails.application.routes.draw do
 
   resources :books, only: [:show] do
     get :query_post, :on => :member
-  end
-
-  resources :messages, only: [:new, :show, :create, :destroy] do
-    get :inbox, :on => :collection
-    get :outbox, :on => :collection
   end
 
   #profile => author

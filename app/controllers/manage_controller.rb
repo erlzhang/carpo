@@ -16,7 +16,6 @@ class ManageController < ApplicationController
         redirect_to root_path
       end
     else
-      #redirect_to new_manage_author_path
       redirect_to complete_your_information_path
     end
   end
