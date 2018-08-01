@@ -10,6 +10,9 @@
           = link_to "#", :class => "btn btn-default toggle-side-form" do
             编辑基本信息
             %i.fa.fa-angle-right.ml-1
+        %p
+          = link_to book_path(@book), :class => "btn btn-primary btn-block" do
+            查看
   .card.border-light.shadow
     .card-header.book-card-header
       %ul.nav.nav-tabs.card-header-tabs.sortable-head.volume-list

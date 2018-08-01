@@ -1,35 +1,40 @@
-console.log("template: paper")
+function Paper() {
+  var self = this;
 
-var postContainer = document.getElementById("postContainer");
-var bookId = postContainer.getAttribute("data-book");
+  self.postContainer = document.getElementById("postContainer");
+  self.bookId = postContainer.getAttribute("data-book");
 
-$(".post-link").on("click", function(event) {
-  event.preventDefault
-  var postId = $(this).data("post");
-  query_post(postId);
-});
+  self.current = 0;
 
-function query_post(id) {
-  $.ajax({
-    url: window.location.origin + "/books/" + bookId + "/query_post",
-    type: "GET",
-    data: {
-      "post_id": id
-    },
-    success: function(data) {
-      console.log(data)
-      showPost(data.post)
-    },
-    error: function(){
-  
-    }
+  $(".post-link").on("click", function() {
+    event.preventDefault
+    self.current = $(this).data("post");
+    self.queryPost(self.current);
   });
 }
 
-function showPost(post) {
-  var content = '<div class="post">'
-  content += '<h1 class="post-title">' + post.title + '</h1>'
-  content += '<div class="post-content">' + post.content + '</div>'
-  content += '</div>'
-  postContainer.innerHTML = content;
+Paper.prototype = {
+  queryPost: function(id) {
+    $.ajax({
+      url: window.location.origin + "/books/" + self.bookId + "/query_post",
+      type: "GET",
+      data: {
+        "post_id": id
+      },
+      success: function(data) {
+        showPost(data.post)
+      },
+      error: function(){
+      }
+    });
+  },
+  showPost: function(post) {
+    var self = this, content = '<div class="post">'
+    content += '<h1 class="post-title">' + post.title + '</h1>'
+    content += '<div class="post-content">' + post.content + '</div>'
+    content += '</div>'
+    self.postContainer.innerHTML = content;
+  }
 }
+
+var paper = new Paper();

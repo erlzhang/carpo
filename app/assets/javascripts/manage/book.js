@@ -96,12 +96,11 @@ $(".delete-volume").each(function(){
 });
 
 //ajax 修改书籍信息
-$(".toggle-side-form").click(function() {
+$(".toggle-side-form").click(function(event) {
   event.preventDefault();
   $(".book-side-form").addClass("on");
-  console.log("on")
 });
-$(".collapse-side-form").click(function() {
+$(".collapse-side-form").click(function(event) {
   event.preventDefault();
   $(".book-side-form").removeClass("on")
 });
