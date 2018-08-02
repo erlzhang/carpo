@@ -12,24 +12,32 @@ $("#author_name").on("input", function(){
     submit.disabled = false
   }
 });
+
 var avatarList = document.getElementsByName("author[avatar_id]");
 var authorId = 1
 for( var i = 0; i < avatarList.length; i++ ){
+  if( avatarList[i].checked && !$(".current-avatar").data("file") ) {
+    changeAvatar( avatarList[i] );
+  }
   avatarList[i].onclick = function() {
-    event.preventDefault();
     if( this.checked ){
-      var img = $(this).siblings(".custom-control-description").find("img")
-      var src = img[0].src
-      $(".current-avatar").css("background-image", "url(" + src + ")");
-      currentImg = this.value
-      imgType = "id"
-      $("#author_file_avatar").val("");
+      changeAvatar(this);
     }
   }
 }
-console.log("1111")
+
+function changeAvatar( input ) {
+  var img = $(input).siblings(".custom-control-description").find("img"),
+      src = img[0].src;
+  $(".current-avatar").css("background-image", "url(" + src + ")");
+  $("#author_file_avatar").val("");
+  if( $("#author_remove_file_avatar").length ) {
+    $("#author_remove_file_avatar").val(1); 
+  }
+}
+
+
 $("#author_file_avatar").on("change", function(){
-  console.log("dddd")
   var file = this.files[0];
   var url = getObjectURL(file);
   $(".current-avatar").css("background-image", "url( " + url + " )")

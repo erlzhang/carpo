@@ -77,6 +77,11 @@
 }
 .author-avatar-list .custom-radio{
   padding-left: 0;
+  .img-radio {
+    width: 60px;
+    height: 60px;
+    display: block;
+  }
   .custom-control-description img {
     border-radius: 50%;
     opacity: .7;

@@ -7,7 +7,7 @@ function Paper() {
   self.current = 0;
 
   $(".post-link").on("click", function() {
-    event.preventDefault
+    event.preventDefault();
     self.current = $(this).data("post");
     self.queryPost(self.current);
   });
@@ -22,7 +22,7 @@ Paper.prototype = {
         "post_id": id
       },
       success: function(data) {
-        showPost(data.post)
+        self.showPost(data.post)
       },
       error: function(){
       }
