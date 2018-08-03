@@ -5,9 +5,6 @@ class Manage::PostsController < ApplicationController
   before_action :set_book
   before_action :set_post, :only => [:show, :edit, :destroy, :update, :release, :withdraw]
 
-  def show
-  end
-
   def new
     @post = Post.new
     if params[:volume_id]

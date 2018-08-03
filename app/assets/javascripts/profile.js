@@ -42,6 +42,9 @@ $("#author_file_avatar").on("change", function(){
   var url = getObjectURL(file);
   $(".current-avatar").css("background-image", "url( " + url + " )")
   $(".img-radio").removeAttr("checked");
+  if( $("#author_remove_file_avatar").length ) {
+    $("#author_remove_file_avatar").val(0); 
+  }
 });
 
 
@@ -83,7 +86,6 @@ $("#author_avatar").bind("ajax:success", function(e, data, status, xhr){
   step3();
 });
 $("#author_avatar").bind("ajax:remotipartComplete", function(e, data){
-  console.log(e, data)
 });
 $("#author_avatar").on("ajax:error", function(e, xhr, status, error){
   show_alert("danger");

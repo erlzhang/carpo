@@ -1,20 +1,39 @@
+- provide :title, @book.title
+
 .container-fluid
   .row
     .col-md-2.col-sm-3.navbar.bg-light.d-sm-block.d-none.p-0
       %ul.nav.flex-column
         %li.nav-link.book-title
-          %span.nav-link= @book.title
-        %li
-          - @book.posts.each do |post|
-            = link_to post.title, "#", :class => "nav-link post-link", "data-post" => post.id
+          - index = -1
+          = link_to @book.title, "#cover", :class => "nav-link post-link active", "data-post" => @book.id, "data-type" => "book", "data-index" => index = index + 1
+        - if @volumes.empty?
+          %li
+            - @book.posts.where(:status => 1).order("post_index").each_with_index do |post, index|
+              %li
+                = link_to post.title, "#", :class => "nav-link post-link", "data-post" => post.id, :id => "post-#{ post.id }", "data-index" => index = index + 1, "data-type" => "chapter"
+
+        - else
+          - @volumes.each do |volume|
+            %li
+              = link_to volume.title, "#", :class => "nav-link post-link", "data-post" => volume.id, :id => "", "data-index" => index = index + 1, "data-type" => "volume"
+              %ul.volume-chapters
+                - volume.posts.where(:status => 1).order("post_index").each.each do |post|
+                  %li
+                    = link_to post.title, "#", :class => "nav-link post-link", "data-post" => post.id, :id => "post-#{ post.id }", "data-index" => index = index + 1, "data-type" => "chapter"
     .col-md-10.col-sm-9.ml-sm-auto
       .container
         .row
           .col-md-10.offset-md-1
             .mt-5#postContainer{"data-book" => @book.id}
               .post
-                %h1.post-title= @init_post.title
+                %h1.post-title= @book.title
                 .post-content
-                  = raw @init_post.content
+                  = raw @book.description
+
+      = link_to "#", :class => "navigation navigation-prev" do
+        %i.fa.fa-angle-left
+      = link_to "#", :class => "navigation navigation-next" do
+        %i.fa.fa-angle-right
 
 = javascript_include_tag "templates/paper"

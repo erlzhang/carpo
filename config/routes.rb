@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         get :update_name, :on => :member
         get :update_description, :on => :member
       end
-      resources :posts do
+      resources :posts, :except => [:show] do
         get :release, :on => :member
         get :withdraw, :on => :member
       end

@@ -72,8 +72,6 @@ addVolume.onclick = function() {
 
 initVolumeAction();
 
-updateVolumeDescription();
-
 initPostActions();
 
 //ajax删除卷
@@ -159,18 +157,18 @@ function volumeSlide() {
 
 function initPostActions() {
   //ajax删除文章
-  $(".delete-post").on("ajax:success", function() {
+  $(document).on("ajax:success", ".delete-post", function() {
     $(this).parents(".list-group-item").remove();
     showAlert("success");
   });
 
   //ajax发布文章
-  $(".release-post").on("ajax:success", function() {
+  $(document).on("ajax:success", ".release-post", function() {
     $(this).addClass("d-none");
     $(this).siblings(".post-withdraw").removeClass("d-none");
     showAlert("success");
   });
-  $(".post-withdraw").on("ajax:complete", function() {
+  $(document).on("ajax:complete",".post-withdraw", function() {
     $(this).addClass("d-none");
     $(this).siblings(".release-post").removeClass("d-none");
     showAlert("success");
@@ -232,38 +230,40 @@ function updateVolumeName(){
 }
 
 /*双击修改卷描述*/
-function updateVolumeDescription() {
-  $(".volume-description").on("dblclick",function() {
-    event.preventDefault();
-    var originalText = ""
-    if($(this).hasClass("hint")){
-      this.innerText = ""  
-    }else{
-      originalText = this.innerText;
+$(document).on("dblclick", ".volume-description", function(event) {
+  event.preventDefault();
+  var originalText = ""
+  if( $(this).hasClass("hint") ){
+    this.innerText = ""  
+  }else{
+    originalText = this.innerText;
+  }
+  this.contentEditable = true
+  if( this.innerText == "双击可添加描述" ) {
+    var range = document.createRange()
+    range.selectNodeContents( this );
+  }
+  this.focus()
+  this.onblur = function(){
+    newText = this.innerText;
+    if( newText == ""  ){
+      this.innerText = originalText
+    }else if( newText != originalText ){
+      var url = window.location.origin + $(this).data("url-updatedescription"); 
+      $.ajax({
+        type: "get",
+        url: url,
+        data: {
+          description: newText 
+        },
+        success: function() {
+          showAlert("success");
+        },
+        error: function() {
+          showAlert("danger");
+        }
+      });
     }
-    this.contentEditable = true
-    this.focus()
-    this.onblur = function(){
-      newText = this.innerText;
-      if( newText == ""  ){
-        this.innerText = originalText
-      }else if( newText != originalText ){
-        var url = window.location.origin + $(this).data("url-updatedescription"); 
-        $.ajax({
-          type: "get",
-          url: url,
-          data: {
-            description: newText 
-          },
-          success: function() {
-            showAlert("success");
-          },
-          error: function() {
-            showAlert("danger");
-          }
-        });
-      }
-      this.contentEditable = false
-    }
-  });
-}
+    this.contentEditable = false
+  }
+});

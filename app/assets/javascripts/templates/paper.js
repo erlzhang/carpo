@@ -3,26 +3,43 @@ function Paper() {
 
   self.postContainer = document.getElementById("postContainer");
   self.bookId = postContainer.getAttribute("data-book");
+  self.linkList = $(".post-link")
 
-  self.current = 0;
+  console.log(self.linkList)
 
-  $(".post-link").on("click", function() {
+  self.current = Number($(".post-link.active").data("index"));
+
+  self.linkList.on("click", function() {
     event.preventDefault();
-    self.current = $(this).data("post");
-    self.queryPost(self.current);
+    var queryId = $(this).data("post"),
+        queryType = $(this).data("type");
+    self.queryPost( queryId, queryType );
+    $(".nav-link.post-link.active").removeClass("active");
+    self.current = $(this).data("index");
+  });
+
+  $(".navigation-next").on("click", function() {
+    self.next()
+  });
+  $(".navigation-prev").on("click", function() {
+    self.prev()
   });
 }
 
 Paper.prototype = {
-  queryPost: function(id) {
+  queryPost: function(queryId, queryType) {
+    var self = this,
+        queryType = queryType || "post"
+
     $.ajax({
       url: window.location.origin + "/books/" + self.bookId + "/query_post",
       type: "GET",
       data: {
-        "post_id": id
+        "post_id": queryId,
+        "type": queryType
       },
       success: function(data) {
-        self.showPost(data.post)
+        self.showPost(data)
       },
       error: function(){
       }
@@ -34,6 +51,33 @@ Paper.prototype = {
     content += '<div class="post-content">' + post.content + '</div>'
     content += '</div>'
     self.postContainer.innerHTML = content;
+    self.linkList.eq(self.current).addClass("active");
+  },
+  next: function() {
+    var self = this;
+    if( self.current == self.linkList.length - 1 ) {
+      return;
+    }
+    self.linkList.eq(self.current).removeClass("active");
+    self.current ++;
+    var query = self.linkList.eq(self.current),
+        queryId = query.data("post"),
+        queryType = query.data("type");
+
+    self.queryPost(queryId, queryType);
+  },
+  prev: function() {
+    var self = this;
+    if( self.current == 0 ) {
+      return;
+    }
+    self.linkList.eq(self.current).removeClass("active");
+    self.current --;
+    var query = self.linkList.eq(self.current),
+        queryId = query.data("post"),
+        queryType = query.data("type");
+
+    self.queryPost(queryId, queryType);
   }
 }
 
