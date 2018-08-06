@@ -6,7 +6,7 @@
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
     %title= "Demo"
     = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
+    //= javascript_include_tag 'application'
     = csrf_meta_tags
   %body{:class => namespace_controller_name + " " + params[:action]}
     = render "layouts/header"
@@ -19,3 +19,4 @@
       = yield
     //= render "layouts/footer"
     = render "layouts/flash"
+    = javascript_pack_tag 'application'
