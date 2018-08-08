@@ -37,7 +37,7 @@
           %li.nav-item.plus
             = link_to "#", :class => "nav-link sort-disabled", :id => "addVolume" do
               %span.icon-plus
-        = form_for @new_volume, :url => manage_book_volumes_path(@book) do |f|
+        = form_for @new_volume, :url => manage_book_volumes_path(@book), :remote => true, "data-type" => "json" do |f|
           = f.hidden_field :title
     .card-body.book-chapter-container
       = render "manage/volumes/information"

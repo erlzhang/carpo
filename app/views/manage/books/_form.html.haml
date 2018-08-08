@@ -1,8 +1,6 @@
 .form-group
   = f.label :title, "书名"
   = f.text_field :title, :class => input_class(@book, :title)
-  - if is_invalid?(@book, :title)
-    = invalid_message(@book, :title)
 .form-group
   = f.label :description, "摘要"
   = f.text_area :description, :class => 'form-control', :rows => "5"
