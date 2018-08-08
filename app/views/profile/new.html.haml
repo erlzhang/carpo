@@ -1,12 +1,14 @@
+- provide :title, "完善个人信息"
+
 .row.mt-5
   .col-md-6.offset-md-3
     %h4.mb-4.text-center 我们需要一些内容来完善你的信息！
-    .author-new-steps
-      .carousel.slide#authorProgress{"data-ride" => "carousel"}
-        %ol.author-new-progress.d-flex.justify-content-between.align-items-center
-          %li.active{"data-target" => "#step-1", "data-slide-to" => "0"}
-          %li{"data-target" => "#step-2", "data-slide-to" => "1"}
-          %li{"data-target" => "#step-3", "data-slide-to" => "2"}
+    .author-new-steps.mb-4
+      .carousel.slide
+        %ol#authorProgress.author-new-progress.d-flex.justify-content-between.align-items-center
+          %li.active
+          %li
+          %li
         .carousel-inner
           .carousel-item#step-1.active
             %h5.mb-5.text-center 首先，你得有个名字吧！
@@ -20,7 +22,7 @@
           .carousel-item#step-2
             %h5.mb-4.text-center 还需要一个头像！
             .text-center.mb-4
-              .current-avatar.rounded
+              #currentAvatar.current-avatar.rounded-circle
             = form_tag profile_update_avatar_path, :id => "author_avatar", :remote => "true", :method => "patch", :multipart => true, :data => {:type => :json} do
               = hidden_field_tag :id
               .author-avatar-list.mb-4.text-center
@@ -53,4 +55,4 @@
                     = submit_tag "搞定！", :class => "btn btn-primary btn-lg"
                     = link_to "太麻烦，以后再说！", nil, :class => "btn btn-default"
 
-= javascript_include_tag "profile"
+= javascript_pack_tag "profile_app"

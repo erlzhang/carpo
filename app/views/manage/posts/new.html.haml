@@ -1,6 +1,8 @@
+- provide :title, "新增文章-" + @book.title
+
 %nav.navbar.navbar-light.bg-white.nav-expand-lg.fixed-top.editor-top
   = link_to manage_dashboard_path, :class => "navbar-brand" do
     = image_tag "logo.svg", :width => "30", :height => "30", :class => "d-inline-block align-top"
-    Demo
+    Leaf
 = form_for @post, :url => manage_book_posts_path(@book) do |f|
   = render :partial => "form", :locals => {:f => f}
