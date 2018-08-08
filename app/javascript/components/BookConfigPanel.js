@@ -1,31 +1,25 @@
-import Alert from 'components/Alert.js'
+import Alert from 'widgets/Alert.js'
 
 export default class BookConfigPanel {
   constructor () {
-    let self = this;
-
     this.toggleBtn = document.getElementById("toggleBookConfig");
     this.cancelBtn = document.getElementById("collapseSideForm")
 
     this.panel = document.getElementById("bookConfig")
     this.form = document.querySelector(".edit_book")
     this.title = document.getElementById("bookTitle")
-    this.description = document.getElementById("bookDescription")
+    this.desc = document.getElementById("bookDescription")
 
     this.isOpen = false;
 
-    this.toggleBtn.addEventListener("click", () => {
-      self.show(); 
-    });
+    this.toggleBtn.addEventListener("click", () => this.show() );
 
-    this.cancelBtn.addEventListener("click", () => {
-      self.hide();
-    })
+    this.cancelBtn.addEventListener("click", () => this.hide() )
 
     this.form.addEventListener("ajax:success", (event) => {
       let data = event.detail[0]
-      self.update(data)
-      self.hide()
+      this.update(data)
+      this.hide()
       new Alert('success', data.message)
     })
   }
@@ -48,6 +42,6 @@ export default class BookConfigPanel {
 
   update (data) {
     this.title.innerText = data.title
-    this.title.innerHtml = data.description
+    this.desc.innerText = data.description
   }
 }

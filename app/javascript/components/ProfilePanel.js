@@ -1,20 +1,22 @@
-import Alert from 'components/Alert.js'
+import Alert from 'widgets/Alert.js'
 
 export default class ProfilePanel {
   constructor () {
-    this.nameInput = document.getElementById("author_name")
-    this.progress = document.getElementById("authorProgress")
-    this.progressList = document.querySelectorAll(".author-new-progress li")
     this.newAuthor = document.getElementById("new_author")
-    this.authorAvatar = document.getElementById("author_avatar")
 
-    this.nameInput.addEventListener("input", () => this.canSubmitStep1() )
-
-    this.newAuthor.addEventListener("ajax:success", () => this.step2())
-    this.newAuthor.addEventListener("ajax:error", () => new Alert("danger") )
-    this.authorAvatar.addEventListener("ajax:success", () => this.step3())
-    this.authorAvatar.addEventListener("ajax:error", () => new Alert("danger") )
-
+    if( this.newAuthor ) {
+      this.nameInput = document.getElementById("author_name")
+      this.progress = document.getElementById("authorProgress")
+      this.progressList = document.querySelectorAll(".author-new-progress li")
+      this.nameInput.addEventListener("input", () => this.canSubmitStep1() )
+      this.authorAvatar = document.getElementById("author_avatar")
+      this.newAuthor.addEventListener("ajax:success", () => this.step2())
+      this.newAuthor.addEventListener("ajax:error", () => new Alert("danger") )
+      this.authorAvatar.addEventListener("ajax:success", () => this.step3())
+      this.authorAvatar.addEventListener("ajax:error", () => new Alert("danger") )
+    } else {
+      this.bindAvatarEvents() 
+    }
   
   }
 
@@ -45,6 +47,7 @@ export default class ProfilePanel {
     }
 
     this.avatarUploader.addEventListener("change", () => this.avatarFromUploader())
+
   }
 
   avatarFromChecked (input) {

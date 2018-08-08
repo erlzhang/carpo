@@ -5,7 +5,7 @@
     .row
       .col-md-10
         %h2#bookTitle.card-title.book-title= @book.title
-        .text-secondary.card-text.book-description
+        #bookDescription.text-secondary.card-text.book-description
           = simple_format @book.description
       .col-md-2
         %p
@@ -47,5 +47,4 @@
       = render :partial => "form", :locals => { :f => f } 
       = link_to "取消", "#", :class => "btn btn-secondary", :id => "collapseSideForm"
 
-//= javascript_include_tag "manage/book"
-= javascript_pack_tag 'book_app'
+= javascript_pack_tag 'book'
