@@ -2,12 +2,12 @@
   .card-body
     .row
       .col-md-10
-        %h2.card-title.book-title= @book.title
+        %h2#bookTitle.card-title.book-title= @book.title
         .text-secondary.card-text.book-description
           = simple_format @book.description
       .col-md-2
         %p
-          = link_to "#", :class => "btn btn-default toggle-side-form" do
+          = link_to "#", :class => "btn btn-default toggle-side-form", :id => "toggleBookConfig" do
             编辑基本信息
             %i.fa.fa-angle-right.ml-1
         %p
@@ -15,7 +15,7 @@
             查看
   .card.border-light.shadow
     .card-header.book-card-header
-      %ul.nav.nav-tabs.card-header-tabs.sortable-head.volume-list
+      %ul#volumeList.nav.nav-tabs.card-header-tabs.sortable-head.volume-list
         - @volumes.each do |volume|
           %li.nav-item.position-relative
             = link_to manage_book_volume_path(@book, volume), :class => @volume.id == volume.id ? "nav-link volume active text-truncate" : "nav-link volume text-truncate", :id => "volume-#{volume.id}", "data-url-updatename" => update_name_manage_book_volume_path(@book, @volume), :remote => true do
@@ -39,11 +39,11 @@
           = f.hidden_field :title
     .card-body.book-chapter-container
       = render "manage/volumes/information"
-.book-side-form.col-md-3.pt-5
+.book-side-form.col-md-3.pt-5#bookConfig
   .card-body.mt-5
     = form_for @book, :url => manage_book_path(@book), :remote => true, "data-type" => "json" do |f|
       = render :partial => "form", :locals => { :f => f } 
-      = link_to "取消", "#", :class => "btn btn-secondary collapse-side-form"
+      = link_to "取消", "#", :class => "btn btn-secondary", :id => "collapseSideForm"
 
 //= javascript_include_tag "manage/book"
 = javascript_pack_tag 'book_app'

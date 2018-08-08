@@ -3,7 +3,7 @@
     .col-md-10
       .book-volume-info
         - if @volume.description.blank?  
-          %p.card-text.text-muted.volume-description{"data-url-updatedescription" => update_description_manage_book_volume_path(@book, @volume)} 双击可添加描述
+          %p.card-text.text-muted.volume-description#volumeDescription{"data-url-updatedescription" => update_description_manage_book_volume_path(@book, @volume)} 双击可添加描述
         - else
           %p.card-text.text-secondary.volume-description{"data-volume" => @volume.id}= @volume.description
   .col-md-2
@@ -11,7 +11,7 @@
       = link_to new_manage_book_post_path(@book, :volume_id => @volume), :class => "btn btn-outline-primary" do
         %span.icon-quill
         撰写文章
-%ul.list-group.sortable-list.mt-4
+%ul#sortableList.list-group.sortable-list.mt-4
   - @posts.each do |post|
     %li.list-group-item{:id => "post-#{post.id}"}
       .post-handle.float-left.mr-2
