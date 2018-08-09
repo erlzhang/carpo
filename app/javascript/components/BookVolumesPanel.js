@@ -1,4 +1,5 @@
-import Alert from 'widgets/Alert.js'
+import Alert from 'widgets/Alert.js';
+import Core from 'widgets/Core.js';
 
 export default class BookVolumesPanel {
   constructor () {
@@ -20,10 +21,10 @@ export default class BookVolumesPanel {
     document.addEventListener("ajax:success", (event) => {
       let data = event.detail[0]
       if( event.target.classList.contains("delete-volume") ) {
-        this.deleteVolumeCallback()
+        this.deleteVolumeCallback(event.target, data)
       }
       if( event.target.classList.contains("volume") ) {
-        this.changeVolumeCallback(data)
+        this.changeVolumeCallback(event.target, data)
       }
       if( event.target.id == "new_volume" ) {
         this.createVolumeCallback(data)
@@ -36,6 +37,17 @@ export default class BookVolumesPanel {
         this.removeNewVolume()
       }
     })
+
+    document.addEventListener("ajax:before", (event) => {
+      if( event.target == this.current ) {
+        event.preventDefault()
+        return false 
+      }
+    })
+  }
+
+  editVolumeTitle () {
+  
   }
 
   newVolume () {
@@ -56,7 +68,9 @@ export default class BookVolumesPanel {
     } else {
       let newVolumeForm = document.getElementById("new_volume")
       document.getElementsByName("volume[title]")[0].value = this.newEle.innerText
-      newVolumeForm.submit()
+
+      // 模拟点击事件，触发rails_ujs提交表单
+      Core.dispathMouseEvent("click", "submitNewVolume")
       this.newEle.contentEditable = false
     }
   }
@@ -70,10 +84,10 @@ export default class BookVolumesPanel {
 
   createVolumeCallback (data) {
     if( data.respond ) {
-      this.newEle.innerHTML = '<a data-remote="true" id="volume-' + data.id + '" class="nav-link volume text-truncate" href="' + data.url + '">' + title + '</a>'
+      this.newEle.innerHTML = '<a data-remote="true" id="volume-' + data.id + '" class="nav-link volume text-truncate" href="' + data.url + '">' + data.title + '</a>'
 
       let deleteBtn = document.createElement("a")
-      deleteBtn.setAttribute("class", "delete-volume", "close-icon")
+      deleteBtn.setAttribute("class", "delete-volume close-icon")
       deleteBtn.setAttribute("data-remote", true)
       deleteBtn.setAttribute("data-method", "delete")
       deleteBtn.href = data.url
@@ -82,16 +96,38 @@ export default class BookVolumesPanel {
 
       this.newEle.classList.remove("active", "nav-link", "new")
       new Alert("success", data.message)
+
+      Core.dispathMouseEvent("click", "volume-" + data.id)
     } else {
       this.removeNewVolume()
       new Alert("warning", data.message)
     }
   }
 
-  deleteVolumeCallback (ele) {
+  deleteVolumeCallback (ele, data) {
+    if( data.respond ) {
+      let pnode = ele
+      while ( !pnode.classList.contains("nav-item") ) {
+        pnode = pnode.parentNode
+      }
+      pnode.parentNode.removeChild(pnode)
+      new Alert("success", data.message)
+      
+      // 如果被删除的是当前卷，需要切换当前卷
+      let newId = document.getElementsByClassName("volume")[0].id
+      Core.dispathMouseEvent("click", newId)
+    } else {
+      new Alert("danger") 
+    }
   
   }
 
-  changeVolumeCallback (ele) {}
-
+  changeVolumeCallback (ele, data) {
+    if( this.current ) {
+      this.current.classList.remove("active")
+      this.current.remove
+    }
+    ele.classList.add("active")
+    this.current = ele
+  }
 }

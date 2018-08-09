@@ -1,4 +1,5 @@
-$(".book-chapter-container").html("<%= escape_javascript(render :partial => 'information')%>")
+document.getElementById("volumeContainer").innerHTML = "<%= escape_javascript(render :partial => 'information')%>"
+/*
 sortable('.sortable-list',{
   handle: ".post-handle",
   items: ":not(.sort-disabled)"
@@ -8,4 +9,4 @@ sortable('.sortable-list')[0].addEventListener('sortupdate', function(e){
 })
 $(function(){
   $('[data-toggle = "tooltip"]').tooltip();
-});
+});*/

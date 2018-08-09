@@ -1,9 +1,5 @@
-import Rails from 'rails-ujs'
-
 import Modal from 'widgets/Modal.js'
 import ValidFeedback from 'widgets/ValidFeedback.js'
-
-Rails.start()
 
 const bookModal = new Modal('newBookModal', 'btnNewBook'),
       newBook = document.getElementById("new_book"),
