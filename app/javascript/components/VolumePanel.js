@@ -1,52 +1,85 @@
-//import Sortable
+import Sortable from 'sortablejs'
+import axios from 'axios'
+
+import Alert from 'widgets/Alert.js'
 
 export default class VolumePanel {
-  constructor () {
-    let self = this
-
+  constructor (titleEle) {
+    this.titleEle = titleEle
     this.descEle = document.getElementById("volumeDescription")
-    this.description.addEventListener("dblclick", (event) => {
-      event.preventDefault()
-      self.editDescription.call(self)
-    })
 
-
-    this.list = document.getElementById("sortableList")
-
-    this.sortable = new Sortable(this.list, {
-      handle: '.post-handle',
-      onUpdate: () => {
-      
-      }
-    })
-  }
-
-  editDescription () {
-    let originText = '',
-        descEle = this.descEle,
-        self = this
-
-    if( descEle.classList.contain("hint") ) {
-      descEle.innerText = '' 
-    } else {
-      originText = descEle.innerText
+    this.editTitle = (event) => {
+      this.edit(this.titleEle, (newText, originText) => this.updateTitle(newText, originText))
     }
-    descEle.contentEditable = true
-    descEle.focus()
-    descEle.addEventListener("blur", () => {
-      newText = descEle.innerText
-      if( newText == "" ) {
-        descEle.innerText = originText
-      } else if ( newText != originText ) {
-        self.updateDescription.call(self)
-      }
-      descEle.contentEditable = false
-    })
-     
+
+    this.editDesc = (event) => {
+      this.edit(this.descEle, (newText, originText) => this.updateDesc(newText, originText))
+    }
+
+    this.titleEle.addEventListener("dblclick", this.editTitle)
+    this.descEle.addEventListener("dblclick", this.editDesc)
+    this.list = document.getElementById("sortableList")
   }
 
-  updateDescription () {
+  edit (ele, fn) {
+    let originText = ''
+
+    if( ele.classList.contains("hint") ) {
+      ele.innerText = '' 
+    } else {
+      originText = ele.innerText
+    }
+    ele.contentEditable = true
+
+    ele.focus()
+    ele.addEventListener("blur", () => {
+      let newText = ele.innerText
+      if( newText == "" ) {
+        ele.innerText = originText
+      } else if ( newText != originText ) {
+        fn.call(this, newText, originText)
+      }
+      ele.contentEditable = false
+    })
   
+  }
+
+  updateDesc (newText, originText) {
+    let url = window.location.origin + this.descEle.getAttribute("data-url-updatedescription") + ".json"
+    axios({
+      url: url,
+      method: 'get',
+      responseType: "json",
+      params: {
+        description: newText
+      }
+    })
+    .then((response) => {
+      new Alert("success")
+    })
+    .catch((error) => {
+      new Alert("danger")
+      this.titleEle.innerText = originText
+    })
+  }
+
+  updateTitle (newText, originText) {
+    let url = window.location.origin + this.titleEle.getAttribute("data-url-updatename") + ".json"
+    axios({
+      url: url,
+      method: 'get',
+      responseType: "json",
+      params: {
+        title: newText
+      }
+    })
+    .then((response) => {
+      new Alert("success")
+    })
+    .catch((error) => {
+      new Alert("danger")
+      this.titleEle.innerText = originText
+    })
   }
 
   //callbacks

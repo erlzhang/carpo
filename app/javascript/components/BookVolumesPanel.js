@@ -1,12 +1,15 @@
 import Alert from 'widgets/Alert.js';
 import Core from 'widgets/Core.js';
 
+import VolumePanel from 'components/VolumePanel.js'
+
 export default class BookVolumesPanel {
   constructor () {
     this.newBtn = document.getElementById("addVolume")
     this.list = document.getElementById("volumeList")
 
     this.current = document.querySelector(".volume.active")
+    this.volumePanel = new VolumePanel(this.current)
 
     this.newBtn.addEventListener("click", () => this.newVolume() )
 
@@ -84,7 +87,7 @@ export default class BookVolumesPanel {
 
   createVolumeCallback (data) {
     if( data.respond ) {
-      this.newEle.innerHTML = '<a data-remote="true" id="volume-' + data.id + '" class="nav-link volume text-truncate" href="' + data.url + '">' + data.title + '</a>'
+      this.newEle.innerHTML = '<a data-remote="true" id="volume-' + data.id + '" data-url-updatename="' + data.update_name_url + '" class="nav-link volume text-truncate" href="' + data.url + '">' + data.title + '</a>'
 
       let deleteBtn = document.createElement("a")
       deleteBtn.setAttribute("class", "delete-volume close-icon")
@@ -125,9 +128,11 @@ export default class BookVolumesPanel {
   changeVolumeCallback (ele, data) {
     if( this.current ) {
       this.current.classList.remove("active")
-      this.current.remove
+      this.current.removeEventListener("dblclick", this.volumePanel.editTitle)
+      this.volumePanel = null
     }
     ele.classList.add("active")
     this.current = ele
+    this.volumePanel = new VolumePanel(this.current)
   }
 }

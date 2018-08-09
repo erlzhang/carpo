@@ -43,6 +43,7 @@ class Manage::VolumesController < ApplicationController
         @data["message"] = "成功创建卷!"
         @data["id"] = @volume.id
         @data["url"] = manage_book_volume_path(@book, @volume)
+        @data["update_name_url"] = update_name_manage_book_volume_path(@book, @volume)
         @data["title"] = @volume.title
         if @book.volumes.size > 5
           @data["max"] = true
