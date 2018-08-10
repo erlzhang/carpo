@@ -1,27 +1,23 @@
-.container-fluid.pt-3.pb-3.bg-white.editor-title-container
+.container-fluid.pt-3.pb-3.bg-white
   .container
     .row
-      .col-md-8.offset-md-2
+      .col-md-10.offset-md-1
         %nav.editor-nav
           %ol.breadcrumb.mb-0
             %li.breadcrumb-item
-              %span.icon-book.mr-1.text-primary
+              %i.fa.fa-book.mr-1.text-primary
               = link_to @book.title, manage_book_path(@book)
             - if params[:volume_id]
               %li.breadcrumb-item
                 = f.select :volume_id, get_volumes, {}, :class => "editor-select-volume"
-        = f.text_field :title, :class => "editor-input", :placeholder => "Your Title"
-        - if is_invalid?(@post, :title)
-          = invalid_message(@post, :title)
-.container
-  .row
-    .col-md-8.offset-md-2
-      = f.text_area :content, :class => "form-control editor", "data-autosave" => @post.id ? "editor-content" + @post.id.to_s : "editor-content-new-" + @book.id.to_s , :row => "20", :placeholder => "Content here!"
+        .editor-title
+          = f.text_field :title, :class => "editor-input", :placeholder => "Your Title", :autocomplete => false
+        #editorContainer.editor-content
+          = simple_format @book.content
+        = f.hidden_field :content
 .editor-infos
   %label.custom-control.custom-checkbox
     = f.check_box :status, :class => "custom-control-input"
     %span.custom-control-indicator.custom-toggle-indicator
     %span.custom-control-description.mr-2 直接发布
 = f.submit "保存", :class => "btn btn-primary mr-2 editor-submit"
-
-= javascript_include_tag "manage/posts"
