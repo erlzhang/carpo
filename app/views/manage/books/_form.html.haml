@@ -1,17 +1,17 @@
+.form-group.input-group
+  = f.text_field :title, :class => "form-control", :required => true
+  = f.label :title, "书名", :class => "input-label"
+  %span.form-group-focus
+.form-group.input-group
+  = f.text_area :description, :class => 'form-control', :rows => "5", :required => true
+  = f.label :description, "摘要", :class => "input-label"
+  %span.form-group-focus
 .form-group
-  = f.label :title, "书名"
-  = f.text_field :title, :class => input_class(@book, :title)
-.form-group
-  = f.label :description, "摘要"
-  = f.text_area :description, :class => 'form-control', :rows => "5"
-.form-group
-  %label.custom-control.custom-checkbox.ml-0.pl-0
+  .custom-control.custom-checkbox.ml-0.pl-0
     = f.check_box :openess, :class => "custom-control-input"
-    %span.custom-control-indicator.custom-toggle-indicator
-    %span.custom-control-description 开放
+    %label.custom-control-label.custom-toggle-label{:for => "book_openess"} 开放
 .form-group
-  %label.custom-control.custom-checkbox.ml-0.pl-0
+  .custom-control.custom-checkbox.ml-0.pl-0
     = f.check_box :status, :class => "custom-control-input"
-    %span.custom-control-indicator.custom-toggle-indicator
-    %span.custom-control-description 已完成
-= f.submit "提交", :class => 'btn btn-primary'
+    %label.custom-control-label.custom-toggle-label{:for => "book_status"} 已完成
+= f.submit "提交", :class => 'btn btn-primary', :data => {"disable-with" => "保存中..."}

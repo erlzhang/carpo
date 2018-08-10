@@ -23,8 +23,6 @@ gem 'webpacker'
 
 # Use CoffeeScript for .coffee assets and views
 #gem 'coffee-rails', '~> 4.2'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -35,7 +33,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'jquery-rails'
 gem 'bootstrap'
 gem 'haml-rails'
 gem 'font-awesome-sass'
@@ -45,7 +42,6 @@ gem 'devise'
 # 图片上传
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
-gem 'remotipart', '~> 1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

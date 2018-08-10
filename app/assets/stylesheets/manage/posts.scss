@@ -51,6 +51,20 @@
 .editor-content {
   outline: none;
   padding: 30px;
+  color: $gray-800;
+  p {
+    font-size: 17px;
+    line-height: 1.5rem;
+  }
+  h2, h3, h4, p {
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
   &:focus {
     outline: none;
   }

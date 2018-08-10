@@ -1,9 +1,6 @@
 html, body {
   height: 100%;
 }
-*{
-  transition: all .15s linear;
-}
 .flex-1 {
   flex: 1;
 }
@@ -32,13 +29,17 @@ svg.icon {
 }
 
 //toggle-input
-.custom-toggle-indicator{
+.custom-checkbox .custom-toggle-label:before {
   width: 64px;
   height: 30px;
-  border-radius: 15px!important;
+  border-radius: 15px;
   position: relative;
+  left: 0;
+  top: 0;
+  float: left;
+  margin-right: 10px;
 }
-.custom-toggle-indicator:after {
+.custom-checkbox .custom-toggle-label:after {
   content: "";
   width: 26px;
   height: 26px;
@@ -49,17 +50,62 @@ svg.icon {
   background-color: #ccc;
   transition: all .25s linear;
 }
-.custom-toggle-indicator ~ .custom-control-description {
+.custom-checkbox .custom-toggle-label {
   line-height: 40px;
   margin-left: 5px;
   vertical-align: bottom;
+  line-height: 30px;
 }
-.custom-control-input:checked ~.custom-toggle-indicator {
+.custom-checkbox .custom-control-input:checked ~.custom-toggle-label:after {
   background-image: none!important;
-}
-.custom-control-input:checked ~.custom-toggle-indicator:after {
   margin-left: 34px;
   background-color: #fff;
+}
+
+// input
+.input-group {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+.input-label {
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  z-index: 3333;
+  transition: all .25s linear;
+  color: #ccc;
+}
+.form-control {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  position: relative;
+}
+.form-group-focus {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  background-color: $primary;
+  transition: width .25s linear;
+  display: inline-block;
+  z-index: 22222;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+.form-control:focus ~ .form-group-focus {
+  width: 100%;
+}
+.form-control:focus ~ .input-label, .form-control:valid ~ .input-label {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: -25px;
+}
+.form-control:focus ~ .input-label {
+  color: $primary;
 }
 
 //card tab

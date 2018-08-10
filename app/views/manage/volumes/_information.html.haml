@@ -19,12 +19,12 @@
           %i.fa.fa-arrows-alt.post-handle.mr-2.text-muted
       = post.title
       .float-right
-        = link_to release_manage_book_post_path(@book, post), :class => "btn btn-outline-success btn-sm rounded-circle mr-2 release-post" + ( post.status == 0 ? "" : " d-none"), :title => "发布", "data-toggle" => "tooltip", "remote" => true do
-          %span.icon-repo-push
-        = link_to withdraw_manage_book_post_path(@book, post), :class => "btn btn-outline-warning btn-sm rounded-circle mr-2 post-withdraw" + ( post.status == 1 ? "" : " d-none"), :title => "撤回", "data-toggle" => "tooltip", "remote" => true do
-          %span.icon-repo-pull
-        = link_to edit_manage_book_post_path(@book, post), :class => "btn btn-outline-primary btn-sm rounded-circle mr-2", :title => "修改", "data-toggle" => "tooltip" do
-          %span.icon-pencil
-        = link_to manage_book_post_path(@book, post), :class => "btn btn-outline-danger btn-sm rounded-circle delete-post", :method => :delete, :title => "删除", "data-toggle" => "tooltip", "remote" => true do
-          %span.icon-bin
+        = link_to release_manage_book_post_path(@book, post), :class => "btn btn-outline-success btn-circle mr-2 release-post" + ( post.status == 0 ? "" : " d-none"), :title => "发布", "data-toggle" => "tooltip", "remote" => true do
+          %i.fas.fa-cloud-upload-alt
+        = link_to withdraw_manage_book_post_path(@book, post), :class => "btn btn-outline-warning btn-circle mr-2 post-withdraw" + ( post.status == 1 ? "" : " d-none"), :title => "撤回", "data-toggle" => "tooltip", "remote" => true do
+          %i.fas.fa-cloud-download-alt
+        = link_to edit_manage_book_post_path(@book, post), :class => "btn btn-outline-primary btn-circle mr-2", :title => "修改", "data-toggle" => "tooltip" do
+          %i.fas.fa-pencil-alt
+        = link_to manage_book_post_path(@book, post), :class => "btn btn-outline-danger btn-circle delete-post", :method => :delete, :title => "删除", "data-toggle" => "tooltip", "remote" => true do
+          %i.far.fa-trash-alt
       //%p.text-muted= truncate(strip_tags(post.content), length: 100, omission: "...")

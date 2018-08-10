@@ -35,16 +35,16 @@
         %h5.modal-title 新建书籍
       = form_for @book, :url => manage_books_path, :remote => true do |f|
         .modal-body
-          .form-group
-            = f.label :title, "书名"
-            = f.text_field :title, :class => input_class(@book, :title)
-            - if is_invalid?(@book, :title)
-              = invalid_message(@book, :title)
-          .form-group
-            = f.label :description, "摘要"
-            = f.text_area :description, :class => 'form-control', :rows => "5"
+          .form-group.input-group.mt-2
+            = f.text_field :title, :class => "form-control", :required => true
+            = f.label :title, "书名", :class => "input-label"
+            %span.form-group-focus
+          .form-group.input-group
+            = f.text_area :description, :class => 'form-control', :rows => "5", :required => true
+            = f.label :description, "摘要", :class => "input-label"
+            %span.form-group-focus
         .modal-footer
-          = f.submit "提交", :class => 'btn btn-primary'
+          = f.submit "提交", :class => 'btn btn-primary', :data => {"disable-with" => "保存中..."}
 
 = javascript_pack_tag "bookshelf.js"
         

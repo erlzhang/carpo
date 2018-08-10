@@ -7,17 +7,17 @@
             %li.breadcrumb-item
               %i.fa.fa-book.mr-1.text-primary
               = link_to @book.title, manage_book_path(@book)
-            - if params[:volume_id]
+            - if params[:volume_id] or @post.volume
               %li.breadcrumb-item
                 = f.select :volume_id, get_volumes, {}, :class => "editor-select-volume"
         .editor-title
           = f.text_field :title, :class => "editor-input", :placeholder => "Your Title", :autocomplete => false
         #editorContainer.editor-content
-          = simple_format @book.content
+          = simple_format @post.content
         = f.hidden_field :content
 .editor-infos
   %label.custom-control.custom-checkbox
     = f.check_box :status, :class => "custom-control-input"
     %span.custom-control-indicator.custom-toggle-indicator
     %span.custom-control-description.mr-2 直接发布
-= f.submit "保存", :class => "btn btn-primary mr-2 editor-submit"
+= f.submit "保存", :class => "btn btn-primary mr-2 editor-submit", :data => {"disable-with" => "保存中..."}

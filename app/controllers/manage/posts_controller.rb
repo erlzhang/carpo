@@ -24,10 +24,9 @@ class Manage::PostsController < ApplicationController
     @post.post_index = current_index
 
     if @post.save
-      @book.update_attribute(:current_post_index, current_index)
-      redirect_to manage_book_path(@book, :volume => @post.volume)
+      render json: {:message => "保存成功", :post => @post}
     else
-      render :new
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
@@ -36,9 +35,9 @@ class Manage::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to manage_book_path(@book, :volume => @post.volume)
+      render json: {:message => "保存成功", :post => @post}
     else
-      render :edit
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
   

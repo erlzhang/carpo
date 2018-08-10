@@ -19,6 +19,29 @@ export default class VolumePanel {
     this.titleEle.addEventListener("dblclick", this.editTitle)
     this.descEle.addEventListener("dblclick", this.editDesc)
     this.list = document.getElementById("sortableList")
+
+    document.addEventListener("ajax:success", (event) => {
+      if( event.target.classList.contains("release-post") ) {
+        event.target.classList.add("d-none")
+        event.target.nextElementSibling.classList.remove("d-none")
+        new Alert("success")
+      } 
+
+      if( event.target.classList.contains("post-withdraw") ) {
+        event.target.classList.add("d-none")
+        event.target.previousElementSibling.classList.remove("d-none")
+        new Alert("success")
+      }
+
+      if( event.target.classList.contains("delete-post") ) {
+        event.target.parentNode.removeChild(event.target)
+        new Alert("success")
+      }
+
+    })
+    document.addEventListener("ajax:error", (event) => {
+      new Alert("danger")
+    })
   }
 
   edit (ele, fn) {
