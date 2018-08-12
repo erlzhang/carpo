@@ -16,8 +16,7 @@ zh:
       user:
         email: "电子邮箱"
         password: "密码"
-        password_confirmation: ""
-        current_password: "当前密码"
+        remember_me: "记住我"
       book:
         title: "书名"
         description: "描述"

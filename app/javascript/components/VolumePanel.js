@@ -15,7 +15,6 @@ export default class VolumePanel {
     this.editDesc = (event) => {
       this.edit(this.descEle, (newText, originText) => this.updateDesc(newText, originText))
     }
-
     this.titleEle.addEventListener("dblclick", this.editTitle)
     this.descEle.addEventListener("dblclick", this.editDesc)
     this.list = document.getElementById("sortableList")
@@ -25,7 +24,7 @@ export default class VolumePanel {
         event.target.classList.add("d-none")
         event.target.nextElementSibling.classList.remove("d-none")
         new Alert("success")
-      } 
+      }
 
       if( event.target.classList.contains("post-withdraw") ) {
         event.target.classList.add("d-none")
@@ -48,7 +47,7 @@ export default class VolumePanel {
     let originText = ''
 
     if( ele.classList.contains("hint") ) {
-      ele.innerText = '' 
+      ele.innerText = ''
     } else {
       originText = ele.innerText
     }
@@ -64,7 +63,7 @@ export default class VolumePanel {
       }
       ele.contentEditable = false
     })
-  
+
   }
 
   updateDesc (newText, originText) {
@@ -108,7 +107,7 @@ export default class VolumePanel {
   //callbacks
 
   sortEndCallback () {
-  
+
   }
 
 }

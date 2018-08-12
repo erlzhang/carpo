@@ -67,6 +67,9 @@ svg.icon {
   position: relative;
   margin-bottom: 2.5rem;
 }
+.form-group.last {
+  margin-top: -1.5rem;
+}
 .input-label {
   position: absolute;
   left: 4px;
@@ -79,6 +82,7 @@ svg.icon {
   border-width: 0 0 1px 0;
   border-radius: 0;
   position: relative;
+  background-color: transparent;
 }
 .form-group-focus {
   content: "";
@@ -95,6 +99,7 @@ svg.icon {
 .form-control:focus {
   box-shadow: none;
   border-color: #ced4da;
+  background-color: transparent;
 }
 .form-control:focus ~ .form-group-focus {
   width: 100%;
@@ -136,7 +141,7 @@ svg.icon {
 //alert
 .alert-float {
   animation: fadeInOut 4s ease-in-out;
-  animation-fill-mode: forwards; 
+  animation-fill-mode: forwards;
   border: 0;
   border-left: 3px solid transparent;
   position: fixed;

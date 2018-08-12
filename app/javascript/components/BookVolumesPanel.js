@@ -9,7 +9,9 @@ export default class BookVolumesPanel {
     this.list = document.getElementById("volumeList")
 
     this.current = document.querySelector(".volume.active")
-    this.volumePanel = new VolumePanel(this.current)
+    if( this.current ) {
+      this.volumePanel = new VolumePanel(this.current)
+    }
 
     this.newBtn.addEventListener("click", () => this.newVolume() )
 
@@ -35,7 +37,7 @@ export default class BookVolumesPanel {
     })
 
     document.addEventListener("ajax:error", (event) => {
-      new Alert("danger") 
+      new Alert("danger")
       if( event.target.id == "new_volume" ) {
         this.removeNewVolume()
       }
@@ -44,13 +46,13 @@ export default class BookVolumesPanel {
     document.addEventListener("ajax:before", (event) => {
       if( event.target == this.current ) {
         event.preventDefault()
-        return false 
+        return false
       }
     })
   }
 
   editVolumeTitle () {
-  
+
   }
 
   newVolume () {
@@ -115,14 +117,14 @@ export default class BookVolumesPanel {
       }
       pnode.parentNode.removeChild(pnode)
       new Alert("success", data.message)
-      
+
       // 如果被删除的是当前卷，需要切换当前卷
       let newId = document.getElementsByClassName("volume")[0].id
       Core.dispathMouseEvent("click", newId)
     } else {
-      new Alert("danger") 
+      new Alert("danger")
     }
-  
+
   }
 
   changeVolumeCallback (ele, data) {

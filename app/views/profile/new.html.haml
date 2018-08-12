@@ -15,8 +15,10 @@
             = form_for @author, :url => profile_create_path, :remote => true do |f|
               .row
                 .col-sm-10.offset-sm-1
-                  .form-group.mb-5
-                    = f.text_field :name, :class => input_class(@author, :name) + " form-control-lg", :placeholder => "Your name here", :required => true
+                  .form-group.input-group.mb-5
+                    = f.text_field :name, :class => input_class(@author, :name) + " form-control-lg", :required => true
+                    = f.label :name, "Your name here!", :class => "input-label"
+                    %span.form-group-focus
               .text-center
                 = submit_tag "填完了，下一步！", :class => "btn btn-primary btn-lg", :id => "submit_author_name", :disabled => "disabled"
           .carousel-item#step-2
