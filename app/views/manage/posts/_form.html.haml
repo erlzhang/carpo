@@ -13,11 +13,10 @@
         .editor-title
           = f.text_field :title, :class => "editor-input", :placeholder => "Your Title", :autocomplete => false
         #editorContainer.editor-content
-          = simple_format @post.content
+          = @post.content.html_safe unless @post.content.blank?
         = f.hidden_field :content
 .editor-infos
-  %label.custom-control.custom-checkbox
+  .custom-control.custom-checkbox
     = f.check_box :status, :class => "custom-control-input"
-    %span.custom-control-indicator.custom-toggle-indicator
-    %span.custom-control-description.mr-2 直接发布
+    = f.label :status, "直接发布", :class => "custom-control-label custom-toggle-label"
 = f.submit "保存", :class => "btn btn-primary mr-2 editor-submit", :data => {"disable-with" => "保存中..."}

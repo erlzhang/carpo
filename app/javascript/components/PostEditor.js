@@ -20,7 +20,13 @@ export default class PostEditor {
     })
 
     this.form.addEventListener("ajax:success", (event) => {
-      new Alert("success", event.detail[0].message)
+      let res = event.detail[0]
+      new Alert("success", res.message)
+      console.log(res.method)
+      console.log(res.url)
+      if( res.method && res.method == "created" ) {
+        window.location.href = res.url  
+      }
     })
   }
 

@@ -9,9 +9,9 @@
 .form-group
   .custom-control.custom-checkbox.ml-0.pl-0
     = f.check_box :openess, :class => "custom-control-input"
-    %label.custom-control-label.custom-toggle-label{:for => "book_openess"} 开放
+    = f.label :openess, :class => "custom-control-label custom-toggle-label"
 .form-group
   .custom-control.custom-checkbox.ml-0.pl-0
     = f.check_box :status, :class => "custom-control-input"
-    %label.custom-control-label.custom-toggle-label{:for => "book_status"} 已完成
+    = f.label :status, "已完成", :class => "custom-control-label custom-toggle-label"
 = f.submit "提交", :class => 'btn btn-primary', :data => {"disable-with" => "保存中..."}

@@ -20,6 +20,7 @@ zh:
       book:
         title: "书名"
         description: "描述"
+        openess: "开放"
       post:
         title: "文章标题"
         content: "文章内容"

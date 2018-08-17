@@ -24,7 +24,7 @@ class Manage::PostsController < ApplicationController
     @post.post_index = current_index
 
     if @post.save
-      render json: {:message => "保存成功", :post => @post}
+      render json: {:message => "保存成功", :url => edit_manage_book_post_path(@book, @post), :method => "created"}
     else
       render json: @post.errors, status: :unprocessable_entity
     end
